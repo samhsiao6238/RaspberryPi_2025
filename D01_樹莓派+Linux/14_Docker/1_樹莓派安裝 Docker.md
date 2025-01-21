@@ -158,11 +158,11 @@
 
 ## Docker 基本指令
 
-1. `docker pull`：下載 Docker 映像，從Docker Hub或其他Docker registry下載指定的映像。
+1. `docker pull`：下載 Docker 鏡像，從Docker Hub或其他Docker registry下載指定的鏡像。
 
 <br>
 
-2. `docker run`：運行 Docker 容器，根據指定的映像啟動一個新的容器實例。
+2. `docker run`：運行 Docker 容器，根據指定的鏡像啟動一個新的容器實例。
 
 <br>
 
@@ -182,11 +182,11 @@
 
 <br>
 
-7. `docker images`：列出本地的 Docker 映像，顯示在本地機器上儲存的所有Docker映像的列表。
+7. `docker images`：列出本地的 Docker 鏡像，顯示在本地機器上儲存的所有Docker鏡像的列表。
 
 <br>
 
-8. `docker rmi`：刪除 Docker 映像，使用映像ID或名稱來刪除指定的Docker映像。
+8. `docker rmi`：刪除 Docker 鏡像，使用鏡像ID或名稱來刪除指定的Docker鏡像。
 
 <br>
 
@@ -204,7 +204,7 @@ _若要更新 Docker Engine 也是運行這個卸載程序後重新安裝_
 
 <br>
 
-2. 刪除所有映像、容器和卷。
+2. 刪除所有鏡像、容器和卷。
 
    ```bash
    sudo rm -rf /var/lib/docker /var/lib/containerd
@@ -214,7 +214,7 @@ _若要更新 Docker Engine 也是運行這個卸載程序後重新安裝_
 
 ## 注意事項
 
-1. 樹莓派使用的是 ARM 架構 的處理器，而大部分的 Docker 映像是為 x86 架構 的處理器設計的，所以在選擇 Docker 映像時，必須確保它支援 ARM 架構。
+1. 樹莓派使用的是 ARM 架構 的處理器，而大部分的 Docker 鏡像是為 x86 架構 的處理器設計的，所以在選擇 Docker 鏡像時，必須確保它支援 ARM 架構。
 
 <br>
 

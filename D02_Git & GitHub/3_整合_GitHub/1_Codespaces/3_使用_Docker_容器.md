@@ -82,7 +82,7 @@
 
 <br>
 
-2. 自訂 `.json` 內容，指定使用 python:3.9-slim-buster 映像，並在容器建立後升級 pip。
+2. 自訂 `.json` 內容，指定使用 python:3.9-slim-buster 鏡像，並在容器建立後升級 pip。
 
    ```json
    {
@@ -140,22 +140,22 @@ _⚠️ 啟動後會因為容器特性出現一些警告或提示，暫時不予
 
 ## 補充說明
 
-1. 使用指定的 Docker 映像，特別是官方的基礎映像時，通常預設會以 `root` 使用者運行，除非映像本身有明確的指示，或建立映像時在 Dockerfile 或 devcontainer.json 中指定了使用者。
+1. 使用指定的 Docker 鏡像，特別是官方的基礎鏡像時，通常預設會以 `root` 使用者運行，除非鏡像本身有明確的指示，或建立鏡像時在 Dockerfile 或 devcontainer.json 中指定了使用者。
 
    ![](images/img_52.png)
 
 <br>
 
-2. `python:3.9-slim-buster` 是一個輕量化的映像，這類映像可能不包含一些標準工具，比如 `git` ，若需要使用則手動進行安裝。
+2. `python:3.9-slim-buster` 是一個輕量化的鏡像，這類鏡像可能不包含一些標準工具，比如 `git` ，若需要使用則手動進行安裝。
 
 <br>
 
 ## 進階設定 Dockerfile
 
-1. 先在 `.devcontainer` 目錄中建立一個 `Dockerfile`，這可達成在想要的映像上安裝其他工具。
+1. 先在 `.devcontainer` 目錄中建立一個 `Dockerfile`，這可達成在想要的鏡像上安裝其他工具。
 
    ```ini
-   # 使用指定映像
+   # 使用指定鏡像
    FROM python:3.9-slim-buster
 
    # 安裝必要庫
@@ -175,7 +175,7 @@ _⚠️ 啟動後會因為容器特性出現一些警告或提示，暫時不予
 
 <br>
 
-3. 接著修改 `devcontainer.json` 中的 `image`，將原本所指向的映像改變為 `Dockerfile` 。
+3. 接著修改 `devcontainer.json` 中的 `image`，將原本所指向的鏡像改變為 `Dockerfile` 。
 
    ```json
    {

@@ -2,7 +2,7 @@
 
 <br>
 
-1. 拉取鏡像；特別說明，Docker 映像檔會被存放在 Docker 的預設儲存路徑中，這個預設路徑通常是 `/var/lib/docker`，所以執行 `pull` 之前不用進入任何指定的路徑中。
+1. 拉取鏡像；特別說明，Docker 鏡像檔會被存放在 Docker 的預設儲存路徑中，這個預設路徑通常是 `/var/lib/docker`，所以執行 `pull` 之前不用進入任何指定的路徑中。
 
    ```bash
    sudo docker pull jellyfin/jellyfin
