@@ -158,15 +158,25 @@ _關於選項可參考說明_
 
 <br>
 
-8. 點擊 `Yes`。
+8. 點擊 `Ok`。
 
    ![](images/img_47.png)
 
 <br>
 
+9. 選取 `Yes`。
+
+   ![](images/img_64.png)
+
+<br>
+
 ## 完成階段工作
 
-1. 會提示接下來的指令 `pivpn add`。
+_這裡在前面步驟設定為 `Yes` 或 `No` 不同狀況下會略有不同_
+
+<br>
+
+1. 點擊 `Ok`；這裡提示後續的指令 `pivpn add`。
 
    ![](images/img_48.png)
 
