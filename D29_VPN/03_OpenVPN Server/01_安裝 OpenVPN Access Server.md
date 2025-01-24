@@ -120,15 +120,17 @@ _如有必要刪除重建也是相同步驟_
 
 <br>
 
-5. 檢查用戶的屬性是否正確設置。
+5. 檢查用戶 `openvpn` 的屬性是否正確設置。
 
     ```bash
-    sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli --user sam6238 UserPropGet"
+    sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli --user openvpn UserPropGet"
     ```
+
+    ![](images/img_06.png)
 
 <br>
 
-6. 重新啟動 OpenVPN Access Server。
+6. 重新啟動 OpenVPN Access Server；sacli start 是容器內部的服務啟動指令，針對 OpenVPN。
 
     ```bash
     sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli start"
@@ -136,7 +138,7 @@ _如有必要刪除重建也是相同步驟_
 
 <br>
 
-7. 若需要可在宿主機上重新啟動容器。
+7. 若需要可在宿主機上重新啟動容器；`docker restart` 是針對名為 `openvpn-as` 的 Docker 容器進行完整的重啟操作。
 
     ```bash
     sudo docker restart openvpn-as
@@ -175,3 +177,47 @@ _如有必要刪除重建也是相同步驟_
     ![](images/img_02.png)
 
 <br>
+
+3. 輸入自訂的帳號密碼。
+
+    ![](images/img_08.png)
+
+4. ![1737706065326](image/01_安裝OpenVPNAccessServer/1737706065326.png)同意之後登入。
+
+    ![](images/img_07.png)
+
+5. ![1737706066559](image/01_安裝OpenVPNAccessServer/1737706066559.png)展開左側 `Configuration`，進入 `Network Settings` 頁籤後，將 IP Address 改為樹莓派的 IP。
+
+    ![](images/img_09.png)
+
+6. ![1737706067815](image/01_安裝OpenVPNAccessServer/1737706067815.png)先按底部儲存。
+
+    ![](images/img_10.png)
+
+7. ![1737706068844](image/01_安裝OpenVPNAccessServer/1737706068844.png)再點擊頂部的 `Update Running Server`。
+
+    ![](images/img_11.png)
+
+## ![1737706070767](image/01_安裝OpenVPNAccessServer/1737706070767.png)訪問客戶端網址
+
+1. 訪問客戶端。
+
+    ```bash
+    PI_IP=$(hostname -I | awk '{print $1}') && echo "https://$PI_IP:943/"
+    ```
+
+2. 同![1737706073699](image/01_安裝OpenVPNAccessServer/1737706073699.png)樣輸入帳號密碼後登入，點擊下載 `.ovpn` 文件。
+
+    ![](images/img_12.png)
+
+3. ![1737706075647](image/01_安裝OpenVPNAccessServer/1737706075647.png)使用桌面應用登入。
+
+    ![](images/img_13.png)
+
+<br>
+
+___
+
+_END_
+
+
