@@ -42,9 +42,10 @@ _如有必要刪除重建也是相同步驟_
 
 <br>
 
-2. 如果已經存在或是重複，可先刪除容器。
+2. 如果已經存在或是重複，可先停止然後刪除容器。
 
     ```bash
+    sudo docker stop openvpn-as
     sudo docker rm openvpn-as
     ```
 
@@ -74,6 +75,8 @@ _如有必要刪除重建也是相同步驟_
     sudo docker ps
     ```
 
+    ![](images/img_03.png)
+
 <br>
 
 ## 操作容器
@@ -84,23 +87,26 @@ _如有必要刪除重建也是相同步驟_
     sudo docker exec -it openvpn-as bash
     ```
 
+    ![](images/img_04.png)
+
 <br>
 
-2. 建立使用者及密碼。
+2. 建立使用者 `openvpn` 及密碼 `Sam-112233`。
 
     ```bash
-    cd /usr/local/openvpn_as/scripts
-    ./sacli --user sam6238 --new_pass sam112233 SetLocalPassword
+    cd /usr/local/openvpn_as/scripts && ./sacli --user openvpn --new_pass "Sam-112233" SetLocalPassword
     ```
 
+    ![](images/img_05.png)
+
 <br>
 
-3. 將該使用者 `sam6238` 設置為 `管理員 superuser`。
+3. 將該使用者 `openvpn` 設置為 `管理員 superuser`。
 
     ```bash
     cd /usr/local/openvpn_as/scripts
-    ./sacli --user sam6238 --key type --value admin UserPropPut
-    ./sacli --user sam6238 --key prop_superuser --value true UserPropPut
+    ./sacli --user openvpn --key type --value admin UserPropPut
+    ./sacli --user openvpn --key prop_superuser --value true UserPropPut
     ./sacli start
     ```
 
@@ -156,10 +162,16 @@ _如有必要刪除重建也是相同步驟_
 
 ## 訪問伺服器
 
-1. 訪問樹莓派 eth0 網址上指定端口所運作的容器。
+1. 確認樹莓派 IP。
 
     ```bash
-    https://192.168.1.154:943/admin/
+    PI_IP=$(hostname -I | awk '{print $1}') && echo "https://$PI_IP:943/admin"
     ```
+
+<br>
+
+2. 訪問輸出的網址。
+
+    ![](images/img_02.png)
 
 <br>
