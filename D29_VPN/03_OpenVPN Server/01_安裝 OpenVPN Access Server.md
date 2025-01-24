@@ -1,6 +1,6 @@
 # 安裝 OpenVPN Access Server
 
-_在樹莓派安裝_
+_在樹莓派透過 Docker 安裝，參考 [官方說明](https://as-portal.openvpn.com/instructions/docker/installation)_
 
 <br>
 
