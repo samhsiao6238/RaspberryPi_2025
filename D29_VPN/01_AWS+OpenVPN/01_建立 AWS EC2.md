@@ -1,16 +1,20 @@
-# 建立 EC2
+# 建立 AWS EC2
 
-_用以安裝 OpenVPN Access Server_
+_透過 AWS 的 AMI 訂閱快速安裝 OpenVPN Access Server_
 
 <br>
 
 ## 建立 `Key Pairs`
 
+_這裡僅是將建立步驟獨立出來，因為這個 Key 是可以沿用的，無需每次都重建，若是初次建立則在建立 EC2 步驟中進行即可_
+
+<br>
+
 1. 登入控制台。
 
 <br>
 
-2. 可先建立一個 `Key Pairs` 備用，這不是必須的，僅為了單純化後續步驟。
+2. 建立一個 `Key Pairs` 備用。
 
    ![](images/img_01.png)
 
