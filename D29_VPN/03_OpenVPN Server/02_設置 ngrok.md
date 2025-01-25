@@ -38,6 +38,66 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
 
 <br>
 
+4. 編輯。
+
+    ```bash
+    sudo nano ~/.config/ngrok/ngrok.yml
+    ```
+
+<br>
+
+5. 預設已經有以下內容。
+
+    ```bash
+    version: "3"
+    agent:
+        authtoken: 2hTyuBo6MsTDMP8EO7TlnAHST03_26EkSKab6rbqhrd6JpwyW
+    ```
+
+<br>
+
+6. 添加以下內容。
+
+    ```bash
+    version: "3"
+    agent:
+        authtoken: 2hTyuBo6MsTDMP8EO7TlnAHST03_26EkSKab6rbqhrd6JpwyW
+    # 添加以下內容
+    tunnels:
+    openvpn-admin:
+        addr: 943
+        proto: http
+    openvpn-vpn:
+        addr: 1194
+        proto: tcp
+    ```
+
+<br>
+
+7. 運行。
+
+    ```bash
+    ngrok start --all
+    ```
+
+<br>
+
+## 輸出說明
+
+1. 畫面顯示。
+
+    ![](images/img_14.png)
+
+<br>
+
+2. `tcp://0.tcp.jp.ngrok.io:15693 -> localhost:1194` 表示將外部請求轉發到本地的 OpenVPN Server，該服務運行在您的樹莓派上，使用 1194 端口。
+
+<br>
+
+3. `https://5df9-150-116-96-45.ngrok-free.app -> http://localhost:943` 表示將外部請求轉發到本地的 OpenVPN 管理界面，該界面運行在 943 端口。
+
+<br>
+
 ___
 
 _END_
