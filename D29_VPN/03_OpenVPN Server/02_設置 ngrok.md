@@ -90,7 +90,7 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
 
 <br>
 
-2. `tcp://0.tcp.jp.ngrok.io:15693 -> localhost:1194` 表示將外部請求轉發到本地的 OpenVPN Server，該服務運行在您的樹莓派上，使用 1194 端口。
+2. `tcp://0.tcp.jp.ngrok.io:15693 -> localhost:1194` 表示將外部請求轉發到本地的 OpenVPN Server，該服務運行在樹莓派上，使用 1194 端口。
 
 <br>
 
