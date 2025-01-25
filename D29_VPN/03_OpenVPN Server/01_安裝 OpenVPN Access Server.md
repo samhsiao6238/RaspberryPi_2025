@@ -190,7 +190,7 @@ _如有必要刪除重建也是相同步驟_
 
 <br>
 
-5. ![1737706066559](image/01_安裝OpenVPNAccessServer/1737706066559.png)展開左側 `Configuration`，進入 `Network Settings` 頁籤後，將 IP Address 改為樹莓派的 IP。
+5. 展開左側 `Configuration`，進入 `Network Settings` 頁籤後，將 IP Address 改為樹莓派的 IP。
 
     ![](images/img_09.png)
 
