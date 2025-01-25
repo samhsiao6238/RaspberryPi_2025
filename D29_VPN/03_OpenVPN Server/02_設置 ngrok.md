@@ -18,6 +18,8 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
 
 2. 註冊一個 [Ngrok 帳戶](https://ngrok.com/)，登錄後取得身份驗證令牌。
 
+    ![](images/img_19.png)
+
 <br>
 
 3. 在樹莓派添加令牌。
