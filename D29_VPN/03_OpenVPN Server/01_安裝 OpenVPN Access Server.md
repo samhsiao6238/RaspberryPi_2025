@@ -182,21 +182,31 @@ _如有必要刪除重建也是相同步驟_
 
     ![](images/img_08.png)
 
+<br>
+
 4. ![1737706065326](image/01_安裝OpenVPNAccessServer/1737706065326.png)同意之後登入。
 
     ![](images/img_07.png)
+
+<br>
 
 5. ![1737706066559](image/01_安裝OpenVPNAccessServer/1737706066559.png)展開左側 `Configuration`，進入 `Network Settings` 頁籤後，將 IP Address 改為樹莓派的 IP。
 
     ![](images/img_09.png)
 
+<br>
+
 6. ![1737706067815](image/01_安裝OpenVPNAccessServer/1737706067815.png)先按底部儲存。
 
     ![](images/img_10.png)
 
+<br>
+
 7. ![1737706068844](image/01_安裝OpenVPNAccessServer/1737706068844.png)再點擊頂部的 `Update Running Server`。
 
     ![](images/img_11.png)
+
+<br>
 
 ## ![1737706070767](image/01_安裝OpenVPNAccessServer/1737706070767.png)訪問客戶端網址
 
@@ -206,9 +216,13 @@ _如有必要刪除重建也是相同步驟_
     PI_IP=$(hostname -I | awk '{print $1}') && echo "https://$PI_IP:943/"
     ```
 
+<br>
+
 2. 同![1737706073699](image/01_安裝OpenVPNAccessServer/1737706073699.png)樣輸入帳號密碼後登入，點擊下載 `.ovpn` 文件。
 
     ![](images/img_12.png)
+
+<br>
 
 3. ![1737706075647](image/01_安裝OpenVPNAccessServer/1737706075647.png)使用桌面應用登入。
 
