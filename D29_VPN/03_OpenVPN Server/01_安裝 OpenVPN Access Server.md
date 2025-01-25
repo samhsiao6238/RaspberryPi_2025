@@ -21,7 +21,17 @@ _因為官方不支援樹莓派系統安裝，所以使用容器_
 2. 運行 OpenVPN Access Server Docker 鏡像，為該容器指定名稱為 `openvpn-as`，並加入參數 `-d` 以分離模式在後台運行容器。
 
     ```bash
-    sudo docker run --name openvpn-as -v /etc/openvpn:/etc/openvpn -d -p 943:943 -p 9443:9443 -p 1194:1194/udp openvpn/openvpn-as
+    sudo docker run -d \
+        --name openvpn-as \
+        --restart always \
+        --cap-add=NET_ADMIN \
+        --cap-add=NET_RAW \
+        --privileged \
+        -v /run:/run \
+        -p 943:943 \
+        -p 9443:9443 \
+        -p 1194:1194/udp \
+        openvpn/openvpn-as
     ```
 
     ![](images/img_01.png)
@@ -42,16 +52,23 @@ _如有必要刪除重建也是相同步驟_
 
 <br>
 
-2. 如果已經存在或是重複，可先停止然後刪除容器。
+2. 如果已經存在或是重複，先將容器停止。
 
     ```bash
     sudo docker stop openvpn-as
+    ```
+
+<br>
+
+3. 然後刪除容器。
+
+    ```bash
     sudo docker rm openvpn-as
     ```
 
 <br>
 
-3. 建立或重建容器。
+4. 建立或重建容器。
 
     ```bash
     sudo docker run -d \
@@ -69,7 +86,7 @@ _如有必要刪除重建也是相同步驟_
 
 <br>
 
-4. 再次確認容器狀態。
+5. 再次確認容器狀態。
 
     ```bash
     sudo docker ps
