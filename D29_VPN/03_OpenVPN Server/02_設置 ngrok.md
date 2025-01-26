@@ -48,7 +48,7 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
 
 <br>
 
-6. 添加以下內容。
+6. 添加以下內容；特別注意，`proto` 表達的是 ngrok 隧道所使用的 `協議類型`，`addr` 表達的是本地網址，也可以簡寫端口號，假如要使用 `https`，必須明確指定完整 HTTPS 地址；TCP 適合需要直接轉發任意如 VPN、SSH、RDP 的 TCP 協議。
 
     ```bash
     version: "3"
@@ -58,7 +58,7 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
     tunnels:
     openvpn-admin:
         proto: http
-        addr: 943
+        addr: https://localhost:943
     openvpn-vpn:
         proto: tcp
         addr: 1194
