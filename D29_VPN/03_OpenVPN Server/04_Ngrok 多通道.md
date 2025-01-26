@@ -16,29 +16,31 @@ _補充說明使用 Ngrok 開啟 VNC 通道_
 
 2. 內容如下，特別注意不可加入註解。
 
-```bash
-version: "3"
-agent:
-    authtoken: 2hTyuBo6MsTDMP8EO7TlnAHST03_26EkSKab6rbqhrd6JpwyW
-tunnels:
-    openvpn-admin:
-        proto: http
-        addr: https://localhost:943
-    openvpn-vpn:
-        proto: tcp
-        addr: 1194
-    vnc-tunnel:
-        proto: tcp
-        addr: 5900
-```
+    ```bash
+    version: "3"
+    agent:
+        authtoken: 2hTyuBo6MsTDMP8EO7TlnAHST03_26EkSKab6rbqhrd6JpwyW
+    tunnels:
+        openvpn-admin:
+            proto: http
+            addr: https://localhost:943
+        openvpn-vpn:
+            proto: tcp
+            addr: 1194
+        vnc-tunnel:
+            proto: tcp
+            addr: 5900
+    ```
+
+<br>
 
 3. 運行。
 
-```bash
-ngrok start --all
-```
+    ```bash
+    ngrok start --all
+    ```
 
-![](images/img_20.png)
+    ![](images/img_20.png)
 
 <br>
 
