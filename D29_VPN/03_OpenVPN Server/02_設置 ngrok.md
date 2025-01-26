@@ -57,11 +57,11 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
     # 添加以下內容
     tunnels:
     openvpn-admin:
-        addr: 943
         proto: http
+        addr: 943
     openvpn-vpn:
-        addr: 1194
         proto: tcp
+        addr: 1194
     ```
 
 <br>
