@@ -1,4 +1,10 @@
+_尚未實作_
+
 # OpenVPN Server
+
+_直接安裝在樹莓派_
+
+<br>
 
 ## 準備樹莓派環境
 
@@ -7,11 +13,16 @@
    ```bash
    sudo apt update && sudo apt upgrade -y
    ```
+
+<br>
+
 2. 安裝必要工具
 
    ```bash
    sudo apt install -y openvpn easy-rsa
    ```
+
+<br>
 
 ## 建立 OpenVPN 伺服器
 
@@ -21,13 +32,18 @@
    make-cadir ~/openvpn-ca
    cd ~/openvpn-ca
    ```
+
+<br>
+
 2. 配置變數，編輯 `vars` 檔案，並修改如下參數。
 
    ```bash
    nano vars
    ```
 
-   修改以下內容：
+<br>
+
+3. 修改以下內容
 
    ```bash
    export KEY_COUNTRY="TW"
@@ -38,28 +54,42 @@
    export KEY_OU="MyVPN"
    export KEY_NAME="server"
    ```
-3. 建立 CA（Certificate Authority）
+
+<br>
+
+4. 建立 CA
 
    ```bash
    source vars
    ./clean-all
    ./build-ca
    ```
-4. 建立伺服器憑證和金鑰
+
+<br>
+
+5. 建立伺服器憑證和金鑰
 
    ```bash
    ./build-key-server server
    ```
-5. 建立 Diffie-Hellman 金鑰
+
+<br>
+
+6. 建立 Diffie-Hellman 金鑰
 
    ```bash
    ./build-dh
    ```
-6. 建立 TLS 金鑰
+
+<br>
+
+7. 建立 TLS 金鑰
 
    ```bash
    openvpn --genkey --secret keys/ta.key
    ```
+
+<br>
 
 ## 配置 OpenVPN 伺服器
 
@@ -69,11 +99,17 @@
    sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
    sudo gzip -d /etc/openvpn/server.conf.gz
    ```
+
+<br>
+
 2. 修改伺服器配置，編輯 `/etc/openvpn/server.conf`。
 
    ```bash
    sudo nano /etc/openvpn/server.conf
    ```
+
+<br>
+
 3. 確保包含以下內容
 
    ```bash
@@ -95,11 +131,16 @@
    push "dhcp-option DNS 8.8.8.8"
    push "dhcp-option DNS 8.8.4.4"
    ```
+
+<br>
+
 4. 複製生成的憑證和金鑰
 
    ```bash
    sudo cp ~/openvpn-ca/keys/{server.crt,server.key,ca.crt,dh.pem,ta.key} /etc/openvpn/
    ```
+
+<br>
 
 ## 啟動 OpenVPN 伺服器
 
@@ -109,11 +150,16 @@
    sudo systemctl start openvpn@server
    sudo systemctl enable openvpn@server
    ```
+
+<br>
+
 2. 檢查伺服器狀態
 
    ```bash
    sudo systemctl status openvpn@server
    ```
+
+<br>
 
 ## 設置防火牆
 
@@ -122,22 +168,33 @@
    ```bash
    sudo sysctl -w net.ipv4.ip_forward=1
    ```
+
+<br>
+
 2. 永久啟用
 
    ```bash
    sudo nano /etc/sysctl.conf
    ```
+
+<br>
+
 3. 添加或取消註解
 
    ```bash
    net.ipv4.ip_forward=1
    ```
+
+<br>
+
 4. 配置 iptables
 
    ```bash
    sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
    sudo iptables-save | sudo tee /etc/iptables/rules.v4
    ```
+
+<br>
 
 ## 生成用戶配置檔案
 
@@ -148,11 +205,17 @@
    source vars
    ./build-key client1
    ```
+
+<br>
+
 2. 生成客戶端配置檔，在 `/etc/openvpn/client/` 建立 `client.ovpn`。
 
    ```bash
    nano ~/client.ovpn
    ```
+
+<br>
+
 3. 配置如下
 
    ```bash
@@ -171,8 +234,19 @@
    tls-auth ta.key 1
    cipher AES-256-CBC
    ```
+
+<br>
+
 4. 將客戶端配置檔與憑證匯出，將 `client.ovpn` 和相關憑證 (`ca.crt`, `client1.crt`, `client1.key`, `ta.key`) 匯出到用戶設備。
+
+<br>
 
 ## 客戶端連接
 
 1. 將 `client.ovpn` 匯入到 OpenVPN 客戶端，啟動連線，即可使用樹莓派架設的 VPN 伺服器。
+
+<br>
+
+___
+
+_END_
