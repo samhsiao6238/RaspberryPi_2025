@@ -43,7 +43,7 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
     ```bash
     version: "3"
     agent:
-        authtoken: 2hTyuBo6MsTDMP8EO7TlnAHST03_26EkSKab6rbqhrd6JpwyW
+        authtoken: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ```
 
 <br>
@@ -53,7 +53,7 @@ _使用 Ngrok 將 VPN 伺服器公開到互聯網_
     ```bash
     version: "3"
     agent:
-        authtoken: 2hTyuBo6MsTDMP8EO7TlnAHST03_26EkSKab6rbqhrd6JpwyW
+        authtoken: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     # 添加以下內容
     tunnels:
     openvpn-admin:
