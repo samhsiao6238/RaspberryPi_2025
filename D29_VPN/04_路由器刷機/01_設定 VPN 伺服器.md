@@ -6,7 +6,7 @@ _設備使用 `Buffalo WZR-HP-G450H`，首先刷機安裝 `DD-WRT`，接著設�
 
 ## 準備工作
 
-1. 將數據機直接連線到電腦，背面 `ROUTER` 開關切換到 `ON`。
+1. 將數據機直接連線到電腦，背面 `ROUTER` 開關切換到 `OFF`。
 
 <br>
 
@@ -14,7 +14,7 @@ _設備使用 `Buffalo WZR-HP-G450H`，首先刷機安裝 `DD-WRT`，接著設�
 
 <br>
 
-3. 搜尋 SSID 前綴為 `BUFFALO` 的設備進行連線，密碼可以填入 `password`；也可能是沒密碼。
+3. 搜尋 SSID _疑似_ 為 `BUFFALO` 的設備進行連線，帳號預設為 `root`，密碼預設可嘗試使用空白或是 `password`；我也還不確定。
 
 <br>
 
@@ -23,6 +23,22 @@ _設備使用 `Buffalo WZR-HP-G450H`，首先刷機安裝 `DD-WRT`，接著設�
     ![](images/img_11.png)
 
 <br>
+
+5. 設定新的帳號密碼，這裡我先將帳號設置為 `sam6238`，密碼暫時設置為 `sam112233`，重新登入後會顯示在畫面中。
+
+    ![](images/img_15.png)
+
+<br>
+
+6. 將相關名稱改為 `SamVPN-0X`。
+
+    ![](images/img_16.png)
+
+<br>
+
+## 設置 SSID
+
+
 
 ## dd-wrt
 
