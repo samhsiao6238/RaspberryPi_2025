@@ -30,7 +30,7 @@ _設備使用 `Buffalo WZR-HP-G450H`，首先刷機安裝 `DD-WRT`，接著設�
 
 <br>
 
-6. 將相關名稱改為 `SamVPN-0X`。
+6. 將相關名稱改為 `SamVPN-0X`；這裡是編號第三的設備，所以是 `03`。
 
     ![](images/img_16.png)
 
