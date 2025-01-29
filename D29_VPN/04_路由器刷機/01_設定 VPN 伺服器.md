@@ -36,6 +36,12 @@ _設備使用 `Buffalo WZR-HP-G450H`，首先刷機安裝 `DD-WRT`，接著設�
 
 <br>
 
+7. 切換到 Wireless 頁籤，點擊子頁籤 `Basic Settings`，將 SSID 也設置為 `SamVPN-0X`。
+
+    ![](images/img_17.png)
+
+<br>
+
 ## 設置 SSID
 
 
