@@ -1,14 +1,40 @@
-# DD-WRT OpenVPN 伺服器設定指南
+# 設定 VPN 伺服器
 
-_使用 `Buffalo WZR-HP-G450H`，先確認是否已安裝 `DD-WRT`，接著進行安裝並設定 OpenVPN 伺服器，確保您可以遠端連線進入內部網路。_
+_設備使用 `Buffalo WZR-HP-G450H`，首先刷機安裝 `DD-WRT`，接著設置 OpenVPN 伺服器。_
+
+<br>
+
+## 準備工作
+
+1. 將數據機直接連線到電腦，背面 `ROUTER` 開關切換到 `ON`。
+
+<br>
+
+2. 長按機底 RESET 孔 `30` 秒將設備恢復至出廠狀態。
+
+3. 搜尋 SSID 前綴為 `BUFFALO` 的設備進行連線，密碼可以填入 `password`；也可能是沒密碼。
+
+4. 連線後訪問 `192.168.11.1`，帳號為 `root`，密碼空白即可登入系統。
 
 ## dd-wrt
 
 1. 訪問 [官網](https://dd-wrt.com/)，點擊上方 `DOWNLOADS` 頁籤。
 
-2. 輸入 `Buffalo` 設備型號 `WZR-HP-G450H` 搜尋。
+    ![](images/img_08.png)
+
+<br>
+
+2. 直接輸入 `Buffalo` 的設備型號 `WZR-HP-G450H`。
+
+    ![](images/img_09.png)
+
+<br>
 
 3. 點擊進入會顯示可下載項目。
+
+    ![](images/img_10.png)
+
+<br>
 
 ## 設定 OpenVPN 伺服器
 
