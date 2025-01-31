@@ -61,7 +61,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-3. 載入上傳的 Docker 鏡像壓縮文件。
+3. 載入上傳的 Docker 鏡像壓縮文件；運行指令後要稍等一下，不會立即開始。
 
    ```bash
    docker load -i /root/openvpn-as.tar
@@ -71,11 +71,13 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-4. 確認鏡像是否成功載入。
+4. 確認鏡像是否成功載入；預設還有另一個鏡像。
 
    ```bash
    docker images
    ```
+
+   ![](images/img_34.png)
 
 <br>
 
@@ -109,9 +111,13 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-## 其他操作
+## 其他指令
 
-1. 停止。
+_補充說明，無需實作_
+
+<br>
+
+1. 停止容器。
 
    ```bash
    sudo docker stop openvpn-as
@@ -119,7 +125,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-2. 移除。
+2. 移除容器。
 
    ```bash
    sudo docker rm openvpn-as
@@ -127,7 +133,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-3. 完全移除。
+3. 完全移除，包含鏡像。
 
    ```bash
    sudo docker rmi openvpn/openvpn-as
@@ -135,9 +141,9 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-## 添加
+## 檢查
 
-1. 檢查 OpenVPN 是否有監聽 1194。
+1. 在宿主機檢查是否有監聽 1194。
 
    ```bash
    netstat -tulnp | grep 1194
@@ -145,191 +151,347 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
    ![](images/img_23.png)
 
+<br>
+
 2. 進入容器內部。
 
-```bash
-sudo docker exec -it openvpn-as bash
-```
-
-3. 檢查 OpenVPN 是否有監聽 1194
-
-```bash
-netstat -tulnp | grep 1194
-```
-
-## 管理容器
-
-_安裝 `Dev Containers` 插件_
-
-1. 先使用 SSH 連線宿主機。
-
-2. 連線後，開啟面板輸入 `Remote-Containers: Attach to Running Container`，然後選擇容器。
-
-![](images/img_24.png)
-
-3. 開啟路徑，找到 `etc/as.conf`。
-
-```bash
-/usr/local/openvpn_as/
-```
-
-4. 在 as.conf 文件的 底部 添加或修改以下設定。
-
-```bash
-# 設置 OpenVPN 服務監聽的端口
-vpn.server.port=1194
-vpn.server.daemon.udp=openvpn
-vpn.server.daemon.udp.n_daemons=2
-vpn.server.daemon.tcp.port=443
-vpn.server.daemon.tcp.n_daemons=2
-```
-
-5. 應用設定並重啟 OpenVPN Access Server 在容器內執行
-
-```bash
-/usr/local/openvpn_as/scripts/sacli stop
-/usr/local/openvpn_as/scripts/sacli start
-```
-
-6. 查看。
-
-```bash
-netstat -tulnp | grep 1194
-```
-
-## 改用 914
-
-1. 改為 914。
-
-```bash
-/usr/local/openvpn_as/scripts/sacli --key "vpn.server.port" --value "914" ConfigPut
-/usr/local/openvpn_as/scripts/sacli --key "vpn.server.daemon.udp" --value "openvpn" ConfigPut
-```
-
-2. 重啟 OpenVPN
-
-```bash
-/usr/local/openvpn_as/scripts/sacli stop
-/usr/local/openvpn_as/scripts/sacli start
-```
-
-3. 確認新端口是否監聽
-
-```bash
-netstat -tulnp | grep 914
-```
-
-1. 查看內容。
-
    ```bash
-   cat /usr/local/openvpn_as/etc/as.conf
+   sudo docker exec -it openvpn-as bash
    ```
 
-2. 重啟 OpenVPN 服務。
+<br>
+
+3. 檢查 OpenVPN 是否有監聽 1194；會顯示並無監聽。
+
+   ```bash
+   netstat -tulnp | grep 1194
+   ```
+
+   ![](images/img_35.png)
+
+<br>
+
+## VSCode 連線容器
+
+_這裡補充說明如何透過 `Dev Containers` 插件連線進入容器內_
+
+1. 開啟 VSCode，先使用 `遠端管理` 透過 SSH 連線宿主機；確認左下方已顯示。
+
+   ![](images/img_36.png)
+
+<br>
+
+2. 連線後，開啟 `命令選擇區` 面板，並輸入 `Remote-Containers: Attach to Running Container`。
+
+   ![](images/img_37.png)
+
+<br>
+
+3. 會出現容器，點擊選取。
+
+   ![](images/img_38.png)
+
+<br>
+
+4. 會彈出新的 VSCode 工作視窗，右下角顯示 `連線到開發人員容器`；等候進度條完成。
+
+   ![](images/img_24.png)
+
+<br>
+
+5. 開啟以下路徑，並找到設定文件 `etc/as.conf`。
+
+   ```bash
+   /usr/local/openvpn_as/
+   ```
+
+<br>
+
+4. 在 `as.conf` 文件的 底部 添加或修改以下設定。
+
+   ```bash
+   # 設置 OpenVPN 服務監聽的端口
+   vpn.server.port=1194
+   vpn.server.daemon.udp=openvpn
+   vpn.server.daemon.udp.n_daemons=2
+   vpn.server.daemon.tcp.port=443
+   vpn.server.daemon.tcp.n_daemons=2
+   ```
+
+<br>
+
+5. 應用設定並重啟 OpenVPN Access Server 在容器內執行；啟動後可略作觀察，確認 OpenVPN 服務正常啟動。
 
    ```bash
    /usr/local/openvpn_as/scripts/sacli stop
    /usr/local/openvpn_as/scripts/sacli start
    ```
 
-3. 檢查。
+   ![](images/img_39.png)
+
+<br>
+
+6. 查看容器對 `1194` 的監聽；這裡沒有任何輸出，代表並未正常啟動監聽。
 
    ```bash
    netstat -tulnp | grep 1194
    ```
 
-## 訪問
+<br>
 
-1. 添加安全組
+7. 透過指令觀察監聽中的端口。
 
-![](images/img_09.png)
-
-2. 添加
-
-```bash
-sudo ufw allow 943/tcp
-sudo ufw allow 9443/tcp
-sudo ufw reload
-sudo ufw status
-```
-
-3. 在本機測試
-
-```bash
-nc -zv 118.31.77.245 943
-nc -zv 118.31.77.245 9443
-```
-
-4. OpenVPN 管理介面
-
-```bash
-SERVER_IP=$(curl -s ifconfig.me)
-echo "管理介面: https://$SERVER_IP:943/admin"
-echo "客戶端介面: https://$SERVER_IP:943/"
-```
-
-5. 登入管理頁面，設置 Hostname
-
-![](images/img_10.png)
-
-## 確認
-
-1. 在容器內執行
-
-```bash
-/usr/local/openvpn_as/scripts/sacli Status
-```
-
-2. 確認 1194 端口是否正在監聽
-
-```bash
-netstat -tulnp | grep 1194
-```
-
-
-
-#### 6️⃣ 設定 OpenVPN
-- 進入 `Configuration -> Network Settings`
-- 更改 `IP Address` 為阿里雲的 ECS 公網 IP
-- 儲存後，點擊 `Update Running Server`
-- 這時你可能會被斷線，重新訪問新的管理地址即可。
-
-#### 7️⃣ 下載 `.ovpn` 設定檔
-- 進入 `Client UI`
-- 下載 `.ovpn` 檔案
-- 在 OpenVPN 客戶端載入該 `.ovpn` 檔案並連線
-
-
-
-### 🔹 阿里雲額外設定
-1. 確保開放防火牆
    ```bash
-   sudo ufw allow 943/tcp
-   sudo ufw allow 9443/tcp
-   sudo ufw allow 1194/udp
-   sudo ufw reload
+   netstat -tulnp
    ```
 
-2. 如果 OpenVPN 連線後無法上網
-   - 檢查 `IP Forwarding`
+   ![](images/img_40.png)
+
+<br>
+
+8. 若要查看設定文件內容。
+
    ```bash
-   echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
-   sudo sysctl -w net.ipv4.ip_forward=1
-   ```
-   - NAT 設定：
-   ```bash
-   sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
-   sudo iptables-save | sudo tee /etc/iptables.rules
+   cat /usr/local/openvpn_as/etc/as.conf
    ```
 
+<br>
 
+## 改用 914
 
-### 🔹 結論
-- 是的，你可以用你的筆記在 阿里雲的 ECS（Ubuntu 20.04 / 22.04） 透過 Docker 部署 OpenVPN Access Server。
-- 注意阿里雲防火牆設定，確保開放 `943`, `9443`, `1194` 端口。
-- NAT 與 IP 轉發 可能需要手動設定，確保 VPN 用戶可以存取網際網路。
+_各種嘗試皆無法啟動 `1194` 監聽，以下嘗試改用 `914`_
 
-這樣，你應該能成功在 阿里雲 ECS 上運行 OpenVPN Access Server！🚀
+<br>
 
+1. 在容器內運行指令改用端口 `914`。
 
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.port" --value "914" ConfigPut
+   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.daemon.udp" --value "openvpn" ConfigPut
+   ```
 
+<br>
+
+2. 再次重啟 OpenVPN。
+
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli stop
+   /usr/local/openvpn_as/scripts/sacli start
+   ```
+
+<br>
+
+3. 確認新端口是否監聽。
+
+   ```bash
+   netstat -tulnp | grep 914
+   ```
+
+<br>
+
+## 登入管理介面
+
+1. 進入 openvpn-as 容器。
+
+   ```bash
+   sudo docker exec -it openvpn-as bash
+   ```
+
+<br>
+
+2. 建立使用者 openvpn 及密碼 Sam-112233。
+
+   ```bash
+   cd /usr/local/openvpn_as/scripts && ./sacli --user openvpn --new_pass "Sam-112233" SetLocalPassword
+   ```
+
+<br>
+
+3. 將該使用者 openvpn 設置為 管理員 superuser。
+
+   ```bash
+   cd /usr/local/openvpn_as/scripts
+   ./sacli --user openvpn --key type --value admin UserPropPut
+   ./sacli --user openvpn --key prop_superuser --value true UserPropPut
+   ./sacli start
+   ```
+
+<br>
+
+4. 退出容器。
+
+   ```bash
+   exit
+   ```
+
+<br>
+
+5. 檢查用戶 openvpn 的屬性是否正確設置。
+
+   ```bash
+   sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli --user openvpn UserPropGet"
+   ```
+
+<br>
+
+6. 重新啟動 OpenVPN Access Server；sacli start 是容器內部的服務啟動指令，針對 OpenVPN。
+
+   ```bash
+   sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli start"
+   ```
+
+<br>
+
+7. 取得 OpenVPN 管理介面網址。
+
+   ```bash
+   SERVER_IP=$(curl -s ifconfig.me)
+   echo "管理介面: https://$SERVER_IP:943/admin"
+   echo "客戶端介面: https://$SERVER_IP:943/"
+   ```
+
+<br>
+
+## 設定 IP
+
+1. 登入管理頁面後，切換到 `Network Settings` 設置 Hostname 為實例 IP。
+
+   ![](images/img_10.png)
+
+<br>
+
+2. 點擊下方的儲存。
+
+   ![](images/img_41.png)
+
+<br>
+
+3. 點擊上方的更新。
+
+   ![](images/img_42.png)
+
+<br>
+
+4. 點擊後會顯示 `無法連上 ...`，這是正常的，無需理會。
+
+   ![](images/img_43.png)
+
+<br>
+
+5. 進入客戶端，輸入相同帳號密碼。
+
+   ![](images/img_44.png)
+
+<br>
+
+6. 下載設定文件。
+
+   ![](images/img_45.png)
+
+<br>
+
+7. 使用客戶端連線。
+
+<br>
+
+## 關於安全群組
+
+_這裡記錄安全群組內容_
+
+<br>
+
+1. 當前的安全組。
+
+   ![](images/img_09.png)
+
+<br>
+
+2. UDP  1194/1194，OpenVPN UDP。
+
+<br>
+
+3. TCP 9443/9443 是 OpenVPN Web UI 的管理頁面。
+
+<br>
+
+4. TCP 943/943 是OpenVPN Web UI 客戶端登入。
+
+<br>
+
+5. RDP TCP 3389 是遠端桌面 Windows。
+
+<br>
+
+6. ICMP 允許 ICMP Ping，可透過遠端透過 `ping` 指令進行連線測試。
+
+<br>
+
+7. TCP 22/22 是 SSH 連線。
+
+<br>
+
+## .ovpn 文件
+
+1. 當前設定。
+
+   ```bash
+   # 加密演算法使用 AES-256-CBC 加密 VPN 流量
+   cipher AES-256-CBC
+   # 指定此配置用於客戶端模式
+   client
+   # 當客戶端嘗試連接伺服器時，最多等候 4 秒鐘
+   server-poll-timeout 4
+   # 不綁定本地端口
+   # 允許客戶端使用動態端口，而不是固定的本地端口，適用於 NAT 環境
+   nobind
+   # 透過 TCP 連線到指定 IP 的 443 HTTPS 端口
+   remote 8.136.110.37 443 tcp
+   # 透過 UDP 連線到指定 IP 的 1194 OpenVPN 預設端口
+   remote 8.136.110.37 1194 udp
+   # 使用 TUN（Tunnel）介面，適用於 L3 隧道，路由模式
+   dev tun
+   # 明確指定設備類型為 TUN
+   dev-type tun
+   # 確保連接的伺服器提供有效的 TLS 憑證
+   remote-cert-tls server
+   # 只允許 TLS 1.2 以上的加密通訊，提升安全性
+   tls-version-min 1.2
+   # 設定 **604800 秒（7 天）**後，重新執行金鑰協商
+   reneg-sec 604800
+   # 設定最大傳輸單元，適合大部分網路環境的值，有助於減少封包分段
+   tun-mtu 1420
+   # 客戶端連接時，需要用戶名和密碼來進行身份驗證
+   auth-user-pass
+   # 日誌模式設定 `3`，顯示錯誤、警告與連線過程訊息
+   verb 3
+   # 讓伺服器接收客戶端的資訊
+   # 客戶端會將一些系統資訊發送給伺服器
+   push-peer-info
+
+   <ca>
+   -----BEGIN CERTIFICATE-----
+   <略>
+   -----END CERTIFICATE-----
+   </ca>
+   <cert>
+   -----BEGIN CERTIFICATE-----
+   <略>
+   -----END CERTIFICATE-----
+   </cert>
+   <key>
+   -----BEGIN PRIVATE KEY-----
+   <略>
+   -----END PRIVATE KEY-----
+   </key>
+   <tls-crypt-v2>
+   -----BEGIN OpenVPN tls-crypt-v2 client key-----
+   <略>
+   -----END OpenVPN tls-crypt-v2 client key-----
+   </tls-crypt-v2>
+   ```
+
+<br>
+
+___
+
+_END_
