@@ -6,7 +6,15 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 ## 本地
 
-1. 本機下載 `linux/amd64` 架構的 `OpenVPN` 鏡像。
+1. 先確認能遠程連線，因為後續要使用 `scp` 指令。
+
+   ```bash
+   ssh ali
+   ```
+
+<br>
+
+2. 本機下載 `linux/amd64` 架構的 `OpenVPN` 鏡像。
 
    ```bash
    cd ~/Downloads && docker pull --platform linux/amd64 openvpn/openvpn-as
@@ -14,7 +22,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-2. 壓縮。
+3. 壓縮；務必確認當前工作路徑。
 
    ```bash
    docker save -o openvpn-as.tar openvpn/openvpn-as
@@ -22,11 +30,13 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-3. 傳送到雲端。
+4. 傳送到雲端；需要一段時間。
 
    ```bash
    scp ~/Downloads/openvpn-as.tar ali:~/
    ```
+
+   ![](images/img_33.png)
 
 <br>
 
