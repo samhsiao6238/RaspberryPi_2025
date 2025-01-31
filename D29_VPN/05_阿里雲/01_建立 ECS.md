@@ -20,7 +20,7 @@ _Elastic Compute Service_
 
 <br>
 
-2. 點擊 `建立我的 ECS`。
+2. 點擊 `建立更多試用 ECS`。
 
     ![](images/img_01.png)
 
@@ -28,9 +28,11 @@ _Elastic Compute Service_
 
 3. 地區選擇 `華東 1（杭州）`。
 
+    ![](images/img_25.png)
+
 <br>
 
-4. 規格選擇 2 核心、2 GiB 經濟型 e。
+4. 規格選擇 `2 核心、2 GiB 經濟型 e`。
 
     ![](images/img_02.png)
 
@@ -54,6 +56,18 @@ _Elastic Compute Service_
 
 <br>
 
+6. 建立成功，點擊 `管理試用`。
+
+    ![](images/img_26.png)
+
+<br>
+
+7. 點擊 `實例`，就可看到新建立的 ECS。
+
+    ![](images/img_27.png)
+
+<br>
+
 ## 使用主控台登入
 
 1. 點擊 `綁定密鑰對`。
@@ -62,7 +76,7 @@ _Elastic Compute Service_
 
 <br>
 
-2. 若無密鑰，選擇 `創建密鑰對`；輸入名稱後會自動下載。
+2. 若無密鑰，選擇 `建立密鑰對`；輸入名稱後會自動下載。
 
     ![](images/img_13.png)
 

@@ -6,7 +6,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 ## 本地
 
-1. 本機下載 `linux/amd64` 架構的 `OpenVPN` 映像。
+1. 本機下載 `linux/amd64` 架構的 `OpenVPN` 鏡像。
 
    ```bash
    cd ~/Downloads && docker pull --platform linux/amd64 openvpn/openvpn-as
@@ -47,7 +47,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-3. 載入上傳的 Docker 映像壓縮文件。
+3. 載入上傳的 Docker 鏡像壓縮文件。
 
    ```bash
    docker load -i /root/openvpn-as.tar
@@ -57,7 +57,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-4. 確認映像是否成功載入。
+4. 確認鏡像是否成功載入。
 
    ```bash
    docker images
