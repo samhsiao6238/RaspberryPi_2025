@@ -42,7 +42,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 ## 設置雲端環境
 
-1. 安裝 Docker；假如有勾選預裝，可跳過此步驟。
+1. 安裝 Docker；假如有勾選預裝，可跳過這第一步。
 
    ```bash
    sudo apt update && sudo apt install -y docker.io
@@ -52,6 +52,10 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 <br>
 
 2. 查看 Docker 運行狀態。
+
+   ```bash
+   sudo systemctl status docker
+   ```
 
    ![](images/img_19.png)
 
