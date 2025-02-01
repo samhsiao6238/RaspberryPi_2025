@@ -105,6 +105,66 @@
 
 <br>
 
+## 清理資源
+
+1. 查詢當前 ECS 實例。
+
+    ```bash
+    aliyun ecs DescribeInstances --RegionId "cn-hangzhou"
+    ```
+
+<br>
+
+2. 確保 ECS 實例已停止。
+
+    ```bash
+    aliyun ecs StopInstance --InstanceId "<實例-Id>"
+    ```
+
+<br>
+
+3. 徹底刪除 ECS 實例。
+
+    ```bash
+    aliyun ecs DeleteInstance --InstanceId "<實例-Id>" --Force true
+    ```
+
+<br>
+
+4. 查詢當前安全群組。
+
+    ```bash
+    aliyun ecs DescribeSecurityGroups --RegionId "cn-hangzhou"
+    ```
+
+<br>
+
+5. 刪除安全群組。
+
+    ```bash
+    aliyun ecs DeleteSecurityGroup --RegionId "cn-hangzhou" --SecurityGroupId "<安全組-Id>"
+    ```
+
+<br>
+
+6. 查詢已建立的密鑰對。
+
+    ```bash
+    aliyun ecs DescribeKeyPairs --RegionId "cn-hangzhou"
+    ```
+
+<br>
+
+7. 刪除密鑰對；特別注意，參數後的中括號 `[]` 必須搭配單引號 `''` 來包覆，這是避免命令行工具誤判這是 `shell` 的語法。
+
+    ```bash
+    aliyun ecs DeleteKeyPairs --RegionId "cn-hangzhou" --KeyPairNames '["<密鑰對-名稱>"]'
+    ```
+
+    ![](images/img_75.png)
+
+<br>
+
 ___
 
 _持續補充_
