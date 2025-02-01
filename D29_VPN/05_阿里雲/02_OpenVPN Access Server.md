@@ -114,7 +114,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-6. 使用本地鏡像啟動 `OpenVPN Access Server`。
+6. 使用本地鏡像啟動 `OpenVPN Access Server`；特別注意，這裡嘗試使用 1194 映射容器的 914。
 
    ```bash
    sudo docker run -d \
@@ -126,7 +126,7 @@ _使用 SSH 連線 ECS 實例_
       -v /run:/run \
       -p 943:943 \
       -p 9443:9443 \
-      -p 1194:1194/udp \
+      -p 1194:914/udp \
       openvpn/openvpn-as
    ```
 
@@ -184,31 +184,14 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-5. 在文件底部添加。
+5. 在文件底部添加以下設定，特別注意，其中的 `1194` 已改用 `914`。
 
    ```bash
-   vpn.server.port=1194
+   vpn.server.port=914
    vpn.server.daemon.udp=openvpn
    vpn.server.daemon.udp.n_daemons=2
    vpn.server.daemon.tcp.port=443
    vpn.server.daemon.tcp.n_daemons=2
-   ```
-
-<br>
-
-6. 應用新的設定。
-
-   ```bash
-   /usr/local/openvpn_as/scripts/sacli stop
-   /usr/local/openvpn_as/scripts/sacli start
-   ```
-
-<br>
-
-7. 確認是否成功監聽。
-
-   ```bash
-   netstat -tulnp | grep 914
    ```
 
 <br>
@@ -252,7 +235,7 @@ _`as.conf`_
 
    ```bash
    # 設定伺服器監聽的 UDP 端口
-   vpn.server.port=1194
+   vpn.server.port=914
    # 使用 UDP 模式運行
    vpn.server.daemon.udp=openvpn
    # 產生 2 個 UDP 處理進程，提高性能
@@ -265,20 +248,78 @@ _`as.conf`_
 
 <br>
 
-3. 設定文件變動時需重啟。
+## 重啟服務
+
+1. 設定文件變動時需重啟；透過輸出可確認服務的重啟狀態。
 
    ```bash
    /usr/local/openvpn_as/scripts/sacli stop
    /usr/local/openvpn_as/scripts/sacli start
    ```
 
+   ![](images/img_58.png)
+
 <br>
 
-4. 檢查指定端口 `1194` 是否被監聽。
+2. 檢查容器內的指定端口 `914` 是否被監聽。
 
    ```bash
-   netstat -tulnp | grep 1194
+   netstat -tulnp | grep 914
    ```
+
+<br>
+
+## 嘗試排除無法監聽 `1194` 的問題
+
+_以下紀錄原本使用預設端口 `1194` 時，嘗試的各種可能的方式排查容器無法監聽 `1194` 的問題，最終未能排除，僅做紀錄參考_
+
+<br>
+
+1. 查詢 OpenVPN 是否嘗試監聽 1194；正確。
+
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli ConfigQuery | grep "vpn.server.port"
+   ```
+
+   ![](images/img_59.png)
+
+<br>
+
+2. 確認 OpenVPN 是否正常運行；正確。
+
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli Status
+   ```
+
+   ![](images/img_60.png)
+
+<br>
+
+3. 檢查 OpenVPN Access Server 日誌；無錯誤。
+
+   ```bash
+   cat /var/log/openvpnas.log | tail -20
+   ```
+
+<br>
+
+4. 確認容器是否正確開放 1194 端口；正確。
+
+   ```bash
+   cat /usr/local/openvpn_as/etc/as.conf | grep vpn.server
+   ```
+
+   ![](images/img_61.png)
+
+<br>
+
+5. 在實例終端機運行指令，檢查 Docker 端口映射；正確。
+
+   ```bash
+   docker ps | grep openvpn-as
+   ```
+
+   ![](images/img_62.png)
 
 <br>
 
@@ -296,7 +337,7 @@ _補充說明，無需實作_
 
 <br>
 
-2. 移除容器。
+2. 使用參數 `rm` 移除容器。
 
    ```bash
    sudo docker rm openvpn-as
@@ -304,7 +345,7 @@ _補充說明，無需實作_
 
 <br>
 
-3. 完全移除，包含鏡像。
+3. 使用參數 `rmi` 移除包含鏡像在內的全部容器文件。
 
    ```bash
    sudo docker rmi openvpn/openvpn-as
@@ -312,13 +353,29 @@ _補充說明，無需實作_
 
 <br>
 
-## 檢查
+4. 重啟容器。
+
+   ```bash
+   docker restart openvpn-as
+   ```
+
+<br>
+
+## 檢查端口監聽
 
 _以下使用端口 `914`_
 
 <br>
 
-1. 在宿主機檢查是否有監聽 914。
+1. 查詢容器的端口監聽。
+
+   ```bash
+   netstat -tulnp
+   ```
+
+<br>
+
+2. 在宿主機檢查是否有監聽 1194。
 
    ```bash
    netstat -tulnp | grep 1194
@@ -328,7 +385,7 @@ _以下使用端口 `914`_
 
 <br>
 
-2. 進入容器內部。
+3. 進入容器內部。
 
    ```bash
    sudo docker exec -it openvpn-as bash
@@ -336,13 +393,95 @@ _以下使用端口 `914`_
 
 <br>
 
-3. 檢查 OpenVPN 是否有監聽 914；會顯示並無監聽。
+4. 檢查 OpenVPN 是否有監聽 914。
 
    ```bash
    netstat -tulnp | grep 914
    ```
 
    ![](images/img_35.png)
+
+<br>
+
+## 手動設定 914
+
+_即使在 Docker 啟動時設置 `-p 1194:914/udp`，仍需手動設置 `sacli` 來確保 OpenVPN 伺服器使用 `UDP`。_
+
+<br>
+
+1. 在容器內運行指令改用端口 `914`；特別注意，這個變更的設定會被寫入 `OpenVPN Access Server` 的內部設定資料庫，而不會直接修改 `as.conf`；另外，不建議直接修改 `as.conf`，因為 `OpenVPN Access Server` 主要使用內部設定資料庫來管理配置，直接修改 `as.conf` 可能不會生效，且容易在更新或重啟時被覆蓋。
+
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.port" --value "914" ConfigPut
+   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.daemon.udp" --value "openvpn" ConfigPut
+   ```
+
+<br>
+
+2. 檢查當前設定值。
+
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli ConfigQuery | grep "vpn.server"
+   ```
+
+   ![](images/img_63.png)
+
+<br>
+
+3. 同時也修改 `as.conf`。
+
+   ```bash
+   nano /usr/local/openvpn_as/etc/as.conf
+   ```
+
+<br>
+
+4. 將原本的 `1194` 改為 `914`。
+
+   ![](images/img_65.png)
+
+<br>
+
+5. 再次重啟 OpenVPN。
+
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli stop
+   /usr/local/openvpn_as/scripts/sacli start
+   ```
+
+<br>
+
+6. 宿主機添加對應規則，先安裝套件。
+
+   ```bash
+   apt install netfilter-persistent -y
+   ```
+
+<br>
+
+7. 宿主機添加規則。
+
+   ```bash
+   sudo iptables -A INPUT -p udp --dport 914 -j ACCEPT
+   netfilter-persistent save
+   netfilter-persistent reload
+   ```
+
+<br>
+
+8. 確認宿主機允許 UDP 914。
+
+   ```bash
+   sudo iptables -L -n -v | grep 914
+   ```
+
+<br>
+
+9. 若有重複規則，可進行刪除。
+
+   ```bash
+   sudo iptables -D INPUT -p udp --dport 914 -j ACCEPT
+   ```
 
 <br>
 
@@ -430,38 +569,6 @@ _這裡補充說明如何透過 `Dev Containers` 插件連線進入容器內_
 
    ```bash
    cat /usr/local/openvpn_as/etc/as.conf
-   ```
-
-<br>
-
-## 手動改用 914
-
-_若已經設定了 `1194`，可透過以下步驟改用 `914`；若已設置為 `914` 可忽略以下步驟_
-
-<br>
-
-1. 在容器內運行指令改用端口 `914`。
-
-   ```bash
-   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.port" --value "914" ConfigPut
-   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.daemon.udp" --value "openvpn" ConfigPut
-   ```
-
-<br>
-
-2. 再次重啟 OpenVPN。
-
-   ```bash
-   /usr/local/openvpn_as/scripts/sacli stop
-   /usr/local/openvpn_as/scripts/sacli start
-   ```
-
-<br>
-
-3. 確認新端口是否監聽。
-
-   ```bash
-   netstat -tulnp | grep 914
    ```
 
 <br>
@@ -661,7 +768,7 @@ _這裡記錄安全群組內容_
    remote-cert-tls server
    # 只允許 TLS 1.2 以上的加密通訊，提升安全性
    tls-version-min 1.2
-   # 設定 **604800 秒（7 天）**後，重新執行金鑰協商
+   # 設定 604800 秒（7 天）後，重新執行金鑰協商
    reneg-sec 604800
    # 設定最大傳輸單元，適合大部分網路環境的值，有助於減少封包分段
    tun-mtu 1420
