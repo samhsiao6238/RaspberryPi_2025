@@ -320,6 +320,16 @@ _在安全組中添加規則，設置 `0.0.0.0/0` 允許所有 IP 連線；特�
 
 <br>
 
+## 其他指令
+
+1. 取得 ECS 實例的公網 IP。
+
+    ```bash
+    aliyun ecs DescribeInstances --RegionId "cn-hangzhou" | jq -r '.Instances.Instance[].PublicIpAddress.IpAddress[]'
+    ```
+
+<br>
+
 ___
 
 _END_

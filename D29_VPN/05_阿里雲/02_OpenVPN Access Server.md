@@ -18,7 +18,7 @@ _因爲在雲端似乎難以拉取，所以從本地上傳；可另實測看看_
 
 <br>
 
-2. 本機下載 `linux/amd64` 架構的 `OpenVPN` 鏡像。
+2. 本機下載 `linux/amd64` 架構的 `OpenVPN` 鏡像；若建立 `linux/arm64` 實例，則無需加入參數。
 
    ```bash
    cd ~/Downloads && docker pull --platform linux/amd64 openvpn/openvpn-as
@@ -71,7 +71,7 @@ _使用 SSH 連線 ECS 實例_
 1. 安裝 Docker；假如有勾選預裝，可跳過這第一步。
 
    ```bash
-   sudo apt update && sudo apt install -y docker.io
+   apt update && apt install -y docker.io
    ```
 
 <br>
@@ -79,7 +79,7 @@ _使用 SSH 連線 ECS 實例_
 2. 啟動服務。
 
    ```bash
-   sudo systemctl enable --now docker
+   systemctl enable --now docker
    ```
 
 <br>
@@ -87,7 +87,7 @@ _使用 SSH 連線 ECS 實例_
 3. 查看 Docker 運行狀態。
 
    ```bash
-   sudo systemctl status docker
+   systemctl status docker
    ```
 
    ![](images/img_19.png)
@@ -114,10 +114,10 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-6. 使用本地鏡像啟動 `OpenVPN Access Server`；特別注意，這裡嘗試使用 1194 映射容器的 914。
+6. 使用本地鏡像啟動 `OpenVPN Access Server`；特別注意，使用 `arm64` 實例時，`1194` 可正確映射。
 
    ```bash
-   sudo docker run -d \
+   docker run -d \
       --name openvpn-as \
       --restart always \
       --cap-add=NET_ADMIN \
@@ -126,7 +126,7 @@ _使用 SSH 連線 ECS 實例_
       -v /run:/run \
       -p 943:943 \
       -p 9443:9443 \
-      -p 1194:914/udp \
+      -p 1194:1194/udp \
       openvpn/openvpn-as
    ```
 
@@ -137,7 +137,7 @@ _使用 SSH 連線 ECS 實例_
 7. 檢查容器狀態。
 
    ```bash
-   sudo docker ps
+   docker ps
    ```
 
    ![](images/img_22.png)
@@ -155,7 +155,7 @@ _使用 SSH 連線 ECS 實例_
 1. 進入容器。
 
    ```bash
-   sudo docker exec -it openvpn-as bash
+   docker exec -it openvpn-as bash
    ```
 
 <br>
@@ -184,10 +184,10 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-5. 在文件底部添加以下設定，特別注意，其中的 `1194` 已改用 `914`。
+5. 在文件底部添加以下設定，特別注意，其中的 `1194` 已改用 `916`。
 
    ```bash
-   vpn.server.port=914
+   vpn.server.port=916
    vpn.server.daemon.udp=openvpn
    vpn.server.daemon.udp.n_daemons=2
    vpn.server.daemon.tcp.port=443
@@ -198,7 +198,7 @@ _使用 SSH 連線 ECS 實例_
 
 ## 設定檔說明
 
-_`as.conf`_
+_`as.conf` 設定內容介紹，無需實作_
 
 <br>
 
@@ -235,7 +235,7 @@ _`as.conf`_
 
    ```bash
    # 設定伺服器監聽的 UDP 端口
-   vpn.server.port=914
+   vpn.server.port=916
    # 使用 UDP 模式運行
    vpn.server.daemon.udp=openvpn
    # 產生 2 個 UDP 處理進程，提高性能
@@ -261,10 +261,10 @@ _`as.conf`_
 
 <br>
 
-2. 檢查容器內的指定端口 `914` 是否被監聽。
+2. 檢查容器內的指定端口 `1194` 是否被監聽。
 
    ```bash
-   netstat -tulnp | grep 914
+   netstat -tulnp | grep 1194
    ```
 
 <br>
@@ -332,7 +332,7 @@ _補充說明，無需實作_
 1. 停止容器。
 
    ```bash
-   sudo docker stop openvpn-as
+   docker stop openvpn-as
    ```
 
 <br>
@@ -340,7 +340,7 @@ _補充說明，無需實作_
 2. 使用參數 `rm` 移除容器。
 
    ```bash
-   sudo docker rm openvpn-as
+   docker rm openvpn-as
    ```
 
 <br>
@@ -348,7 +348,7 @@ _補充說明，無需實作_
 3. 使用參數 `rmi` 移除包含鏡像在內的全部容器文件。
 
    ```bash
-   sudo docker rmi openvpn/openvpn-as
+   docker rmi openvpn/openvpn-as
    ```
 
 <br>
@@ -363,7 +363,7 @@ _補充說明，無需實作_
 
 ## 檢查端口監聽
 
-_以下使用端口 `914`_
+_以下使用端口 `916`_
 
 <br>
 
@@ -388,31 +388,31 @@ _以下使用端口 `914`_
 3. 進入容器內部。
 
    ```bash
-   sudo docker exec -it openvpn-as bash
+   docker exec -it openvpn-as bash
    ```
 
 <br>
 
-4. 檢查 OpenVPN 是否有監聽 914。
+4. 檢查 OpenVPN 是否有監聽 1194。
 
    ```bash
-   netstat -tulnp | grep 914
+   netstat -tulnp | grep 1194
    ```
 
    ![](images/img_35.png)
 
 <br>
 
-## 手動設定 914
+## 手動設定 916
 
-_即使在 Docker 啟動時設置 `-p 1194:914/udp`，仍需手動設置 `sacli` 來確保 OpenVPN 伺服器使用 `UDP`。_
+_即使在 Docker 啟動時設置 `-p 1194:1194/udp`，仍需手動設置 `sacli` 來確保 OpenVPN 伺服器使用 `UDP`。_
 
 <br>
 
-1. 在容器內運行指令改用端口 `914`；特別注意，這個變更的設定會被寫入 `OpenVPN Access Server` 的內部設定資料庫，而不會直接修改 `as.conf`；另外，不建議直接修改 `as.conf`，因為 `OpenVPN Access Server` 主要使用內部設定資料庫來管理配置，直接修改 `as.conf` 可能不會生效，且容易在更新或重啟時被覆蓋。
+1. 在容器內運行指令改用端口 `916`；特別注意，這個變更的設定會被寫入 `OpenVPN Access Server` 的內部設定資料庫，而不會直接修改 `as.conf`；另外，不建議直接修改 `as.conf`，因為 `OpenVPN Access Server` 主要使用內部設定資料庫來管理配置，直接修改 `as.conf` 可能不會生效，且容易在更新或重啟時被覆蓋。
 
    ```bash
-   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.port" --value "914" ConfigPut
+   /usr/local/openvpn_as/scripts/sacli --key "vpn.server.port" --value "1194" ConfigPut
    /usr/local/openvpn_as/scripts/sacli --key "vpn.server.daemon.udp" --value "openvpn" ConfigPut
    ```
 
@@ -436,7 +436,7 @@ _即使在 Docker 啟動時設置 `-p 1194:914/udp`，仍需手動設置 `sacli`
 
 <br>
 
-4. 將原本的 `1194` 改為 `914`。
+4. 將端口修正為原本的 `1194`。
 
    ![](images/img_65.png)
 
@@ -462,25 +462,25 @@ _即使在 Docker 啟動時設置 `-p 1194:914/udp`，仍需手動設置 `sacli`
 7. 宿主機添加規則。
 
    ```bash
-   sudo iptables -A INPUT -p udp --dport 914 -j ACCEPT
+   iptables -A INPUT -p udp --dport 1194 -j ACCEPT
    netfilter-persistent save
    netfilter-persistent reload
    ```
 
 <br>
 
-8. 確認宿主機允許 UDP 914。
+8. 確認宿主機允許 UDP 1194。
 
    ```bash
-   sudo iptables -L -n -v | grep 914
+   iptables -L -n -v | grep 1194
    ```
 
 <br>
 
-9. 若有重複規則，可進行刪除。
+9. 若有重複規則，可進行刪除；一次會刪除一個。
 
    ```bash
-   sudo iptables -D INPUT -p udp --dport 914 -j ACCEPT
+   iptables -D INPUT -p udp --dport 1194 -j ACCEPT
    ```
 
 <br>
@@ -527,7 +527,7 @@ _這裡補充說明如何透過 `Dev Containers` 插件連線進入容器內_
 
    ```bash
    # 設置 OpenVPN 服務監聽的端口
-   vpn.server.port=914
+   vpn.server.port=1194
    vpn.server.daemon.udp=openvpn
    vpn.server.daemon.udp.n_daemons=2
    vpn.server.daemon.tcp.port=443
@@ -547,10 +547,10 @@ _這裡補充說明如何透過 `Dev Containers` 插件連線進入容器內_
 
 <br>
 
-6. 查看容器對 `914` 的監聽；這裡沒有任何輸出，代表並未正常啟動監聽。
+6. 查看容器對 `1194` 的監聽；這裡沒有任何輸出，代表並未正常啟動監聽。
 
    ```bash
-   netstat -tulnp | grep 914
+   netstat -tulnp | grep 1194
    ```
 
 <br>
@@ -582,7 +582,7 @@ _在容器內運行_
 1. 進入 `openvpn-as` 容器。
 
    ```bash
-   sudo docker exec -it openvpn-as bash
+   docker exec -it openvpn-as bash
    ```
 
 <br>
@@ -625,7 +625,7 @@ _以下示範在容器外運行容器內指令_
 1. 若要在容器外對容器內運行指令。
 
    ```bash
-   sudo docker exec -it openvpn-as bash -c "<將指令寫在這>"
+   docker exec -it openvpn-as bash -c "<將指令寫在這>"
    ```
 
 <br>
@@ -633,7 +633,7 @@ _以下示範在容器外運行容器內指令_
 2. 檢查用戶 `openvpn` 的屬性是否正確設置。
 
    ```bash
-   sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli --user openvpn UserPropGet"
+   docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli --user openvpn UserPropGet"
    ```
 
 <br>
@@ -641,7 +641,7 @@ _以下示範在容器外運行容器內指令_
 3. 重新啟動 OpenVPN Access Server；`sacli start` 是容器內部針對 OpenVPN 的服務啟動指令。
 
    ```bash
-   sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli start"
+   docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli start"
    ```
 
 <br>
@@ -702,7 +702,15 @@ _以下示範在容器外運行容器內指令_
 
 <br>
 
-7. 使用客戶端連線。
+7. 在本機先使用終端機指令啟動測試。
+
+   ```bash
+   openvpn --config <.ovpn-文件>
+   ```
+
+<br>
+
+8. 確定可連線後再使用客戶端連線。
 
 <br>
 
