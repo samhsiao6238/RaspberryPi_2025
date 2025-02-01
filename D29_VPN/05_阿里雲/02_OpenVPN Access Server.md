@@ -160,7 +160,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-2. 更新套件列表並安裝 nano。
+2. 更新套件列表並安裝 `nano`；通常系統只預設安裝 `vim`。
 
    ```bash
    apt update && apt install -y nano
@@ -168,7 +168,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-3. 確認安裝成功。
+3. 確認 `nano` 已安裝成功。
 
    ```bash
    nano --version
@@ -176,7 +176,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-4. 修改 as.conf 配置。
+4. 修改 `as.conf` 配置；這是 `OpenVPN Access Server` 的主要配置文件。
 
    ```bash
    nano /usr/local/openvpn_as/etc/as.conf
@@ -187,7 +187,7 @@ _使用 SSH 連線 ECS 實例_
 5. 在文件底部添加。
 
    ```bash
-   vpn.server.port=914
+   vpn.server.port=1194
    vpn.server.daemon.udp=openvpn
    vpn.server.daemon.udp.n_daemons=2
    vpn.server.daemon.tcp.port=443
@@ -209,6 +209,75 @@ _使用 SSH 連線 ECS 實例_
 
    ```bash
    netstat -tulnp | grep 914
+   ```
+
+<br>
+
+## 設定檔說明
+
+_`as.conf`_
+
+<br>
+
+1. 預設內容說明。
+
+   ```bash
+   # 指定私鑰位置
+   cs.ca_key=~/web-ssl/ca.key
+
+   # Web 伺服器的動態端口範圍
+   cs.dynamic_port_base=870
+
+   # 啟動的服務群組
+   # Web 管理介面
+   sa.initial_run_groups.0=web_group
+   # VPN 伺服器
+   sa.initial_run_groups.1=openvpn_group
+
+   # 伺服器的單位編號
+   sa.unit=0
+
+   # 是否自動開放 Web 端口，包含 943、9443、443 等端口
+   iptables.web=true
+
+   # 伺服器運行的用戶與群組
+   # 確保 OpenVPN 服務不以 root 權限運行，以增強安全性
+   vpn.server.user=openvpn_as
+   vpn.server.group=openvpn_as
+   ```
+
+<br>
+
+2. 添加內容說明。
+
+   ```bash
+   # 設定伺服器監聽的 UDP 端口
+   vpn.server.port=1194
+   # 使用 UDP 模式運行
+   vpn.server.daemon.udp=openvpn
+   # 產生 2 個 UDP 處理進程，提高性能
+   vpn.server.daemon.udp.n_daemons=2
+   # 同時監聽 TCP 443 端口
+   vpn.server.daemon.tcp.port=443
+   # 產生 2 個 TCP 處理進程
+   vpn.server.daemon.tcp.n_daemons=2
+   ```
+
+<br>
+
+3. 設定文件變動時需重啟。
+
+   ```bash
+   /usr/local/openvpn_as/scripts/sacli stop
+   /usr/local/openvpn_as/scripts/sacli start
+   ```
+
+<br>
+
+4. 檢查指定端口 `1194` 是否被監聽。
+
+   ```bash
+   netstat -tulnp | grep 1194
    ```
 
 <br>
