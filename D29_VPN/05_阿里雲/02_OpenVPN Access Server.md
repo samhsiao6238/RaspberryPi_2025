@@ -4,7 +4,11 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-## 本地
+## 上傳鏡像
+
+_因爲在雲端似乎難以拉取，所以從本地上傳；可另實測看看_
+
+<br>
 
 1. 先確認能遠程連線，因為後續要使用 `scp` 指令。
 
@@ -22,7 +26,25 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-3. 壓縮；務必確認當前工作路徑。
+3. 檢查是否有重複；從這個案例來看確實出現重複。
+
+   ```bash
+   docker images | grep openvpn
+   ```
+
+   ![](images/img_56.png)
+
+<br>
+
+4. 依據指定標籤刪除鏡像。
+
+   ```bash
+   docker rmi 066e8adf3a47
+   ```
+
+<br>
+
+5. 壓縮；務必確認當前工作路徑。
 
    ```bash
    docker save -o openvpn-as.tar openvpn/openvpn-as
@@ -30,7 +52,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
-4. 傳送到雲端；需要一段時間。
+6. 傳送到雲端；需要一段時間。
 
    ```bash
    scp ~/Downloads/openvpn-as.tar ali:~/
@@ -50,12 +72,19 @@ _使用 SSH 連線 ECS 實例_
 
    ```bash
    sudo apt update && sudo apt install -y docker.io
+   ```
+
+<br>
+
+2. 啟動服務。
+
+   ```bash
    sudo systemctl enable --now docker
    ```
 
 <br>
 
-2. 查看 Docker 運行狀態。
+3. 查看 Docker 運行狀態。
 
    ```bash
    sudo systemctl status docker
@@ -65,7 +94,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-3. 載入上傳的 Docker 鏡像壓縮文件；運行指令後要稍等一下，不會立即開始。
+4. 載入上傳的 `Docker` 鏡像壓縮文件；指令運行後要稍等一下，不會立即開始。
 
    ```bash
    docker load -i /root/openvpn-as.tar
@@ -75,7 +104,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-4. 確認鏡像是否成功載入；輸出中預設還有另一個鏡像。
+5. 確認鏡像是否成功載入；輸出中若有其他鏡像，代表上傳的壓縮文件有累贅檔案，已在前面補充說明。
 
    ```bash
    docker images
@@ -85,7 +114,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-5. 啟動 OpenVPN Access Server；特別注意，這裡嘗試 改用 `914` 而不是預設的 `1194` 來監聽 OpenVPN，倘若失敗再改回來。
+6. 啟動 OpenVPN Access Server；特別注意，這裡嘗試 改用 `914` 而不是預設的 `1194` 來監聽 OpenVPN，倘若失敗再改回來。
 
    ```bash
    sudo docker run -d \
@@ -105,7 +134,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-6. 檢查容器狀態。
+7. 檢查容器狀態。
 
    ```bash
    sudo docker ps
