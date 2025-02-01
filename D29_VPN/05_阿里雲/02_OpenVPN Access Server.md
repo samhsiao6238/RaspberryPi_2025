@@ -104,7 +104,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-5. 確認鏡像是否成功載入；輸出中若有其他鏡像，代表上傳的壓縮文件有累贅檔案，已在前面補充說明。
+5. 確認鏡像是否成功載入。
 
    ```bash
    docker images
@@ -114,7 +114,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-6. 啟動 OpenVPN Access Server；特別注意，這裡嘗試 改用 `914` 而不是預設的 `1194` 來監聽 OpenVPN，倘若失敗再改回來。
+6. 使用本地鏡像啟動 `OpenVPN Access Server`。
 
    ```bash
    sudo docker run -d \
@@ -126,7 +126,7 @@ _使用 SSH 連線 ECS 實例_
       -v /run:/run \
       -p 943:943 \
       -p 9443:9443 \
-      -p 914:914/udp \
+      -p 1194:1194/udp \
       openvpn/openvpn-as
    ```
 
@@ -141,6 +141,12 @@ _使用 SSH 連線 ECS 實例_
    ```
 
    ![](images/img_22.png)
+
+<br>
+
+8. 可確認端口是否都正確設置。
+
+   ![](images/img_57.png)
 
 <br>
 
