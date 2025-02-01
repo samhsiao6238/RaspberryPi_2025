@@ -6,7 +6,7 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 ## 上傳鏡像
 
-_因爲在雲端似乎難以拉取，所以從本地上傳；可另實測看看_
+_因爲在雲端似乎難以拉取，所以從本地上傳；可先實測能否下載再進行這個步驟_
 
 <br>
 
@@ -147,6 +147,91 @@ _使用 SSH 連線 ECS 實例_
 8. 可確認端口是否都正確設置。
 
    ![](images/img_57.png)
+
+<br>
+
+## 監聽測試
+
+_進行後續步驟之前，先進行端口轉發測試，特別注意，是否正確轉發流量皆以這個步驟為準_
+
+<br>
+
+1. 在容器內安裝 `tcpdump`。
+
+   ```bash
+   apt update && apt install -y tcpdump
+   ```
+
+<br>
+
+2. 在容器內監控 UDP 1194，這會顯示所有發往 1194 端口的流量，確保轉發的數據有正確到達。
+
+   ```bash
+   tcpdump -i any udp port 1194
+   ```
+
+<br>
+
+3. 在宿主機監控 UDP 1194，與前一步驟相同。
+
+   ```bash
+   sudo tcpdump -i any udp port 1194
+   ```
+
+<br>
+
+4. 在本地電腦使用 `netcat (nc)` 發送 `UDP` 封包到宿主機 `1194` 端口。
+
+   ```bash
+   nc -u -v <ECS-公網-IP> 1194
+   ```
+
+<br>
+
+## 檢查端口監聽
+
+_相關指令_
+
+<br>
+
+1. 檢查端口監聽。
+
+   ```bash
+   netstat -tulnp
+   ```
+
+<br>
+
+2. 進入容器。
+
+   ```bash
+   docker exec -it openvpn-as bash
+   ```
+
+<br>
+
+3. 在宿主機建立 `iptables` 規則，將宿主機 `1194` 流量轉發到容器的 `918`。
+
+   ```bash
+   iptables -t nat -A PREROUTING -p udp --dport 1194 -j DNAT --to-destination 172.17.0.2:918
+   iptables -t nat -A POSTROUTING -p udp --dport 918 -j MASQUERADE
+   ```
+
+<br>
+
+4. 檢查宿主機是否有將外部的 `1194 UDP` 端口轉發到容器的內部端口。
+
+   ```bash
+   iptables -t nat -L -n -v | grep 1194
+   ```
+
+<br>
+
+5. 在容器內部確認是否在監聽 `918 UDP` 端口。
+
+   ```bash
+   netstat -tulnp | grep 918
+   ```
 
 <br>
 
