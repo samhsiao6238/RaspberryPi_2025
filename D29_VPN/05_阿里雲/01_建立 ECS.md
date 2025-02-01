@@ -20,19 +20,27 @@ _Elastic Compute Service_
 
 <br>
 
-2. 點擊 `建立更多試用 ECS`。
+2. 若具備試用資格，點擊 `建立更多試用 ECS`。
 
     ![](images/img_01.png)
 
 <br>
 
-3. 地區選擇 `華東 1（杭州）`。
+3. 若無試用資格，點擊 `創建我的 ECS`。
+
+    ![](images/img_55.png)
+
+<br>
+
+## 硬體配置
+
+1. 地區選擇 `華東 1（杭州）`。
 
     ![](images/img_25.png)
 
 <br>
 
-4. 規格選擇 `2 核心、2 GiB 經濟型 e`。
+2. 規格選擇 `2 核心、2 GiB 經濟型 e`。
 
     ![](images/img_02.png)
 
