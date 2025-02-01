@@ -20,13 +20,13 @@ _Elastic Compute Service_
 
 <br>
 
-2. 若具備試用資格，點擊 `建立更多試用 ECS`。
+2. 若具備試用資格，可點擊 `建立更多試用 ECS`。
 
     ![](images/img_01.png)
 
 <br>
 
-3. 若無試用資格，點擊 `創建我的 ECS`。
+3. 若無試用資格，點擊 `建立我的 ECS`。
 
     ![](images/img_55.png)
 
@@ -274,7 +274,7 @@ _在安全組中添加規則，設置 `0.0.0.0/0` 允許所有 IP 連線；特�
 
     ```bash
     SG_ID=$(aliyun ecs DescribeSecurityGroups --RegionId "cn-hangzhou" | jq -r '.SecurityGroups.SecurityGroup[].SecurityGroupId')
-    echo "已獲取安全組 ID：$SG_ID"
+    echo "已取得安全組 ID：$SG_ID"
     ```
 
 <br>

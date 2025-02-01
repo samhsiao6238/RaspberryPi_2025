@@ -68,7 +68,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-1. 安裝 Docker；假如有勾選預裝，可跳過這第一步。
+1. 安裝 Docker；假如是有預裝的實例，可跳過這第一步。
 
    ```bash
    apt update && apt install -y docker.io
@@ -76,15 +76,7 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-2. 啟動服務。
-
-   ```bash
-   systemctl enable --now docker
-   ```
-
-<br>
-
-3. 查看 Docker 運行狀態。
+2. 安裝後會自動啟動服務，可透過指令查看運行狀態。
 
    ```bash
    systemctl status docker
@@ -94,7 +86,15 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-4. 載入上傳的 `Docker` 鏡像壓縮文件；指令運行後要稍等一下，不會立即開始。
+3. 若未啟動，可手動啟動服務。
+
+   ```bash
+   systemctl enable --now docker
+   ```
+
+<br>
+
+4. 載入上傳的鏡像壓縮文件。
 
    ```bash
    docker load -i /root/openvpn-as.tar
@@ -184,10 +184,10 @@ _使用 SSH 連線 ECS 實例_
 
 <br>
 
-5. 在文件底部添加以下設定，特別注意，其中的 `1194` 已改用 `916`。
+5. 在文件底部添加以下設定。
 
    ```bash
-   vpn.server.port=916
+   vpn.server.port=1194
    vpn.server.daemon.udp=openvpn
    vpn.server.daemon.udp.n_daemons=2
    vpn.server.daemon.tcp.port=443

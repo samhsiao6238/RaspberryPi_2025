@@ -63,7 +63,7 @@ sudo systemctl status openvpn
 
 4. **連接 VPN：**
    - 啟動 VPN 客戶端，嘗試連接到 PiVPN 伺服器。
-   - 連接成功後，所有網絡流量將通過樹莓派上的 VPN 伺服器。
+   - 連接成功後，所有網路流量將通過樹莓派上的 VPN 伺服器。
 
 ---
 
@@ -72,7 +72,7 @@ sudo systemctl status openvpn
    - 打開瀏覽器訪問 [WhatIsMyIP](https://whatismyipaddress.com/)。
    - 確認顯示的 IP 地址是樹莓派所在網路的公有 IP（例如 `150.116.96.45`），而非客戶端的原始 IP。
 
-2. **測試內部網絡訪問：**
+2. **測試內部網路訪問：**
    - 如果需要，確認是否可以通過 VPN 訪問 Linksys 路由器或其他內部設備。
 
 ---
