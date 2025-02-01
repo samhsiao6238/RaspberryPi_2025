@@ -268,7 +268,55 @@ _在安全組中添加規則，設置 `0.0.0.0/0` 允許所有 IP 連線；特�
 
 <br>
 
-4. 自訂義 `UDP`、端口 `914`；先加入備用。
+## 使用 CLI 編輯安全組
+
+1. 取得安全組 ID 並寫入變數。
+
+    ```bash
+    SG_ID=$(aliyun ecs DescribeSecurityGroups --RegionId "cn-hangzhou" | jq -r '.SecurityGroups.SecurityGroup[].SecurityGroupId')
+    echo "已獲取安全組 ID：$SG_ID"
+    ```
+
+<br>
+
+2. 添加安全組規則，開放 1194/UDP 作為 OpenVPN 伺服器通訊。
+
+    ```bash
+    aliyun ecs AuthorizeSecurityGroup --RegionId "cn-hangzhou" \
+    --SecurityGroupId "$SG_ID" \
+    --IpProtocol udp --PortRange 1194/1194 \
+    --SourceCidrIp 0.0.0.0/0
+    ```
+
+<br>
+
+3. 開放 9443/TCP 作為 OpenVPN Web UI 管理頁面。
+
+    ```bash
+    aliyun ecs AuthorizeSecurityGroup --RegionId "cn-hangzhou" \
+    --SecurityGroupId "$SG_ID" \
+    --IpProtocol tcp --PortRange 9443/9443 \
+    --SourceCidrIp 0.0.0.0/0
+    ```
+
+<br>
+
+4. 開放 943/TCP 作為 OpenVPN Web UI 客戶端登入。
+
+    ```bash
+    aliyun ecs AuthorizeSecurityGroup --RegionId "cn-hangzhou" \
+    --SecurityGroupId "$SG_ID" \
+    --IpProtocol tcp --PortRange 943/943 \
+    --SourceCidrIp 0.0.0.0/0
+    ```
+
+<br>
+
+5. 確認規則是否成功添加。
+
+    ```bash
+    aliyun ecs DescribeSecurityGroupAttribute --RegionId "cn-hangzhou" --SecurityGroupId "$SG_ID" | jq '.Permissions.Permission[] | {IpProtocol, PortRange, SourceCidrIp}'
+    ```
 
 <br>
 
