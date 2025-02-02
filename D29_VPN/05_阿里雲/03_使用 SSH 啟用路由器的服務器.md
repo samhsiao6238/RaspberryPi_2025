@@ -1,114 +1,249 @@
-# 
+# 使用 SSH 設定路由器
 
-##
+_DD-WRT 路由器_
 
-1. 編輯
+<br>
 
-```bash
-code ~/.ssh
-```
+## 準備工作
 
-2. 寫入
+1. 編輯本地 SSH 客戶端設定檔。
 
-```bash
-Host buff
-    HostName 192.168.11.1
-    User root
-```
+    ```bash
+    code ~/.ssh
+    ```
 
-3. 連線
+<br>
 
-```bash
-ssh buff
-```
+2. 設定路由器別名方便連線。
 
-## 檢查
+    ```bash
+    Host buff
+        HostName 192.168.11.1
+        User root
+    ```
 
-1. DD-WRT 路由器內建 `OpenVPN`，可運行以下指令確認 `/usr/sbin/openvpn` 存在。
+<br>
 
-```bash
-ls /usr/sbin/openvpn
-```
+3. 透過 SSH 連線路由器。
 
-2. 插入 USB 之後。
+    ```bash
+    ssh buff
+    ```
 
-## 嘗試手動啟動 OpenVPN
+<br>
 
-1. 執行以下指令來手動測試 OpenVPN 是否能夠正常啟動
+## 環境檢查
 
-```bash
-/usr/sbin/openvpn --config /tmp/mnt/sda1/chine.ovpn --verb 4
-```
+1. 這款路由器已內建 `OpenVPN`，無需啟動直接運行以下指令，確認應用文件路徑在 `/usr/sbin/openvpn`。
 
-### 步驟 2：檢查 OpenVPN 是否正在運行
-```sh
-ps | grep openvpn
-```
-如果只有 `grep openvpn` 的回應，代表 OpenVPN 並未成功啟動。
+    ```bash
+    ls /usr/sbin/openvpn
+    ```
 
+<br>
 
+## 處理 .ovpn 文件
 
-### 步驟 3：檢查網路接口
-```sh
-ifconfig tun0
-```
-如果回應 `Device not found`，代表 OpenVPN 並未建立 VPN 隧道，可能的問題如下：
-1. OpenVPN 配置錯誤
-2. DNS 設定問題
-3. NAT 設定錯誤
+_修改 OpenVPN 客戶端自動生成的 `.ovpn` 文件_
 
+<br>
 
+1. 修改文件中對於加密方式的設定，因為 `OpenVPN 2.5+` 版本已改用 `--data-ciphers` 允許多種加密演算法協商，舊版則是使用 `cipher` 指定單一加密演算法。
 
-### 步驟 4：確認日誌
-執行以下指令檢查 OpenVPN 啟動記錄：
-```sh
-logread | grep openvpn
-dmesg | grep openvpn
-```
-如果 `logread` 無法使用，請先啟動 `syslogd`：
-```sh
-syslogd -O /tmp/syslog.log
-logread | grep openvpn
-```
+    ```bash
+    # cipher AES-256-CBC
+    # 改用
+    data-ciphers AES-256-GCM:AES-128-GCM:AES-256-CBC
+    ```
 
+<br>
 
+## 手動啟動 OpenVPN
 
-### 步驟 5：確保 `ip_forward` 已啟用
-執行以下指令確保路由器允許 VPN 流量：
-```sh
-echo 1 > /proc/sys/net/ipv4/ip_forward
-```
-🔹 這應該已經在你的 Startup Scripts 中啟用，但請再次確認。
+1. 準備一個 USB 隨身碟，將修正後的 `.ovpn` 文件存入根目錄並命名為 `china.ovpn`。
 
+<br>
 
+2. 將 USB 插入路由器，可在控制面板 `Services` 中的子頁籤 `USB` 中查看，滾動到下方可確認預設掛載路徑在 `/tmp/mnt/sda1`。
 
-### 步驟 6：手動啟用 NAT 規則
-```sh
-iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
-iptables -A FORWARD -i br0 -o tun0 -j ACCEPT
-iptables -A FORWARD -i tun0 -o br0 -j ACCEPT
-```
-這將確保 VPN 流量能夠轉發到內部網絡。
+    ![](images/img_86.png)
 
-⚠️ 重要提醒：這些 NAT 規則不會永久生效，若能解決問題，請到 DD-WRT → Administration → Commands 加入 `Firewall` 規則。
+<br>
 
+3. 透過終端機確認路由器的文件位置。
 
+    ```bash
+    ls /tmp/mnt/sda1/china.ovpn
+    ```
 
-### 步驟 7：確認 OpenVPN 服務是否啟動
-如果手動運行 OpenVPN 可以成功連接，但無法在 DD-WRT 內部啟動，請執行：
-```sh
-nvram show | grep openvpn
-```
-這將顯示目前 OpenVPN 相關的設定。
+<br>
 
-若 `nvram` 內沒有 `openvpn_enable=1`，請執行：
-```sh
-nvram set openvpn_enable=1
-nvram commit
-reboot
-```
-這將確保 OpenVPN 服務開機時自動啟動。
+## 修正路由器時間
 
+_若未更新可手動進行設置；未自動更新的原因可能是尚未連線到網際網路_
 
+<br>
 
-### 請執行這些步驟，並回報結果，我可以進一步幫助你排除問題！ 🚀
+1. 使用以下指令設定時間 `date -s "YYYY-MM-DD HH:MM:SS"`，其中 `"YYYY-MM-DD HH:MM:SS"` 改為當前時間如下。
+
+    ```bash
+    date -s "2025-02-03 02:14:00"
+    ```
+
+<br>
+
+## 設定 DNS
+
+1. 查看當前設定內容。
+
+    ```bash
+    cat /etc/resolv.conf
+    ```
+
+<br>
+
+2. 手動設定 DNS；特別注意，`>` 是覆蓋，會清空原有內容僅寫上新內容；另外，若不要清空當前內容則要使用 `>>` 進行追加；假如路由器重啟之後內容自動恢復，可嘗試改用 `>>` 進行設定；另外，亦可使用控制台進行設置，應該可持久化設定。
+
+    ```bash
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    ```
+
+<br>
+
+## 啟用服務
+
+_完成以上設置後可啟動服務_
+
+<br>
+
+1. 假如服務已經啟用，先停用。
+
+    ```bash
+    killall openvpn
+    ```
+
+<br>
+
+2. 啟動服務前先載入 TUN 模組；預設並未載入。
+
+    ```bash
+    modprobe tun
+    ```
+
+<br>
+
+3. 確認模組是否載入。
+
+    ```bash
+    lsmod | grep tun
+    ```
+
+<br>
+
+4. 將以下設定寫入主控台以利持久化設定，位置在主頁籤的 `Administration` 中的子頁籤 `Commands`，寫入後點擊 `Save Startup` 表示寫入啟動執行區。
+
+    ```bash
+    insmod tun
+    ```
+
+    ![](images/img_87.png)
+
+<br>
+
+5. 完成相關準備工作後啟動服務，日誌會顯示相關啟動資訊，包含伺服器 IP。
+
+    ```bash
+    /usr/sbin/openvpn --config /tmp/mnt/sda1/china.ovpn --verb 4
+    ```
+
+    ![](images/img_88.png)
+
+<br>
+
+## 檢查服務狀態 
+
+1. 確認 OpenVPN 是否正在運行，如果只有 `grep openvpn` 的回應，代表 OpenVPN 並未成功啟動。
+
+    ```bash
+    ps | grep openvpn
+    ```
+
+    ![](images/img_89.png)
+
+<br>
+
+2. 檢查網路接口，如果回應 `Device not found`，代表 OpenVPN 並未建立 VPN 隧道；其中 `172.27.232.3` 是 `VPN` 內部 IP。
+
+    ```bash
+    ifconfig tun0
+    ```
+
+    ![](images/img_90.png)
+
+<br>
+
+3. 當前連線外網 IP。
+
+    ```bash
+    curl ifconfig.me
+    ```
+
+    ![](images/img_91.png)
+
+<br>
+
+4. 開啟 IP 運行轉發。
+
+    ```bash
+    echo 1 > /proc/sys/net/ipv4/ip_forward
+    ```
+
+<br>
+
+5. 同樣寫入開機腳本中；特別注意，寫入時必須將當前設置也複製貼上，不然會清空覆蓋當前內容。
+
+    ![](images/img_92.png)
+
+<br>
+
+## 加入防火牆規則
+
+1. 手動啟用 NAT 規則，確保 VPN 流量能夠轉發到內部網絡。
+
+    ```bash
+    iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
+    iptables -A FORWARD -i br0 -o tun0 -j ACCEPT
+    iptables -A FORWARD -i tun0 -o br0 -j ACCEPT
+    ```
+
+<br>
+
+2. 同樣，將 NAT 規則寫入主控台中永久生效，位置同樣在 `Administration → Commands`，寫入後點擊 `Save Firewall`。
+
+    ![](images/img_93.png)
+
+<br>
+
+## 確認 OpenVPN 服務是否啟動
+
+1. 顯示目前 OpenVPN 相關的設定。
+
+    ```bash
+    nvram show | grep openvpn
+    ```
+
+<br>
+
+2. 若 `nvram` 內沒有 `openvpn_enable=1`，確保 OpenVPN 服務開機時自動啟動。。
+
+    ```bash
+    nvram set openvpn_enable=1
+    nvram commit
+    reboot
+    ```
+
+<br>
+
+___
+
+_END_
