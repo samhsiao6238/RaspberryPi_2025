@@ -346,7 +346,7 @@ _進行後續步驟之前，先進行端口轉發測試，特別注意，是否�
 
 <br>
 
-4. 在容器內監控 `UDP 1194`，這會顯示所有發 `容器 1194 端口` 的流量。
+4. 在容器內監控 `UDP 1194`，也就是捕捉所有介面 `-i any` 上的 `UDP 1194` 端口封包。
 
    ```bash
    tcpdump -i any udp port 1194
@@ -364,17 +364,17 @@ _進行後續步驟之前，先進行端口轉發測試，特別注意，是否�
 
 <br>
 
-5. 複製 ECS 公網 IP 如 `121.41.38.218`，在本地電腦使用 `netcat (nc)` 發送 `UDP` 封包到宿主機 `1194` 端口。
+6. 在本地電腦開啟第三個終端視窗，使用 `netcat (nc)` 指令發送 `UDP` 封包到正在監聽的宿主機 `1194` 端口。
 
    ```bash
-   nc -u -v 121.41.38.218 1194
+   nc -u -v <實例-公網-IP> 1194
    ```
 
    ![](images/img_78.png)
 
 <br>
 
-6. 在本地終端中繼續輸入任意文字後按下 `ENTER`；對於一個封包來說，宿主機公網介面 eth0 收到來自 45.96.116.150 的 UDP 封包並轉發宿主機、宿主機內部的 Docker 橋接網路 (docker0) 會將這個封包 NAT 轉發給內部的 Docker 容器（IP 172.17.0.2），最後是容器的虛擬網卡 (vethXXXXXX) 扮演宿主機內的 `橋接通道`，將封包轉發到容器內的 eth0 介面；而容器內只會透過自己的 eth0 接收封包，所以只看到一條流量。
+7. 使用鍵盤在本地終端中輸入任意文字並按下 `ENTER` 發送到宿主機；對於一個封包來說，宿主機公網介面 eth0 收到來自 45.96.116.150 的 UDP 封包並轉發宿主機、宿主機內部的 Docker 橋接網路 (docker0) 會將這個封包 NAT 轉發給內部的 Docker 容器（IP 172.17.0.2），最後是容器的虛擬網卡 (vethXXXXXX) 扮演宿主機內的 `橋接通道`，將封包轉發到容器內的 eth0 介面；而容器內只會透過自己的 eth0 接收封包，所以只看到一條流量。
 
    ![](images/img_79.png)
 
@@ -390,40 +390,30 @@ _補充相關指令_
 
 <br>
 
-1. 檢查端口監聽。
+1. 使用 `iptables` 建立規則；以下指令所建立的規則是將宿主機 `1194` 流量轉發到容器的 `918`。
 
    ```bash
-   netstat -tulnp
-   ```
-
-<br>
-
-2. 進入容器。
-
-   ```bash
-   docker exec -it openvpn-as bash
-   ```
-
-<br>
-
-3. 在宿主機建立 `iptables` 規則，將宿主機 `1194` 流量轉發到容器的 `918`。
-
-   ```bash
+   # 將進入 宿主機 1194 端口的 UDP 流量，轉發到 容器 172.17.0.2:918
    iptables -t nat -A PREROUTING -p udp --dport 1194 -j DNAT --to-destination 172.17.0.2:918
+   # 讓轉發的封包看起來來自宿主機，而不是原始來源 IP
    iptables -t nat -A POSTROUTING -p udp --dport 918 -j MASQUERADE
    ```
 
 <br>
 
-4. 檢查宿主機是否有將外部的 `1194 UDP` 端口轉發到容器的內部端口。
+2. 檢查宿主機是否有將外部的 `1194 UDP` 端口轉發到容器的內部端口。
 
    ```bash
+   # 篩選出與 1194 端口 相關的規則
+   # 列出 NAT 規則表 (-t nat)
+   # 顯示詳細 (-v) 規則
+   # 不解析 DNS (-n)
    iptables -t nat -L -n -v | grep 1194
    ```
 
 <br>
 
-5. 在容器內部確認是否在監聽 `918 UDP` 端口。
+3. 確認是否在監聽 `918 UDP` 端口。
 
    ```bash
    netstat -tulnp | grep 918
@@ -431,7 +421,11 @@ _補充相關指令_
 
 <br>
 
-## 設定配置
+## 配置文件 `as.conf`
+
+_手動配置容器內的設置檔 `as.conf`；倘若可正常運作，則無需進行設定_
+
+<br>
 
 1. 進入容器。
 
@@ -457,7 +451,7 @@ _補充相關指令_
 
 <br>
 
-4. 修改 `as.conf` 配置；這是 `OpenVPN Access Server` 的主要配置文件。
+4. 編輯 `as.conf` 配置；這是 `OpenVPN Access Server` 的主要配置文件。
 
    ```bash
    nano /usr/local/openvpn_as/etc/as.conf
@@ -529,9 +523,13 @@ _`as.conf` 設定內容介紹，無需實作_
 
 <br>
 
-## 重啟服務
+## 套用配置文件
 
-1. 設定文件變動時需重啟；透過輸出可確認服務的重啟狀態。
+_修改過配置文件後必須重啟服務_
+
+<br>
+
+1. 停止並重啟服務；透過輸出可確認服務的重啟狀態。
 
    ```bash
    /usr/local/openvpn_as/scripts/sacli stop
@@ -601,44 +599,6 @@ _以下紀錄原本使用預設端口 `1194` 時，嘗試的各種可能的方�
    ```
 
    ![](images/img_62.png)
-
-<br>
-
-## 其他指令
-
-_補充說明，無需實作_
-
-<br>
-
-1. 停止容器。
-
-   ```bash
-   docker stop openvpn-as
-   ```
-
-<br>
-
-2. 使用參數 `rm` 移除容器。
-
-   ```bash
-   docker rm openvpn-as
-   ```
-
-<br>
-
-3. 使用參數 `rmi` 移除包含鏡像在內的全部容器文件。
-
-   ```bash
-   docker rmi openvpn/openvpn-as
-   ```
-
-<br>
-
-4. 重啟容器。
-
-   ```bash
-   docker restart openvpn-as
-   ```
 
 <br>
 
