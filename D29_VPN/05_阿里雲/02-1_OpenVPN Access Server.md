@@ -4,6 +4,32 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 <br>
 
+## 準備工作
+
+_在本機中進行_
+
+<br>
+
+1. 檢查 Docker 是否安裝。
+
+   ```bash
+   docker --version
+   ```
+
+<br>
+
+2. 檢查 Docker 服務是否運行。
+
+   ```bash
+   docker info
+   ```
+
+<br>
+
+3. 啟動 Docker Desktop 即可啟動服務。
+
+<br>
+
 ## 上傳鏡像
 
 _因爲在雲端似乎難以拉取，所以從本地上傳_
