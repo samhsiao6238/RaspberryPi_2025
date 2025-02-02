@@ -52,7 +52,7 @@ _因爲在雲端似乎難以拉取，所以從本地上傳_
 
 <br>
 
-3. 檢查是否有重複；從這個案例來看確實出現重複。
+3. 查看鏡像，一併檢查是否有重複；從這個案例來看確實出現重複。
 
    ```bash
    docker images | grep openvpn
@@ -62,7 +62,7 @@ _因爲在雲端似乎難以拉取，所以從本地上傳_
 
 <br>
 
-4. 依據指定標籤刪除鏡像。
+4. 若有重複，指定 `Image ID` 刪除鏡像。
 
    ```bash
    docker rmi 066e8adf3a47
@@ -70,7 +70,17 @@ _因爲在雲端似乎難以拉取，所以從本地上傳_
 
 <br>
 
-5. 壓縮；務必確認當前工作路徑。
+5. 確認鏡像的作業系統。
+
+   ```bash
+   docker inspect --format='{{.Os}} {{.Architecture}}' <鏡像-ID>
+   ```
+
+   ![](images/img_76.png)
+
+<br>
+
+6. 壓縮；務必確認當前工作路徑。
 
    ```bash
    docker save -o openvpn-as.tar openvpn/openvpn-as
@@ -78,23 +88,13 @@ _因爲在雲端似乎難以拉取，所以從本地上傳_
 
 <br>
 
-6. 傳送到雲端；需要一段時間。
+7. 傳送到雲端；需要一段時間。
 
    ```bash
    scp ~/Downloads/openvpn-as.tar ali:~/
    ```
 
    ![](images/img_33.png)
-
-<br>
-
-7. 確認鏡像的作業系統。
-
-   ```bash
-   docker inspect --format='{{.Os}} {{.Architecture}}' <鏡像-ID>
-   ```
-
-   ![](images/img_76.png)
 
 <br>
 
