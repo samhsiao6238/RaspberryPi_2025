@@ -24,11 +24,13 @@ ssh buff
 
 ## 檢查
 
-1. DD-WRT 路由器已經內建 OpenVPN，確認 `/usr/sbin/openvpn`。
+1. DD-WRT 路由器內建 `OpenVPN`，可運行以下指令確認 `/usr/sbin/openvpn` 存在。
 
 ```bash
 ls /usr/sbin/openvpn
 ```
+
+2. 插入 USB 之後。
 
 ## 嘗試手動啟動 OpenVPN
 
