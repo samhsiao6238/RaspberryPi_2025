@@ -10,6 +10,10 @@ _建立 OpenVPN 伺服器連回中國內地_
 
 <br>
 
+2. [已有帳號登入](https://account.aliyun.com/login/login.htm?oauth_callback=https%3A%2F%2Fmyaccount.console.aliyun.com%2Fsecurity&clearRedirectCookie=1&lang=zh)。
+
+<br>
+
 ## 建立 ECS 實例
 
 _Elastic Compute Service_
