@@ -358,6 +358,42 @@ _開啟本地終端機，可嘗試使用 CLI 建立安全組_
 
 <br>
 
+## 關於安全群組
+
+_這裡記錄安全群組內容_
+
+<br>
+
+1. 當前的安全組。
+
+   ![](images/img_09.png)
+
+<br>
+
+2. UDP 1194/1194，OpenVPN UDP。
+
+<br>
+
+3. TCP 9443/9443 是 OpenVPN Web UI 的管理頁面。
+
+<br>
+
+4. TCP 943/943 是OpenVPN Web UI 客戶端登入。
+
+<br>
+
+5. RDP TCP 3389 是遠端桌面 Windows。
+
+<br>
+
+6. ICMP 允許 ICMP Ping，可透過遠端透過 `ping` 指令進行連線測試。
+
+<br>
+
+7. TCP 22/22 是 SSH 連線。
+
+<br>
+
 ___
 
 _END_
