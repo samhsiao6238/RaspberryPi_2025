@@ -34,7 +34,17 @@
 
 ## 取得 AccessKey
 
-1. 顯示。
+_先完成主控台燈入_
+
+<br>
+
+1. 滑動到右上角帳號圖標上，在展開的選單中點擊 `AccessKey`
+
+    ![](images/img_99.png)
+
+<br>
+
+2. 顯示。
 
     ![](images/img_66.png)
 
