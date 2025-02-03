@@ -107,7 +107,7 @@ _使用 SSH 連線 ECS 實例後進行以下操作_
 1. 安裝 Docker；假如是有預裝的實例，可跳過這第一步。
 
    ```bash
-   apt update && apt install -y docker.io
+   apt update && apt upgrade -y && apt install -y docker.io
    ```
 
 <br>
