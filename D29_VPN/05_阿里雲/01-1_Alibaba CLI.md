@@ -16,27 +16,19 @@
 
 <br>
 
-3. 解壓縮。
+3. 這是 `.apk` 文件，點擊即可自動安裝。
 
-    ```bash
-    tar xzvf ~/Downloads/aliyun-cli-macosx-latest-universal.tgz
-    ```
+    ![](images/img_97.png)
 
 <br>
 
-3. 複製到指定路徑。
-
-    ```bash
-    sudo cp ~/Downliads/aliyun /usr/local/bin
-    ```
-
-<br>
-
-4. 測試。
+3. 開啟終端機運行查詢版本指令，正確顯示則代表安裝成功。
 
     ```bash
     aliyun version
     ```
+
+    ![](images/img_98.png)
 
 <br>
 
