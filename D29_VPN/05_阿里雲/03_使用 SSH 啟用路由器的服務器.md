@@ -274,7 +274,7 @@ _後續步驟要將指令設定為開機自動運行，必須免除帳號密碼�
 
 <br>
 
-2. 在主控台 `Administration` > `Commands` 中新增開機運行指令，並以守護進程運行。
+2. 在主控台 `Administration` > `Commands` 中新增開機運行指令，並以守護進程在背景運行。
 
     ```bash
     sleep 10
