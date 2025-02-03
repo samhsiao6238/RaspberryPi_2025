@@ -4,7 +4,9 @@
 
 ## 步驟 
 
-1. [官方載點](https://www.alibabacloud.com/help/tc/cli/install-cli-on-macos?spm=a2c63.p38356.0.i0#32865bfe14am6)
+1. [官方載點](https://www.alibabacloud.com/help/tc/cli/install-cli-on-macos?spm=a2c63.p38356.0.i0#32865bfe14am6)，若要切換語系，在右上角展開選取。
+
+    ![](images/img_95.png)
 
 <br>
 
