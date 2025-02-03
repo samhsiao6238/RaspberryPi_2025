@@ -193,7 +193,7 @@ _使用前步驟取得的 `INSTANCE_IDS`_
 
 <br>
 
-2. 徹底刪除 ECS 實例。
+2. 徹底刪除 ECS 實例；同時也會釋放雲盤空間。
 
     ```bash
     aliyun ecs DeleteInstance --InstanceId $INSTANCE_IDS --Force true

@@ -148,7 +148,9 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-5. 執行以下命令來修正 `W`。
+## 排除第二個錯誤
+
+1. 執行以下命令來修正 `W`。
 
    ```bash
    mkdir -p /etc/apt/keyrings
@@ -159,7 +161,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-6. 重新安裝。
+2. 重新安裝。
 
    ```bash
    apt install -y docker.io
@@ -167,7 +169,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-7. 還是錯誤，先刪除重複的 Docker 軟體源。
+3. 還是錯誤，先刪除重複的 Docker 軟體源。
 
    ```bash
    rm -f /etc/apt/sources.list.d/docker.list
@@ -177,7 +179,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-8. 移除衝突的 containerd 軟體包。
+4. 移除衝突的 containerd 軟體包。
 
    ```bash
    apt remove --purge -y containerd containerd.io docker-ce docker-ce-cli docker-ce-rootless-extras
@@ -186,7 +188,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-9. 清理 dpkg 並確保沒有鎖定的套件。
+5. 清理 dpkg 並確保沒有鎖定的套件。
 
    ```bash
    dpkg --configure -a
@@ -195,7 +197,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-10. 重新安裝 Docker，先刪除舊的 Docker 相關套件。
+6. 重新安裝 Docker，先刪除舊的 Docker 相關套件。
 
    ```bash
    apt remove --purge -y docker docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc
@@ -205,7 +207,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-11. 更新 apt 並確保 ca-certificates 可用。
+7. 更新 apt 並確保 ca-certificates 可用。
 
    ```bash
    apt update && apt install -y ca-certificates curl gnupg
@@ -213,7 +215,9 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-12. 手動設定 Docker 官方 GPG 金鑰。
+## 再次安裝
+
+1. 手動設定 Docker 官方 GPG 金鑰。
 
    ```bash
    install -m 0755 -d /etc/apt/keyrings
@@ -223,7 +227,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-13. 正確設定 Docker 軟體源。
+2. 正確設定 Docker 軟體源。
 
    ```bash
    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -231,7 +235,7 @@ _排除安裝過程中的錯誤，這是一個迭代的過程，沒有絕對的�
 
 <br>
 
-14. 更新 apt 軟體清單並安裝最新版 Docker。
+3. 更新 apt 軟體清單並安裝最新版 Docker。
 
    ```bash
    apt update
