@@ -1,6 +1,6 @@
 # 使用 SSH 設定路由器
 
-_DD-WRT 路由器_
+_不使用路由器主控台中的 OpenVPN Client，改用讀取 USB 中的 `.ovpn` 文件並啟動 OpenVPN 客戶端服務_
 
 <br>
 
@@ -234,13 +234,56 @@ _完成以上設置後可啟動服務_
 
 <br>
 
-2. 若 `nvram` 內沒有 `openvpn_enable=1`，確保 OpenVPN 服務開機時自動啟動。。
+2. 若 `nvram` 內沒有 `openvpn_enable=1`，確保 OpenVPN 服務開機時自動啟動。
 
     ```bash
     nvram set openvpn_enable=1
     nvram commit
     reboot
     ```
+
+<br>
+
+## 免輸入帳號密碼
+
+_後續步驟要將指令設定為開機自動運行，必須免除帳號密碼的輸入_
+
+<br>
+
+1. 進入 OpenVPN 網頁管理頁面，在 `User Permissions` 勾選 `Allow Auto-login`。
+
+    ![](images/img_94.png)
+
+<br>
+
+2. 完成後務必記得點擊 `Save Settings`
+
+<br>
+
+3. 進入客戶端站台，重新下載 `.ovpn`。
+
+<br>
+
+## 寫入開機腳本
+
+1. 上傳文件，特別注意，DD-WRT 版本的 scp 需要額外的 `-O` 參數，這是因為該版本不支援 `sftp`，但 `scp -O` 會強制使用 `scp` 模式。
+
+    ```bash
+    scp -O ~/Downloads/china.ovpn buff:/tmp/mnt/sda1/china.ovpn
+    ```
+
+<br>
+
+2. 在主控台 `Administration` > `Commands` 中新增開機運行指令，並以守護進程運行。
+
+    ```bash
+    sleep 10
+    /usr/sbin/openvpn --config /tmp/mnt/sda1/china.ovpn --verb 4 --daemon
+    ```
+
+<br>
+
+3. 使用手機連線測試。
 
 <br>
 
