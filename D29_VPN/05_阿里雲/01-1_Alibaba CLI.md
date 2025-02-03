@@ -80,7 +80,7 @@ _開啟下載的 `.csv` 文件備用_
 
 <br>
 
-1. 設定憑證；關於 `ID` 及 `Secret` 部分就是複製貼上，不做贅述。
+1. 設定憑證。
 
     ```bash
     aliyun configure
@@ -88,21 +88,33 @@ _開啟下載的 `.csv` 文件備用_
 
 <br>
 
-2. 其中預設區域設定為 `華東1`，ID 為 `cn-hangzhou`。
+2. 先設定 Id 及 Secret，複製文件內容貼上。
 
     ![](images/img_72.png)
 
 <br>
 
-3. 預設語言繁體中文，代碼為 `zh-Hant`。
+3. 預設區域設定為 `華東1`，ID 為 `cn-hangzhou`。
+
+<br>
+
+4. 預設語系設定為中文，代碼為 `zh`。
 
     ![](images/img_71.png)
 
 <br>
 
-4. 完成。
+5. 完成。
 
     ![](images/img_73.png)
+
+<br>
+
+6. 設定檔案位置在本地的 `~/.aliyun/config.json`。
+
+    ```bash
+    code ~/.aliyun/
+    ```
 
 <br>
 
