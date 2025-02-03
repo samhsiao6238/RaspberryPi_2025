@@ -120,7 +120,7 @@ _開啟下載的 `.csv` 文件備用_
 
 ## 查詢
 
-1. 查詢並列出指定欄位。
+1. 查詢 ECS 並列出指定欄位。
 
     ```bash
     aliyun ecs DescribeInstances | jq -r '.Instances.Instance[] | {InstanceId, InstanceName, InstanceType, Status, RegionId, ZoneId, PublicIpAddress, PrivateIpAddress}'
