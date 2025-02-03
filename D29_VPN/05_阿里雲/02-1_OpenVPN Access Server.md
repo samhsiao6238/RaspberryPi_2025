@@ -6,11 +6,11 @@ _這是 OpenVPN 官方提供的 Web 管理介面版本_
 
 ## 準備工作
 
-_在本機中進行_
+_先在本機中處理 Docker 所需的鏡像_
 
 <br>
 
-1. 檢查 Docker 是否安裝。
+1. 檢查本地電腦是否已經安裝 Docker。
 
    ```bash
    docker --version
