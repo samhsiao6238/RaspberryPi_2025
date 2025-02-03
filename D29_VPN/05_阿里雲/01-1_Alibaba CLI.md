@@ -131,9 +131,7 @@ _開啟下載的 `.csv` 文件備用_
 
 <br>
 
-## 清理資源
-
-1. 查詢當前 ECS 實例。
+2. 列出當前 `cn-hangzhou` 區域中的全部 ECS 實例。
 
     ```bash
     aliyun ecs DescribeInstances --RegionId "cn-hangzhou"
@@ -141,50 +139,80 @@ _開啟下載的 `.csv` 文件備用_
 
 <br>
 
-2. 確保 ECS 實例已停止。
+3. 列出 ECS 實例 ID。
 
     ```bash
-    aliyun ecs StopInstance --InstanceId "<實例-Id>"
+    aliyun ecs DescribeInstances --RegionId "cn-hangzhou" | jq -r '.Instances.Instance[].InstanceId'
     ```
 
 <br>
 
-3. 徹底刪除 ECS 實例。
+4. 將實例 ID 讀出並存入變數中，其中 `tee /dev/tty` 會讓輸出同時顯示在終端上。
 
     ```bash
-    aliyun ecs DeleteInstance --InstanceId "<實例-Id>" --Force true
+    INSTANCE_IDS=$(aliyun ecs DescribeInstances | jq -r '.Instances.Instance[].InstanceId' | tee /dev/tty)
     ```
 
 <br>
 
-4. 查詢當前安全群組。
+5. 查詢當前安全群組，提取 ID 並存入變數。
 
     ```bash
-    aliyun ecs DescribeSecurityGroups --RegionId "cn-hangzhou"
+    SECURITY_GROUP_IDS=$(aliyun ecs DescribeSecurityGroups --RegionId "cn-hangzhou" | jq -r '.SecurityGroups.SecurityGroup[].SecurityGroupId' | tee /dev/tty)
     ```
 
 <br>
 
-5. 刪除安全群組。
+6. 查詢已建立的密鑰對並存入變數。
 
     ```bash
-    aliyun ecs DeleteSecurityGroup --RegionId "cn-hangzhou" --SecurityGroupId "<安全組-Id>"
+    KEY_PAIR_NAMES=$(aliyun ecs DescribeKeyPairs --RegionId "cn-hangzhou" | jq -r '.KeyPairs.KeyPair[].KeyPairName' | tee /dev/tty)
     ```
 
 <br>
 
-6. 查詢已建立的密鑰對。
+7. 查詢 ECS 伺服器掛載的雲磁碟並篩選磁碟 ID 存入變數。
 
     ```bash
-    aliyun ecs DescribeKeyPairs --RegionId "cn-hangzhou"
+    DISK_IDS=$(aliyun ecs DescribeDisks --RegionId "cn-hangzhou" | jq -r '.Disks.Disk[].DiskId' | tee /dev/tty)
     ```
 
 <br>
 
-7. 刪除密鑰對；特別注意，參數後的中括號 `[]` 必須搭配單引號 `''` 來包覆，這是避免命令行工具誤判這是 `shell` 的語法。
+## 清理資源
+
+_使用前步驟取得的 `INSTANCE_IDS`_
+
+<br>
+
+1. 確保 ECS 實例已停止。
 
     ```bash
-    aliyun ecs DeleteKeyPairs --RegionId "cn-hangzhou" --KeyPairNames '["<密鑰對-名稱>"]'
+    aliyun ecs StopInstance --InstanceId $INSTANCE_IDS
+    ```
+
+<br>
+
+2. 徹底刪除 ECS 實例。
+
+    ```bash
+    aliyun ecs DeleteInstance --InstanceId $INSTANCE_IDS --Force true
+    ```
+
+<br>
+
+3. 刪除安全群組。
+
+    ```bash
+    aliyun ecs DeleteSecurityGroup --RegionId "cn-hangzhou" --SecurityGroupId $SECURITY_GROUP_IDS
+    ```
+
+<br>
+
+4. 刪除密鑰對；特別注意，參數後的中括號 `[]` 必須搭配單引號 `''` 來包覆，這是避免命令行工具誤判這是 `shell` 的語法。
+
+    ```bash
+    aliyun ecs DeleteKeyPairs --RegionId "cn-hangzhou" --KeyPairNames "[\"$KEY_PAIR_NAMES\"]"
     ```
 
     ![](images/img_75.png)
