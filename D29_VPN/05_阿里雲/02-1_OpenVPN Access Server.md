@@ -59,7 +59,8 @@ _因爲在雲端似乎難以拉取，所以從本地上傳_
 3. 查看鏡像，一併檢查是否有重複；從這個案例來看確實出現重複。
 
    ```bash
-   docker images | grep openvpn
+   FULL_IMAGE_INFO=$(docker images | grep openvpn | tee /dev/tty)
+   IMAGE_ID=$(echo "$FULL_IMAGE_INFO" | awk '{print $3}')
    ```
 
    ![](images/img_56.png)
@@ -69,7 +70,7 @@ _因爲在雲端似乎難以拉取，所以從本地上傳_
 4. 若有重複，指定 `Image ID` 刪除鏡像。
 
    ```bash
-   docker rmi 066e8adf3a47
+   docker rmi <指令鏡像-ID>
    ```
 
 <br>
@@ -77,7 +78,7 @@ _因爲在雲端似乎難以拉取，所以從本地上傳_
 5. 確認鏡像的作業系統；進行上傳前，務必確認相容於當前 ECS 的作業系統。
 
    ```bash
-   docker inspect --format='{{.Os}} {{.Architecture}}' <鏡像-ID>
+   docker inspect --format='{{.Os}} {{.Architecture}}' $IMAGE_ID
    ```
 
    ![](images/img_76.png)
