@@ -1,16 +1,18 @@
 # VSCode 連線容器
 
-_這裡補充說明如何透過 `Dev Containers` 插件連線進入容器內_
+_補充說明如何使用 `VSCode` 透過 `Dev Containers` 插件連線進入容器內_
 
 <br>
 
-1. 開啟 VSCode，先使用 `遠端管理` 透過 SSH 連線宿主機；確認左下方已顯示。
+## 步驟說明
+
+1. 開啟 VSCode，先使用 `遠端管理` 透過 SSH 連線宿主機，確認左下方已顯示；特別注意，這個主機別名 `ali` 在前面步驟已經存入設定文件中 `config`。
 
    ![](images/img_36.png)
 
 <br>
 
-2. 連線後，開啟 `命令選擇區` 面板，並輸入 `Remote-Containers: Attach to Running Container`。
+2. 連線後，點擊左下方齒輪進入 `命令選擇區` 面板，並輸入 `Remote-Containers: Attach to Running Container`。
 
    ![](images/img_37.png)
 
@@ -22,7 +24,7 @@ _這裡補充說明如何透過 `Dev Containers` 插件連線進入容器內_
 
 <br>
 
-4. 會彈出新的 VSCode 工作視窗，右下角顯示 `連線到開發人員容器`；等候進度條完成。
+4. 會彈出新的 VSCode 工作視窗，右下角顯示 `連線到開發人員容器` 及 `正在安裝伺服器`；等候安裝進度條顯示完成。
 
    ![](images/img_24.png)
 
