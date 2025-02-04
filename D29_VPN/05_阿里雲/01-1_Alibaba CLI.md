@@ -179,9 +179,74 @@ _開啟下載的 `.csv` 文件備用_
 
 <br>
 
-## 清理資源
+## 查詢彈性公網 IP
 
-_使用前步驟取得的 `INSTANCE_IDS`_
+_特別提出來說明，因為這是個獨立收費的項目_
+
+<br>
+
+1. 查詢當前帳號下的彈性公網 IP `EIP`，包含綁定與未綁定，並存入變數中。
+
+    ```bash
+    ALL_EIP_INFO=$(aliyun vpc DescribeEipAddresses --RegionId "cn-hangzhou" --PageSize 100 | tee /dev/tty)
+    ```
+
+    ![](images/img_104.png)
+
+<br>
+
+2. 依據 `InstanceId` 是否為空篩選當前 EIP，分別存入不同變數。
+
+    ```bash
+    # 提取未綁定的 EIP
+    UNBOUND_EIP=$(echo "$ALL_EIP_INFO" | jq -r '.EipAddresses.EipAddress[] | select(.InstanceId == "") | .IpAddress')
+
+    # 提取已綁定的 EIP
+    BOUND_EIP=$(echo "$ALL_EIP_INFO" | jq -r '.EipAddresses.EipAddress[] | select(.InstanceId != "") | .IpAddress')
+
+    echo "未綁定的 EIP:"
+    echo "$UNBOUND_EIP"
+
+    echo "已綁定的 EIP:"
+    echo "$BOUND_EIP"
+    ```
+
+<br>
+
+3. 釋放未綁定的 EIP。
+
+    ```bash
+    echo "釋放未綁定的 EIP..."
+    for EIP_ID in $UNBOUND_EIP_IDS; do
+        echo "釋放 EIP: $EIP_ID"
+        aliyun vpc ReleaseEipAddress --RegionId "cn-hangzhou" --AllocationId "$EIP_ID"
+    done
+    ```
+
+<br>
+
+4. 解除綁定並釋放已綁定的 EIP；先確認 BOUND_EIP_INFO 是否有內容，若為空則表示無綁定的 EIP，使用 jq 確保輸出的格式正確。
+
+    ```bash
+    echo "解除綁定並釋放已綁定的 EIP..."
+    while read -r EIP_ID INSTANCE_ID; do
+        # 確保變數有值
+        if [[ -n "$EIP_ID" && -n "$INSTANCE_ID" ]]; then
+            echo "解除綁定 EIP: $EIP_ID 從實例: $INSTANCE_ID"
+            aliyun vpc UnassociateEipAddress --RegionId "cn-hangzhou" --AllocationId "$EIP_ID" --InstanceId "$INSTANCE_ID"
+            echo "釋放 EIP: $EIP_ID"
+            aliyun vpc ReleaseEipAddress --RegionId "cn-hangzhou" --AllocationId "$EIP_ID"
+        else
+            echo "錯誤: EIP_ID 或 INSTANCE_ID 為空，跳過此行"
+        fi
+    done <<< "$BOUND_EIP_INFO"
+    ```
+
+<br>
+
+## 清理其他資源
+
+_延續使用之前步驟所取得的實例 ID 變數 `INSTANCE_IDS`_
 
 <br>
 
