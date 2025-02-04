@@ -18,7 +18,7 @@ _先在本機中處理 Docker 所需的鏡像_
 
 <br>
 
-2. 檢查 Docker 服務是否運行。
+2. 查看 Docker 服務詳細資訊。
 
    ```bash
    docker info
@@ -26,7 +26,11 @@ _先在本機中處理 Docker 所需的鏡像_
 
 <br>
 
-3. 假如服務尚未啟動，可開啟 `Docker Desktop`，如此在可自動啟動服務。
+3. 篩選資訊，查看服務是否已啟動；假如服務尚未啟動，可開啟 `Docker Desktop`，如此在可自動啟動服務。
+
+   ```bash
+   docker info >/dev/null 2>&1 && echo "Docker 正在運行" || echo "Docker 未運行"
+   ```
 
 <br>
 
