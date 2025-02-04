@@ -30,15 +30,25 @@ _補充說明如何使用 `VSCode` 透過 `Dev Containers` 插件連線進入容
 
 <br>
 
-5. 開啟以下路徑，並找到設定文件 `etc/as.conf`。
+## 開啟遠端文件
+
+1. 完成後，終端機畫面中會顯示當前所載路徑。
 
    ```bash
    /usr/local/openvpn_as/
    ```
 
+   ![](images/img_105.png)
+
 <br>
 
-6. 在 `as.conf` 文件的 底部 添加或修改以下設定。
+2. 可嘗試在 `etc` 中找到 `OpenVPN-AS` 的設定文件 `as.conf`。
+
+   ![](images/img_106.png)
+
+<br>
+
+3. 若要添加規則，可在 `as.conf` 文件的 底部進行編輯如下。
 
    ```bash
    # 設置 OpenVPN 服務監聽的端口
@@ -51,7 +61,7 @@ _補充說明如何使用 `VSCode` 透過 `Dev Containers` 插件連線進入容
 
 <br>
 
-7. 應用設定並重啟 OpenVPN Access Server 在容器內執行；啟動後可略作觀察，確認 OpenVPN 服務正常啟動。
+4. 設定文件若有修改，需進行套用並重啟 OpenVPN Access Server。
 
    ```bash
    /usr/local/openvpn_as/scripts/sacli stop
@@ -62,25 +72,7 @@ _補充說明如何使用 `VSCode` 透過 `Dev Containers` 插件連線進入容
 
 <br>
 
-8. 查看容器對 `1194` 的監聽；這裡沒有任何輸出，代表並未正常啟動監聽。
-
-   ```bash
-   netstat -tulnp | grep 1194
-   ```
-
-<br>
-
-9. 透過指令觀察監聽中的端口。
-
-   ```bash
-   netstat -tulnp
-   ```
-
-   ![](images/img_40.png)
-
-<br>
-
-10. 若要查看設定文件內容。
+5. 可查看設定文件內容是否確實變更。
 
    ```bash
    cat /usr/local/openvpn_as/etc/as.conf
