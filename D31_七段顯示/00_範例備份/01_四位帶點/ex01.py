@@ -1,16 +1,3 @@
-
-#
-
-1. 安裝；特別說明，gpiozero 會依序嘗試 `RPi.GPIO` 和 `pigpio`
-
-```bash
-pip install RPi.GPIO pigpio gpiozero lgpio
-pip install pi74HC595
-```
-
-2. 代碼
-
-```python
 import time
 from gpiozero import OutputDevice
 
@@ -96,11 +83,13 @@ def test_digit_scroll():
                     # 短暫間隔 (降低閃爍)
                     time.sleep(INTERVAL_FALSH)
 
-try:
-    test_digit_scroll()
-except KeyboardInterrupt:
-    clear_display()
-    DATA_PIN.off()
-    LATCH_PIN.off()
-    CLOCK_PIN.off()
-```
+
+if __name__ == '__main__':
+
+    try:
+        test_digit_scroll()
+    except KeyboardInterrupt:
+        clear_display()
+        DATA_PIN.off()
+        LATCH_PIN.off()
+        CLOCK_PIN.off()
