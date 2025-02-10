@@ -209,7 +209,7 @@ _建立使用者_
 
 <br>
 
-3. 輸入自訂的帳號密碼。
+3. 輸入自訂的帳號密碼；習慣將名稱設定為 `openvpn`。
 
     ![](images/img_08.png)
 
@@ -227,19 +227,33 @@ _建立使用者_
 
 <br>
 
-6. 先按底部儲存。
+## 設定免帳密
+
+_為了便於直接讀取 `.ovpn` 文件進行登入，這裡將登入時驗證帳號密碼的程序省略_
+
+<br>
+
+1. 展開 `User Management`，點擊子頁籤 `User Permissions`，勾選右側的 `Allow Auto-login`。
+
+    ![](images/img_36.png)
+
+<br>
+
+## 儲存設定
+
+1. 先按底部儲存。
 
     ![](images/img_10.png)
 
 <br>
 
-7. 再點擊頂部的 `Update Running Server`。
+2. 再點擊頂部的 `Update Running Server`。
 
     ![](images/img_11.png)
 
 <br>
 
-8. 會先出現 `無法連上這個網站` 的提示，可不予理會。
+3. 會先出現 `無法連上這個網站` 的提示，可不予理會。
 
     ![](images/img_18.png)
 
