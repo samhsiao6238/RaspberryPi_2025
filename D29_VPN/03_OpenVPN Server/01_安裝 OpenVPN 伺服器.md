@@ -167,7 +167,7 @@ _建立使用者_
 
 <br>
 
-7. 若需要可在宿主機上重新啟動容器；`docker restart` 是針對名為 `openvpn-as` 的 Docker 容器進行完整的重啟操作。
+7. 也可在宿主機上透過 `docker restart` 指令完整地重新啟動容器。
 
     ```bash
     sudo docker restart openvpn-as
@@ -175,7 +175,7 @@ _建立使用者_
 
 <br>
 
-8. 使用指令驗證用戶屬性。
+8. 驗證用戶屬性。
 
     ```bash
     sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli --user sam6238 UserPropGet"
