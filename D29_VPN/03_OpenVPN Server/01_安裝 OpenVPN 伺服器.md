@@ -175,7 +175,7 @@ _建立使用者_
 
 <br>
 
-8. 驗證用戶屬性。
+8. 驗證用戶 `sam6238` 的屬性。
 
     ```bash
     sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli --user sam6238 UserPropGet"
@@ -193,7 +193,7 @@ _建立使用者_
 
 ## 訪問伺服器
 
-1. 確認樹莓派 IP。
+1. 輸出樹莓派上所架設的伺服器完整 URL；特別注意，這是內部訪問的網址。
 
     ```bash
     PI_IP=$(hostname -I | awk '{print $1}') && echo "https://$PI_IP:943/admin"
