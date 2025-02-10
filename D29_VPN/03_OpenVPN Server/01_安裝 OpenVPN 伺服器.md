@@ -159,7 +159,7 @@ _建立使用者_
 
 <br>
 
-6. 重新啟動 OpenVPN Access Server；sacli start 是容器內部的服務啟動指令，針對 OpenVPN。
+6. 重新啟動 OpenVPN 伺服器；`sacli start` 是針對 OpenVPN 容器內部的 _服務啟動指令_。
 
     ```bash
     sudo docker exec -it openvpn-as bash -c "/usr/local/openvpn_as/scripts/sacli start"
