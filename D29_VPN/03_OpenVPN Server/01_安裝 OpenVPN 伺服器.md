@@ -10,7 +10,7 @@ _因為官方不支援樹莓派系統安裝，所以使用容器_
 
 <br>
 
-1. 安裝 Docker。
+1. 安裝 Docker；特別注意，在樹莓派運行需要使用 `sudo`。
 
     ```bash
     sudo apt update && sudo apt install -y docker.io && sudo systemctl enable --now docker
@@ -18,7 +18,7 @@ _因為官方不支援樹莓派系統安裝，所以使用容器_
 
 <br>
 
-2. 運行 OpenVPN Access Server Docker 鏡像，為該容器指定名稱為 `openvpn-as`，並加入參數 `-d` 以分離模式在後台運行容器。
+2. 運行 `OpenVPN Access Server Docker` 鏡像，為該容器指定名稱為 `openvpn-as`，並加入參數 `-d` 以分離模式在後台運行容器。
 
     ```bash
     sudo docker run -d \
