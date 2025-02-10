@@ -199,9 +199,11 @@ _建立使用者_
     PI_IP=$(hostname -I | awk '{print $1}') && echo "https://$PI_IP:943/admin"
     ```
 
+    ![](images/img_35.png)
+
 <br>
 
-2. 訪問輸出的網址。
+2. 複製輸出的網址並進行訪問；展開下方的 `進階`，然後點擊 `繼續前往 ...`。
 
     ![](images/img_02.png)
 
