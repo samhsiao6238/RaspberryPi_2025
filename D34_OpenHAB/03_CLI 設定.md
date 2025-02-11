@@ -1,109 +1,79 @@
-_尚未成功_
+# 建立 openHAB 規則
 
-<br>
+_啟動時發送 Line Notify_
 
-# 透過終端機指令設定
+1. 進入主控台。
 
-<br>
+```bash
+sudo openhab-cli console
+```
 
-## 流程
+## 編輯規則檔案
 
-1. 編輯規則檔案（Rules DSL）並將腳本寫入檔案。  
+1. 在 `/etc/openhab/rules/` 目錄下建立規則檔案。
 
-<br>
+```bash
+sudo nano /etc/openhab/rules/startup_notify.rules
+```
 
-2. 將規則放置於 OpenHAB 的 `rules` 目錄中，OpenHAB 會自動加載並執行。  
+2. 寫入以下內容。
 
-<br>
+```java
+rule "Startup Line Notify"
+when
+    System started
+then
+    val token = "Bearer WemrA5mtsqcBcvTEG59tXmVGVTDj8wifXH51GzjWXx8"
+    val message = "OpenHAB 啟動成功！"
+    val headers = newHashMap(
+        "Authorization" -> token,
+        "Content-Type" -> "application/x-www-form-urlencoded"
+    )
+    
+    try {
+        val response = sendHttpPostRequest("https://notify-api.line.me/api/notify", "application/x-www-form-urlencoded", "message=" + message, headers)
+        logInfo("LineNotify", "已發送 Line Notify 訊息: " + response)
+    } catch (Exception e) {
+        logError("LineNotify", "發送 Line Notify 時發生錯誤: " + e.getMessage)
+    }
+end
+```
 
-## 建立 HTTP Thing
+3. 重啟 openHAB
 
-1. 編輯或建立新的 Things 檔案
+```bash
+sudo systemctl restart openhab.service
+```
 
-    ```bash
-    sudo nano /etc/openhab/things/linenotify.things
-    ```
+4. 檢查日誌。
 
-<br>
+```bash
+sudo journalctl -u openhab.service -f -n 30
+```
 
-2. 貼上
+5. 登入伺服器。
 
-    ```bash
-    Thing http:url:linenotify "Line Notify Thing" [
-        baseURL="https://notify-api.line.me/api/notify",
-        timeout=3000,
-        refresh=0
-    ]
-    ```
+```bash
+sudo openhab-cli console
+```
 
-<br>
+6. 檢查伺服器內日誌。
 
-## 建立規則檔案
+```bash
+log:tail;
+```
 
-1. 建立一個新的規則檔，讓 OpenHAB 在啟動時執行 curl 發送 LINE Notify。
 
-    ```bash
-    sudo nano /etc/openhab/rules/startup_notify.rules
-    ```
 
-<br>
 
-2. 在檔案中貼上以下規則代碼，特別注意，其中包含 Token，儲存並退出。
 
-    ```java
-    rule "Test Rule"
-    when
-        System started
-    then
-        logInfo("TestRule", "Test Rule has been executed successfully.")
-    end
-    ```
 
-<br>
 
-3. 檢查檔案權限是否為 openhab 用戶可讀寫
 
-    ```bash
-    sudo chown openhab:openhab /etc/openhab/rules/startup_notify.rules
-    sudo chmod 644 /etc/openhab/rules/startup_notify.rules
-    ```
 
-<br>
 
-4. 重啟 OpenHAB 服務，讓 OpenHAB 加載新規則
 
-    ```bash
-    sudo systemctl restart openhab.service
-    ```
 
-<br>
 
-## 檢查執行狀況
 
-1. 查看 OpenHAB 日誌，確認規則是否執行成功
 
-    ```bash
-    sudo journalctl -u openhab.service -f -n 30
-    ```
-
-<br>
-
-2. 檢查語法。
-
-    ```bash
-    sudo cat /var/log/openhab/openhab.log | grep -i error
-    ```
-
-<br>
-
-3. 檢查 OpenHAB 日誌，確認規則是否已加載
-
-    ```bash
-    sudo cat /var/log/openhab/openhab.log | grep "Loaded"
-    ```
-
-<br>
-
-___
-
-_END_
