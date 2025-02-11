@@ -1,3 +1,7 @@
+_測試中_
+
+<br>
+
 # 建立 openHAB 規則
 
 _啟動時發送 Line Notify_
@@ -63,9 +67,13 @@ sudo openhab-cli console
 log:tail;
 ```
 
+## 測試
 
+1. 手動測試
 
-
+```bash
+openhab:automation trigger startup_notify-1;
+```
 
 
 
