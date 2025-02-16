@@ -20,7 +20,7 @@ LATCH_PIN = OutputDevice(27)
 # SH_CP (Shift Register Clock)
 CLOCK_PIN = OutputDevice(22)
 
-# 共陰極 7 段顯示器數字段碼
+# 共陰極 7 段顯示器數欄位碼
 SEG_MAP = {
     '0': 0b11000000, '1': 0b11111001, '2': 0b10100100, '3': 0b10110000,
     '4': 0b10011001, '5': 0b10010010, '6': 0b10000010, '7': 0b11111000,
