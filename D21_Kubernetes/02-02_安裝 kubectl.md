@@ -4,6 +4,16 @@ _必須在要部署的設備上安裝 [kubctl on MacOS](https://kubernetes.io/do
 
 <br>
 
+## 說明
+
+1. K3s 自帶 kubectl，更適合在 Raspberry Pi 這類資源有限的設備上使用，無需手動安裝，獨立安裝 kubectl，適合用在開發環境或遠程管理其他叢集。
+
+<br>
+
+2. 不同場景選擇不同安裝方式，在樹莓派上安裝 K3s 這種場景，手動安裝 kubectl 並無必要；而本地開發環境如 Mac 需要連接遠程 Kubernetes 叢集時，只需要一個 kubectl 客戶端來管理外部 Kubernetes 叢集，這種手動安裝是必要的。
+
+<br>
+
 ## MacOS 安裝 kubectl
 
 _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
@@ -86,7 +96,7 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 ## 樹莓派安裝 kubectl
 
-_在兩台樹莓派也都安裝 kubectl_
+_若樹莓派僅作客戶端來管理外部 Kubernetes 叢集，可在樹莓派也安裝 kubectl_
 
 <br>
 
