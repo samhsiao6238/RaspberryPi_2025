@@ -1,13 +1,14 @@
 import urequests
-import time
 from boot import connect_wifi
+# 存放敏感資料的模組
+import mysecrets
 
 # WiFi 設定
-SSID = "SamHome2.4g"
-PASSWORD = "sam112233"
+SSID = mysecrets.SSID
+PASSWORD = mysecrets.PASSWORD
 
 # LINE Notify 權杖
-LINE_TOKEN = "WemrA5mtsqcBcvTEG59tXmVGVTDj8wifXH51GzjWXx8"
+LINE_TOKEN = mysecrets.LINE_TOKEN
 
 def send_line_notify(message):
     url = "https://notify-api.line.me/api/notify"
@@ -23,6 +24,6 @@ def send_line_notify(message):
 # 主流程
 if connect_wifi(SSID, PASSWORD):
     print("✅ WiFi 已連線")
-    send_line_notify("🎉 Pico W 成功上線並發送通知！")
+    send_line_notify("🎉🎉 Pico W 成功上線")
 else:
     print("❌ WiFi 連線失敗")
