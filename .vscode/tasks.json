@@ -47,6 +47,18 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Upload to Pico W",
+            "type": "shell",
+            "command": "${workspaceFolder}/upload.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "使用 mpremote 自動上傳 MicroPython 程式到 Pico W"
         }
+
     ]
 }
