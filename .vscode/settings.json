@@ -50,5 +50,8 @@
     // 忽略特定警告
     "python.analysis.diagnosticSeverityOverrides": {
         "reportMissingImports": "none"
-    }
+    },
+    "idf.espIdfPath": "/Users/samhsiao/esp/v5.3.2/esp-idf",
+    "idf.toolsPath": "/Users/samhsiao/.espressif",
+    "idf.pythonInstallPath": "/Users/samhsiao/.espressif/python_env/idf5.3_py3.10_env/bin/python"
 }
