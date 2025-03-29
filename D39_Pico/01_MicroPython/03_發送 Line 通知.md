@@ -1,12 +1,12 @@
-# Pico W 
+# 發送 Line 通知
 
-_使用 MicroPython + VS Code，連線 Wi-Fi 並發送 LINE 通知_
+_連線 Wi-Fi 並發送 LINE 通知_
 
 <br>
 
 ## 敏感資訊
 
-_MicroPython 開發板不會自動讀取電腦端的模組，必須手動上傳_
+_針對權杖等敏感資訊皆需做保護處理_
 
 <br>
 
@@ -21,7 +21,7 @@ _MicroPython 開發板不會自動讀取電腦端的模組，必須手動上傳_
 2. 編輯 `.gitignore`，將敏感資訊加入。
 
     ```bash
-    secrets.py
+    mysecrets.py
     ```
 
 <br>
@@ -37,7 +37,7 @@ _MicroPython 開發板不會自動讀取電腦端的模組，必須手動上傳_
 
 <br>
 
-3. 修改 `upload.sh`，添加腳本
+3. 修改 `upload.sh`，將新增的腳本加入上傳。
 
     ```bash
     #!/bin/bash
@@ -45,14 +45,14 @@ _MicroPython 開發板不會自動讀取電腦端的模組，必須手動上傳_
     # 上傳 boot.py 與 main.py 到 Pico W
     mpremote connect auto fs cp boot.py :boot.py
     mpremote connect auto fs cp main.py :main.py
-    # 添加
+    # 添加 `mysecrets.py`
     mpremote connect auto fs cp mysecrets.py :mysecrets.py
     echo "✅ 上傳完成！"
     ```
 
 <br>
 
-4. 修改主腳本 `main.py`。
+4. 修改主腳本 `main.py`；導入存放敏感資訊的腳本，然後透過模組名稱直接調用。
 
     ```python
     import urequests
@@ -88,9 +88,9 @@ _MicroPython 開發板不會自動讀取電腦端的模組，必須手動上傳_
 
 <br>
 
-## 在 VS Code 撰寫與上傳程式碼
+## 編輯腳本
 
-1. 建立專案資料夾如 `pico-line-notify`，編輯腳本 `boot.py`，作為 Wi-Fi 初始化。
+1. 編輯啟動腳本 `boot.py` 處理 Wi-Fi 初始化工作。
 
     ```python
     import network
@@ -111,7 +111,7 @@ _MicroPython 開發板不會自動讀取電腦端的模組，必須手動上傳_
 
 <br>
 
-2. 編輯 `main.py`，這是主程式，用來連網後發送 LINE 通知
+2. 編輯主腳本 `main.py`，用來連網後發送 LINE 通知
 
     ```python
     import urequests
@@ -147,7 +147,7 @@ _MicroPython 開發板不會自動讀取電腦端的模組，必須手動上傳_
 
 <br>
 
-3. 使用組合鍵上傳程式到 Pico W
+3. 使用組合鍵上傳程式到 Pico W。
 
 <br>
 
