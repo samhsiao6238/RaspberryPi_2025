@@ -64,6 +64,7 @@ _刷新之前，先對當前 EEPROM 設置進行查詢_
     ```
 
     _輸出_
+
     ```bash
     *** PREPARING EEPROM UPDATES ***
     BOOTLOADER: update available
