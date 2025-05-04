@@ -1,6 +1,6 @@
 # Raspberry Pi Connect 
 
-_這是官方在 2024/05/07 發佈的測試版功能，使用 WebRTC 技術來建立安全的點對點連接_
+_這是官方在 2024/05/07 發佈的測試版功能，使用 `WebRTC` 技術來建立安全的點對點連接_
 
 ![](images/img_147.png)
 
@@ -26,7 +26,7 @@ _其他版本硬體進行安裝不會報錯，只是重啟後並不會看到服�
 
 ## 軟體需求
 
-1. 64位元版本的 Raspberry Pi OS Bookworm。
+1. 至少需安裝 `64 位元 Raspberry Pi OS Bookworm` 以上版本。
 
 <br>
 
@@ -44,7 +44,7 @@ _其他版本硬體進行安裝不會報錯，只是重啟後並不會看到服�
 
 <br>
 
-2. 安裝 Raspberry Pi Connect。
+2. 安裝 `Raspberry Pi Connect`；新版系統已預裝，可直接在桌面 `Turn On` 應用。
 
     ```bash
     sudo apt install rpi-connect
@@ -52,7 +52,7 @@ _其他版本硬體進行安裝不會報錯，只是重啟後並不會看到服�
 
 <br>
 
-3. 重啟 Raspberry Pi。
+3. 若是手動安裝，須重啟樹莓派讓服務啟動。
 
     ```bash
     sudo reboot
