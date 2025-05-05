@@ -1,14 +1,15 @@
+_整理中_
+
 # Raspberry Pi AI Kit
 
 _搭配 USB 相機與麥克風_
-
 
 ## 安裝必要軟硬體
 
 1. 更新系統。
 
 ```bash
-sudo apt update && sudo apt full-upgrade
+sudo apt update && sudo apt full-upgrade -y 
 ```
 
 2. 更新韌體。
