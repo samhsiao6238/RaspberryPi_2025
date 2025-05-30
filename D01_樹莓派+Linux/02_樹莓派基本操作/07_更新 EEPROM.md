@@ -18,7 +18,7 @@ _更新樹莓派的 `EEPROM` 韌體，屬於底層硬體開機晶片的程式碼
 
 <br>
 
-## 刷新
+## 查詢
 
 _刷新之前，先對當前 EEPROM 設置進行查詢_
 
@@ -30,15 +30,7 @@ _刷新之前，先對當前 EEPROM 設置進行查詢_
     vcgencmd bootloader_version
     ```
 
-    _輸出_
-
-    ```bash
-    Apr 29 2021 17:11:25
-    version c2f8c388c4ee37ad709ace403467d163e8dd91ce (release)
-    timestamp 1619712685
-    update-time 1619712685
-    capabilities 0x0000001f
-    ```
+    ![](images/img_181.png)
 
 <br>
 
@@ -47,23 +39,38 @@ _刷新之前，先對當前 EEPROM 設置進行查詢_
     ```bash
     vcgencmd bootloader_config
     ```
-    _輸出_
-    ```bash
-    [all]
-    BOOT_UART=0
-    WAKE_ON_GPIO=1
-    POWER_OFF_ON_HALT=0
-    ```
+
+    ![](images/img_182.png)
 
 <br>
 
-3. 更新指令，由輸出可知有一個新的 EEPROM 引導程式更新可用，當前版本是 2021/0429，最新版本是 2024/04/15，VL805 固件已經是是最新的不需要更新，而更新文件 (`pieeprom.upd`) 已經複製到資料夾 `/boot/firmware` 中，並且也做了備份 `recovery.bin`，如果想取消此更新，可以執行 `sudo rpi-eeprom-update -r`。
+3. 若沒有單獨的可更新引導程式 EEPROM，會回傳 `unknown`。
+
+    ![](images/img_169.png)
+
+<br>
+
+## 更新
+
+1. 更新指令，由輸出可知有一個新的 EEPROM 引導程式更新可用，以下範例中，`BOOTLOADER` 顯示 `up to date` 表示開機韌體已是最新版本，無需更新；`CURRENT` 是當前版本日期，`LATEST` 是可用的最新版本日期，`RELEASE` 表示目前使用的韌體通道是 `latest`，可透過指令 `raspi-config` 切換為 `stable` 或 `beta` 等版本。
 
     ```bash
     sudo rpi-eeprom-update -a
     ```
 
-    _輸出_
+    ![](images/img_183.png)
+
+<br>
+
+2. 使用以下指令清理更新暫存資料，適合在更新失敗後執行以重設狀態。
+
+    ```bash
+    sudo rpi-eeprom-update -r
+    ```
+
+<br>
+
+3. 特別注意，預設會將更新文件 (`pieeprom.upd`) 複製到資料夾 `/boot/firmware` 中，並且也做了備份 `recovery.bin`，所以透過上述指令可取消此更新。
 
     ```bash
     *** PREPARING EEPROM UPDATES ***
@@ -90,13 +97,7 @@ _刷新之前，先對當前 EEPROM 設置進行查詢_
 
 <br>
 
-4. 若沒有單獨的可更新引導程式 EEPROM，會回傳 `unknown`。
-
-    ![](images/img_169.png)
-
-<br>
-
-5. 完成更新後要重啟系統。
+4. 若有更新需重啟系統。
 
     ```bash
     sudo reboot now
