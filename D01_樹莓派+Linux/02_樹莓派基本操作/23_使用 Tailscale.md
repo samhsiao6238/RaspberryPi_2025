@@ -78,7 +78,7 @@ _使用終端機指令安裝_
 
 <br>
 
-5. 斷開本設備。
+5. 斷開本設備；特別注意，這僅僅是停止連線，裝置仍會保留在後台。
 
     ```bash
     sudo tailscale down
@@ -153,6 +153,22 @@ _設定 Remote-SSH_
 3. 透過 VSCode 遠端連線也可完成。
 
     ![](images/img_200.png)
+
+<br>
+
+## 登出
+
+1. 登出登入狀態；與 `down` 相同，這僅會登出，設備仍會在後台顯示。
+
+    ```bash
+    sudo tailscale logout
+    ```
+
+<br>
+
+2. 若要完全刪除，需至 [控制台](https://login.tailscale.com/admin/machines) 手動清理。
+
+    ![](images/img_204.png)
 
 <br>
 
