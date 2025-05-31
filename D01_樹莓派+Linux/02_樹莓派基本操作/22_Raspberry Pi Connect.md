@@ -140,6 +140,66 @@ _可在任意設備中的瀏覽器進行兩種連線方式訪問樹莓派_
 
 <br>
 
+## 透過終端機建立設備
+
+_不進入樹莓派桌面_
+
+<br>
+
+1. 若已經建立設備，可先進行刪除。
+
+<br>
+
+2. 在本機使用 SSH 連線樹莓派後，在終端機中輸入以下指令，畫面會輸出附帶授權碼的登入網址。
+
+    ```bash
+    rpi-connect signin
+    ```
+
+    ![](images/img_184.png)
+
+<br>
+
+3. 複製該網址後，在本機中開啟瀏覽器進行訪問，便會看到設備的設定畫面。
+
+    ![](images/img_185.png)
+
+<br>
+
+4. 輸入任意名稱後點擊登入。
+
+    ![](images/img_186.png)
+
+<br>
+
+5. 畫面會顯示成功。
+
+    ![](images/img_187.png)
+
+<br>
+
+6. 終端機也會同步顯示登入成功訊息。
+
+    ![](images/img_188.png)
+
+<br>
+
+7. 點擊瀏覽器中的 `view all devices` 連結，便可看到該設備。
+
+    ![](images/img_189.png)
+
+<br>
+
+## 補充
+
+_不能直接將 Raspberry Pi Connect 的 SSH 連線整合到 VSCode Remote-SSH 擴充中使用_
+
+<br>
+
+1. Raspberry Pi Connect 的 Remote Shell 是瀏覽器內嵌的 `WebShell`，是基於 WebRTC / Relay 的抽象連線，它並不開放真正的 SSH port（22），也不提供 SSH Host/IP 給 VSCode 使用。
+
+<br>
+
 ___
 
 _END_
