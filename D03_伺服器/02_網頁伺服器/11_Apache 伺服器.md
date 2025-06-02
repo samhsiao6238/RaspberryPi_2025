@@ -1,4 +1,4 @@
-# Apache 站台實作
+# Apache 伺服器站台實作
 
 _以下將分幾個階段依序完成站台建立_
 
@@ -91,6 +91,44 @@ _以下將分幾個階段依序完成站台建立_
    ```
 
    ![](images/img_05.png)
+
+<br>
+
+## 端口佔用
+
+_若預設端口 `80` 被佔用會導致啟動失敗_
+
+<br>
+
+1. 啟動失敗時會顯示 `failed`。
+
+   ![](images/img_137.png)
+
+<br>
+
+2. 查詢端口使用狀況。
+
+   ```bash
+   sudo lsof -i :80
+   ```
+
+<br>
+
+3. 如需要查看詳細錯誤日誌。
+
+   ```bash
+   sudo journalctl -xeu apache2.service
+   ```
+
+<br>
+
+4. 停用佔用端口的服務如 `lighttpd`，同時啟用 `Apache`。
+
+   ```bash
+   sudo systemctl stop lighttpd
+   sudo systemctl disable lighttpd
+   sudo systemctl start apache2
+   ```
 
 <br>
 
