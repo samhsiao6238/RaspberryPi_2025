@@ -293,40 +293,40 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 <br>
 
-6. 添加內容 `# 添加這個`，並且些修改 `超文本所在目錄` ，其餘部分可以不用變動，也可以把已經註解的內容都刪除，這樣會看得比較清楚。
+6. 添加內容 `# 添加這個`，並且些修改 `超文本所在目錄`，其餘部分不用變動；可把預設註解的內容都刪除，這樣會看得比較清楚。
 
    ```html
    <VirtualHost *:80>
-       ServerAdmin webmaster@localhost
-       DocumentRoot <超文本所在目錄>
+      ServerAdmin webmaster@localhost
+      DocumentRoot <超文本所在目錄>
 
-       # 添加這段
-       <Directory <超文本所在目錄>>
-           Options Indexes FollowSymLinks
-           AllowOverride All
-           Require all granted
-       </Directory>
+      # 添加這段
+      <Directory <超文本所在目錄>>
+         Options Indexes FollowSymLinks
+         AllowOverride All
+         Require all granted
+      </Directory>
 
-       ErrorLog ${APACHE_LOG_DIR}/error.log
-       CustomLog ${APACHE_LOG_DIR}/access.log combined
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
    </VirtualHost>
    ```
 
 <br>
 
-## 是否使用預設的設定文件
+## 指定要使用的設定文件
 
-_因為我們將使用預設值，所以這裡不用做任何變動，理解即可。_
+_因為將使用預設值，所以這裡僅作說明無需實作_
 
 <br>
 
-1. 禁用（關閉）預設的設定檔 `000-default.conf`
-
-   - `a2dissite` 是 `Apache 2 Disable Site` 的縮寫
+1. 若要禁用預設的設定檔 `000-default.conf`；`a2dissite` 是 `Apache 2 Disable Site` 的縮寫。
 
    ```bash
    sudo a2dissite 000-default.conf
    ```
+
+   ![](images/img_138.png)
 
 <br>
 
