@@ -1,0 +1,1 @@
+_參考 [小智客戶端使用教程](https://github.com/Huang-junsen/py-xiaozhi)_
