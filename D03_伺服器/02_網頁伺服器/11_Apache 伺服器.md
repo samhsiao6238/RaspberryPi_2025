@@ -236,10 +236,10 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 ## 修改設定文件
 
-1. 首先，在設定文件中將會指定 `超文本所在路徑`，所以可將這個指定目錄先進行建立，這個範例是將目錄建立在 `/home/sam6238/Documents` 。
+1. 首先，在設定文件中將會指定 `超文本所在路徑`，所以先建立這個指定目錄；以下指令會將目錄建立在 `/home/sam6238/Documents` 。
 
    ```bash
-   sudo mkdir /home/sam6238/Documents/my_web
+   mkdir /home/sam6238/Documents/my_web
    ```
 
 <br>
@@ -256,30 +256,30 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
    ```html
    <Directory />
-       Options FollowSymLinks
-       AllowOverride None
-       Require all granted
+      Options FollowSymLinks
+      AllowOverride None
+      Require all granted
    </Directory>
    <Directory /usr/share>
-       AllowOverride None
-       Require all granted
+      AllowOverride None
+      Require all granted
    </Directory>
    <Directory /var/www/>
-       Options Indexes FollowSymLinks
-       AllowOverride None
-       Require all granted
+      Options Indexes FollowSymLinks
+      AllowOverride None
+      Require all granted
    </Directory>
    # 添加這個
    <Directory <超文本所在目錄>>
-       Options Indexes FollowSymLinks
-       AllowOverride None
-       Require all granted
+      Options Indexes FollowSymLinks
+      AllowOverride None
+      Require all granted
    </Directory>    
    ```
 
 <br>
 
-4. 超文本所在目錄就是前面自己建立的那個路徑，比如說 `/home/sam6238/Documents/my_web` 。
+4. 超文本所在目錄就是前面自己建立的目錄，比如說 `/home/sam6238/Documents/my_web`；特別注意箭頭括號的格式。
 
    ![](images/img_06.png)
 
