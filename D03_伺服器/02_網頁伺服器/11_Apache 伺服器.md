@@ -424,11 +424,12 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 
 <br>
 
-## 建立網站文本進行測試
+## 建立網站文本
 
-1. 進入超文本目錄，建立一個 `index.html` 檔案。
+1. 進入指定的文本目錄 `/home/sam6238/Documents/my_web`，接著新增 `index.html` 檔案。
 
    ```bash
+   cd /home/sam6238/Documents/my_web
    sudo touch index.html
    ```
 
@@ -436,19 +437,19 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 
 <br>
 
-2. 開啟 `index.html` 使用 VSCode 透過快速鍵 `!` 建立文本。
+2. 在 VSCode 中開啟 `index.html`，並使用快速鍵 `!` 建立文本。
 
    ![](images/img_08.png)
 
 <br>
 
-3. 任意修改。
+3. 可任意修改 `<title>` 或在 `<body>` 中添加一個 `<H1>`。
 
    ![](images/img_12.png)
 
 <br>
 
-4. 完成要重新啟動。
+4. 完成要重新啟動 `apache2`。
 
    ```bash
    sudo systemctl reload apache2
@@ -456,7 +457,7 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 
 <br>
 
-5. 在樹莓派上瀏覽 `http://localhost` 或在區網內訪問樹莓派網址。
+5. 在樹莓派上瀏覽 `http://localhost` 或在區網內訪問樹莓派網址 `http://<樹莓派-IP>`。
 
    ![](images/img_11.png)
 
@@ -464,29 +465,29 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 
 ## 錯誤排除
 
-1. 假使看到的是這個內容，表示文本路徑設置錯誤，所以訪問到預設內容。
+1. 假使看到的是 Apache2 預設的首頁，表示文本路徑設置錯誤，所以會訪問到預設內容。
 
    ![](images/img_89.png)
 
 <br>
 
-2. 在進行任何更改之前，先確保 Apache 配置文件沒有 `語法錯誤`。
+2. 可使用指令查詢 `Apache` 配置文件是否有 `語法錯誤`；正確會回傳 `Syntax OK`。
 
    ```bash
    sudo apache2ctl configtest
    ```
 
-   _正確的話會看到 `Syntax OK`_
-
    ![](images/img_90.png)
 
-   _錯誤的話會看到 `Action 'configtest' failed`_
+<br>
+
+3. 承上，若有語法錯誤會傳回 `Action 'configtest' failed`。
 
    ![](images/img_91.png)
 
 <br>
 
-3. 查看日誌可以看到詳細的錯誤與問題。
+4. 可透過查看日誌找出詳細的錯誤與問題。
 
    ```bash
    sudo tail -f /var/log/apache2/error.log
@@ -494,18 +495,20 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 
 <br>
 
-4. 確認站台是否啟動 `active`。
+5. 查看站台狀態，正確啟動會顯示 `active`。
 
    ```bash
    sudo systemctl status apache2
    ```
 
-   _沒有啟動會顯示 `failed`_
-   
+<br>
+
+6. 承上，若沒有啟動會顯示 `failed`。
+
    ![](images/img_92.png)
 
 <br>
 
 ___
 
-_END：以上建立自己的 Apache 站台_
+_END：以上完成 Apache 站台的建立_
