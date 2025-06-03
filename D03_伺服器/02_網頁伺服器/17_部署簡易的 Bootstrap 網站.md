@@ -4,19 +4,19 @@
 
 ## 步驟
 
-1. 下載一個 Bootstrap [範例](https://startbootstrap.com/theme/freelancer)
+1. 下載任意一個 `Bootstrap` [範例](https://startbootstrap.com/theme/freelancer)。
 
    ![img](images/img_43.png)
 
 <br>
 
-2. 解壓縮
+2. 解壓縮。
 
    ![img](images/img_45.png)
 
 <br>
 
-3. 拖曳複製＆覆蓋原本 Apache 的檔案
+3. 拖曳複製＆覆蓋原本 Apache 的檔案。
 
    ![img](images/img_44.png)
 
@@ -46,18 +46,18 @@
 
 <br>
 
-7. 運行 Ngrok 在端口 `80`
+7. 運行 Ngrok 在端口 `80`。
 
    ![img](images/img_47.png)
 
 <br>
 
-8. 完成
+8. 完成。
 
    ![img](images/img_48.png)
 
 <br>
 
----
+___
 
 _END_
