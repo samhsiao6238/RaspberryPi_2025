@@ -108,7 +108,7 @@ _使用 `zenity` 來搭建_
 
 <br>
 
-3. 輸入指定的端口如 `80` 然後點擊 `OK`，接著去訪問網頁看看。
+3. 輸入指定的端口如 `80` 然後點擊 `OK`；接著複製網址進行訪問。
 
    ![](images/img_100.png)
 
@@ -120,12 +120,11 @@ _添加輸入 Token 的對話框_
 
 <br>
 
-1. 修改原本的腳本。
+1. 修改原本的腳本；技巧提示，在編輯器中以 `CTRL+K` 可以快速刪除一整行。
 
    ```bash
-   sudo nano ~/Documents/NgrokApp/start_ngrok.sh
+   nano ~/Documents/NgrokApp/start_ngrok.sh
    ```
-   _技巧提示：在編輯器中以 CTRL+K 可以快速刪除一整行_
 
 <br>
 
