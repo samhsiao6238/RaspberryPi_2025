@@ -129,21 +129,13 @@
 
 <br>
 
-8. 運行指令進行更新。
-
-```bash
-
-```
-
-<br>
-
-9. 網頁顯示如下，點擊 `Visit Site` 。
+8. 若正常運行，網頁顯示如下，點擊 `Visit Site` 。
 
     ![](images/img_96.png)
 
 <br>
 
-10. 就會看到目前樹莓派的 Nginx 服務器了。
+9. 就會看到目前樹莓派的 Nginx 服務器了。
 
     ![](images/img_97.png)
 
