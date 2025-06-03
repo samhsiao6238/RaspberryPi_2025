@@ -7,15 +7,17 @@ _部署聊天機器人的所有方式中最簡單的一種，沒有之一_
 ## 安裝
 
 1. 可參考官方 [API SDKs](https://developers.line.biz/en/docs/messaging-api/line-bot-sdk/) ，或直接參考官網 [Python](https://github.com/line/line-bot-sdk-python) 文件。
-   
-2. 在樹莓派上安裝 SDK
+
+<br>
+
+2. 在樹莓派上安裝 SDK。
 
     ```bash
     pip install line-bot-sdk
     ```
 
 
-2. 更新版本
+2. 更新版本。
 
     ```bash
     pip install --upgrade line-bot-sdk
@@ -31,9 +33,15 @@ _這裡不重複步驟指引，僅說明 Webhook 設置，其他請參考前週�
 
 1. 進入 Line 開發者 [網址](https://developers.line.biz/zh-hant/) 。
 
+<br>
+
 2. 可先記下 `Token`、 `Secret` 以及 `user ID` 備用。
 
+<br>
+
 3. 使用 [官網腳本](https://github.com/line/line-bot-sdk-python#synopsis)
+
+<br>
 
 4. 用自己的 `Token`、 `Secret` 更改範例中的。
 
@@ -47,7 +55,7 @@ _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。
 
 <br>
 
-1. 在樹莓派安裝套件   
+1. 在樹莓派安裝套件。
 
     ```bash
     pip install python-dotenv
@@ -60,7 +68,7 @@ _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。
     _CHANNEL_SECRET_ = <貼上 SECRET>
     ```
 
-7. 在主腳本 `app.py` 導入 dotenv。
+3. 在主腳本 `app.py` 導入 `dotenv`。
 
     ```python
     import os
@@ -68,15 +76,18 @@ _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。
     load_dotenv()
     ```
 
-8. 在程序中使用 `os` 來取得 Token 及 Secret，分開寫只是讓程式碼易讀性提高。
+4. 在程序中使用 `os` 來取得 Token 及 Secret，分開寫只是讓程式碼易讀性提高。
 
     _取得_
+
     ```python
     CHANNEL_ACCESS_TOKEN = os.getenv("_CHANNEL_ACCESS_TOKEN_")
     CHANNEL_SECRET = os.getenv("_CHANNEL_SECRET_")
     ```
+
     _使用_
-    ```
+
+    ```python
     configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
     handler = WebhookHandler(CHANNEL_SECRET)
     ```
@@ -86,23 +97,29 @@ _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。
 ## 啟動 Flask 應用
 
 1. 先在 `5000` 端口啟動 Ngrok，這是 Flask 預設的端口。
-    
+
     ![](images/img_76.png)
 
-2. 將 `https` 的 URL 貼到 LineBot 的 Webhook 中
-    
+<br>
+
+2. 將 `https` 的 URL 貼到 LineBot 的 Webhook 中。
+
     ![](images/img_77.png)
 
-11. 使用 `https` 並加上 `/callback` ，特別注意所使用的路由名稱是否正確，有些腳本會使用 `webhook` 。
-    
+<br>
+
+3. 使用 `https` 並加上 `/callback` ，特別注意所使用的路由名稱是否正確，有些腳本會使用 `webhook` 。
+
     ![](images/img_78.png)
 
-12. 以上機器人便部署完成。
-    
+<br>
+
+4. 以上機器人便部署完成。
+
     ![](images/img_79.png)
 
 <br>
 
----
+___
 
 _END_
