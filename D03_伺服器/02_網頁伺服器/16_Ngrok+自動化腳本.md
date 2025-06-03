@@ -21,12 +21,13 @@ _使用 `zenity` 來搭建_
 2. 在 `~/Documents/NgrokApp` 資料夾內建立腳本。
 
    ```bash
+   cd ~/Documents/NgrokApp
    nano start_ngrok.sh
    ```
 
 <br>
 
-3. 編輯內容。
+3. 編輯內容；完成後使用快速鍵存檔、退出。
 
    ```bash
    #!/bin/bash
@@ -41,7 +42,10 @@ _使用 `zenity` 來搭建_
    fi
 
    # 啟動
-   ./ngrok http $PORT
+   # ./ngrok http $PORT
+   NGROK_PATH=~/Documents/NgrokApp/ngrok
+   "$NGROK_PATH" http "$PORT"
+   read -p "Ngrok 啟動完成，按 Enter 結束..."
    ```
 
 <br>
@@ -65,7 +69,7 @@ _使用 `zenity` 來搭建_
 6. 建立腳本。
 
    ```bash
-   sudo nano start_ngrok.desktop
+   nano start_ngrok.desktop
    ```
 
 <br>
@@ -92,21 +96,23 @@ _使用 `zenity` 來搭建_
 
 <br>
 
-9. 在樹莓派桌面點擊運行。
+## 進入樹莓派桌面
+
+1. 點擊運行。
 
    ![](images/img_98.png)
 
 <br>
 
-10. 點擊 `Execute`。
+2. 在彈窗中點擊 `Execute`。
 
-      ![](images/img_99.png)
+   ![](images/img_99.png)
 
 <br>
 
-11. 輸入指定的端口，接著去訪問網頁看看。
+3. 輸入指定的端口如 `80` 然後點擊 `OK`，接著去訪問網頁看看。
 
-      ![](images/img_100.png)
+   ![](images/img_100.png)
 
 <br>
 
