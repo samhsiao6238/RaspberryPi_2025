@@ -1,56 +1,12 @@
 # Ngrok
 
-_實現外網訪問內網_
-
-<br>
-
-## 說明
-
-_Ngrok 本身並不是一種 `伺服器服務`，而是一種 `通道服務`，可透過本地執行 Ngrok 服務取得 Ngrok 公開服務器的通道，讓外部使用者可以透過這個通道訪問本地網站，也就是讓樹莓派變成一個可訪問的網站伺服器。_
-
-<br>
-
-## 安裝 Ngrok
-
-_這個步驟在前面已經做過，可以跳過_
-
-<br>
-
-1. 在樹莓派中進入文件資料夾。
-
-   ```bash
-   cd ~/Documents
-   ```
-
-<br>
-
-2. 建立存放腳本的資料夾。
-
-   ```bash
-   sudo mkdir NgrokApp && cd NgrokApp
-   ```
-
-<br>
-
-3. 下載指令。
-
-   ```bash
-   sudo wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-v3-stable-linux-arm64.tgz
-   ```
-
-<br>
-
-4. 解壓縮：若是 `.zip` 文件則將 `tar -xvzf` 改為 `unzip`。
-
-   ```bash
-   sudo tar -xvzf ngrok-v3-stable-linux-arm64.tgz
-   ```
+_撰寫自動化腳本啟動 Ngrok_
 
 <br>
 
 ## 建立自動化腳本
 
-_使用 zenity 來搭建_
+_使用 `zenity` 來搭建_
 
 <br>
 
@@ -65,7 +21,7 @@ _使用 zenity 來搭建_
 2. 在 `~/Documents/NgrokApp` 資料夾內建立腳本。
 
    ```bash
-   sudo nano start_ngrok.sh
+   nano start_ngrok.sh
    ```
 
 <br>

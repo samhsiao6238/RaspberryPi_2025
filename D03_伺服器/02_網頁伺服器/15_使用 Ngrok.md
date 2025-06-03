@@ -4,6 +4,11 @@ _[Ngrok 官網](https://ngrok.com/)_
 
 <br>
 
+## 簡介
+
+_Ngrok 本身並不是一種 `伺服器服務`，而是一種 `通道服務`，可透過本地執行 Ngrok 服務取得 Ngrok 公開服務器的通道，讓外部使用者可以透過這個通道訪問本地網站，也就是讓樹莓派變成一個可訪問的網站伺服器。_
+
+<br>
 
 ## 安裝 Ngrok
 
@@ -143,6 +148,10 @@ _[Ngrok 官網](https://ngrok.com/)_
 
 ## 將 Ngrok 移動到系統 PATH 中
 
+_可先關閉 Ngrok_
+
+<br>
+
 1. 切換到當前所在的路徑中。
 
     ```bash
@@ -159,7 +168,7 @@ _[Ngrok 官網](https://ngrok.com/)_
 
 <br>
 
-3. 將文件移動到系統的 PATH 中。
+3. 將 `ngrok` 執行檔移動到 `/usr/local/bin`，使其成為系統全域指令。
 
     ```bash
     sudo mv ~/Documents/NgrokApp/ngrok /usr/local/bin/ngrok
@@ -167,11 +176,13 @@ _[Ngrok 官網](https://ngrok.com/)_
 
 <br>
 
-4. 確保 `/usr/local/bin` 已經在 PATH 環境變數中。
+4. 同時也可進一步檢查 `/usr/local/bin` 是否已經在 PATH 環境變數中。
 
     ```bash
     echo $PATH
     ```
+
+    ![](images/img_141.png)
 
 <br>
 
@@ -184,15 +195,15 @@ _[Ngrok 官網](https://ngrok.com/)_
 
 <br>
 
-6. 檢查是否設置完成。
+6. 完成後，切換到任意目錄中並運行以下指令，確認設置是否完成；特別注意，設定完成後執行的就是全域指令，也就是系統路徑中的 `ngrok`，所以不使用 `./`；另外，在尚未建立全局變數時，即便位在腳本所在路徑中也必須加上 `./`，因為 `Linux/macOS` 系統預設不會將 `當前目錄` 加入 `$PATH`。
 
     ```bash
-    ngrok --version
+    cd ~ && ngrok --version
     ```
 
 <br>
 
-7. 添加憑證。
+7. 嘗試透過以下指令添加憑證。
 
     ```bash
     ngrok config add-authtoken <輸入自己的憑證>
@@ -200,10 +211,10 @@ _[Ngrok 官網](https://ngrok.com/)_
 
 <br>
 
-8. 啟動服務：特別注意，這裡執行的是全域的應用而非當前路徑的腳本，所以不使用 `./`。
+8. 啟動服務。
 
     ```bash
-    ngrok http 8080
+    ngrok http 80
     ```
 
 <br>
