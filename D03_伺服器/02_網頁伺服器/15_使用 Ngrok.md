@@ -1,13 +1,13 @@
-# 安裝＆申請 Ngrok
+# Ngrok 
 
-[官網](https://ngrok.com/) 註冊以及驗證
+_[Ngrok 官網](https://ngrok.com/)_
 
 <br>
 
 
-## 安裝
+## 安裝 Ngrok
 
-1. 在樹莓派中進入文件資料夾。
+1. 進入樹莓派的文件資料夾 `~/Documents`。
 
     ```bash
     cd ~/Documents
@@ -15,10 +15,10 @@
 
 <br>
 
-2. 建立存放腳本的資料夾。
+2. 建立存放自訂腳本的資料夾 `NgrokApp`。
 
     ```bash
-    sudo mkdir NgrokApp && cd NgrokApp
+    mkdir NgrokApp && cd NgrokApp
     ```
 
 <br>
@@ -26,7 +26,7 @@
 3. 下載指令。
 
     ```bash
-    sudo wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz
+    wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz
     ```
 
 <br>
@@ -34,21 +34,15 @@
 4. 解壓縮：若是 `.zip` 文件則將 `tar -xvzf` 改為 `unzip`。
 
     ```bash
-    sudo tar -xvzf ngrok-v3-stable-linux-arm.tgz
+    tar -xvzf ngrok-v3-stable-linux-arm.tgz
     ```
 
 <br>
 
-5. 在終端機起動 Ngrok。
+5. 啟動 Ngrok 並指定端口為 `80`；特別注意，這裡因為尚未授權，所以必然會出現錯誤，請繼續下一個步驟。
 
     ```bash
-    ./ngrok http <指定端口>
-    ```
-
-    如 `8080` 訪問 `Nginx`
-
-    ```bash
-    ./ngrok http 8080
+    ./ngrok http 80
     ```
 
 <br>
@@ -62,8 +56,8 @@
 <br>
 
 2. 假如是訪問看到如下錯誤，也是因為尚無授權資訊。
-   
-   ![](images/img_95.png)
+
+    ![](images/img_95.png)
 
 <br>
 
@@ -89,7 +83,7 @@
 
 <br>
 
-3. 複製 `Authtoken` 然後保存好即可。
+3. 複製 `Authtoken` 或保留瀏覽頁面備用。
 
     ![](images/img_31.png)
 
@@ -108,17 +102,17 @@
 5. 假如是依照官網指示安裝的版本，可以適用以下新版指令，在沒有其他參數時，兩者效果一致，這裡不做贅述。
 
     ```bash
-    ngrok config add-authtoken <複製下來的 Authtoken>
+    ./ngrok config add-authtoken <複製下來的 Authtoken>
     ```
 
     ![](images/img_94.png)
 
 <br>
 
-6. 再次啟動服務；以下指令是使用端口 `8080`，若使用其他端口則自行修正參數。
+6. 再次啟動服務；以下指令是使用端口 `80`，若使用其他端口則自行修正參數。
 
     ```bash
-    ./ngrok http 8080
+    ./ngrok http 80
     ```
 
 <br>
@@ -129,13 +123,19 @@
 
 <br>
 
-8. 若正常運行，網頁顯示如下，點擊 `Visit Site` 。
+8. 可複製公網網址進行訪問。
+
+    ![](images/img_140.png)
+
+<br>
+
+9. 若正常運行會顯示如下，點擊 `Visit Site` 。
 
     ![](images/img_96.png)
 
 <br>
 
-9. 就會看到目前樹莓派的 Nginx 服務器了。
+10. 就會看到目前樹莓派的 Nginx 服務器了；同時終端機會顯示 `200 OK`。
 
     ![](images/img_97.png)
 
