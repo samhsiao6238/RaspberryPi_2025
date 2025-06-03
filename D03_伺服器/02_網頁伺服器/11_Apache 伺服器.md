@@ -326,7 +326,7 @@ _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定�
 
 <br>
 
-1. 若要禁用預設的設定檔 `000-default.conf`；`a2dissite` 是 `Apache 2 Disable Site` 的縮寫。
+1. 預設的設定檔為 `000-default.conf`，可使用指令 `a2dissite` 進行禁用；`a2dissite` 是 `Apache 2 Disable Site` 的縮寫。
 
    ```bash
    sudo a2dissite 000-default.conf
@@ -344,7 +344,7 @@ _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定�
 
 <br>
 
-3. 使用預設檔案。
+3. 若要使用預設檔案，也就是指定為預設文件 `000-default.conf`。
 
    ```bash
    sudo a2ensite 000-default.conf
@@ -354,7 +354,11 @@ _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定�
 
 ## 授權訪問文件
 
-1. 讓 `Apache` 用戶有權限訪問服務相關目錄。
+_網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
+
+<br>
+
+1. 授權 `Apache` 用戶有權限訪問服務相關目錄。
 
    ```bash
    sudo chmod -R 755 <Apache 超文本所在目錄>
@@ -368,13 +372,13 @@ _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定�
 
 <br>
 
-2. 確保 Apache 用戶（通常是 www-data）是相關目錄和文件的擁有者
+2. 確保 `Apache` 用戶是相關目錄和文件的擁有者，而 `www-data` 就是 `Ubuntu/Debian` 系統中 `Apache` 的預設執行用戶；透過以下設定便可確保 `Apache` 有權限讀寫指定的目錄。
 
    ```bash
    sudo chown -R www-data:www-data <Apache 超文本所在目錄>
    ```
 
-   如
+   _如_
 
    ```bash
    sudo chown -R www-data:www-data  /home/sam6238/Documents/my_web
@@ -398,7 +402,7 @@ _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定�
 
 <br>
 
-4. 後續會添加超文本，所以可先授權自己擁有添加文件的權限，沒授權的話將無法新增 `index.html`。
+4. 後續會添加超文本，所以在這先授權自己擁有添加文件的權限；若無權限，後續將無法新增 `index.html`。
 
    ```bash
    sudo chown -R <使用者名稱>:<使用者同名群組名稱> <Apache 超文本所在目錄>
@@ -410,7 +414,9 @@ _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定�
    sudo chown -R sam6238:sam6238 /home/sam6238/Documents/my_web
    ```
 
-   _或_
+<br>
+
+5. 以上指令可進一步使用 `$USER` 來表達當前使用者 `sam6238`；在編程時，無論腳本或指令都應儘量避免硬編碼。
 
    ```bash
    sudo chown -R $USER:$USER /home/sam6238/Documents/my_web
