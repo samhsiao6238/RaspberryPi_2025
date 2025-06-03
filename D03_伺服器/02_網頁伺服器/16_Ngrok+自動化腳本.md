@@ -128,7 +128,7 @@ _添加輸入 Token 的對話框_
 
 <br>
 
-2. 編輯內容。
+2. 編輯內容後儲存、退出。
 
    ```bash
    #!/bin/bash
@@ -147,34 +147,34 @@ _添加輸入 Token 的對話框_
 
    # 如果用戶提供了token，使用它來認證
    if [ ! -z "$TOKEN" ]; then
-      ./ngrok authtoken $TOKEN
+      ngrok authtoken $TOKEN
    fi
 
    # 使用指定的端口啟動ngrok
-   ./ngrok http $PORT
+   ngrok http $PORT
    ```
 
 <br>
 
-3. 雙擊啟動桌面腳本。
+3. 再次進入樹莓派桌面，雙擊應用啟動腳本。
 
    ![img](images/img_35.png)
 
 <br>
 
-4. 點擊 `執行`。
+4. 點擊 `Excute`。
 
    ![img](images/img_36.png)
 
 <br>
 
-5. 輸入端口。
+5. 輸入`80` 或其他指定端口。
 
    ![img](images/img_37.png)
 
 <br>
 
-6. 可輸入 `Authtoken` ，假如已經存過可以按下 `ENTER` 以預設值運行，假如要切換帳號就要輸入該帳號的 `Authtoken` 。
+6. 在接下來的對話框中，可輸入指定的 `Authtoken`；假如系統中已儲存過，可按下 `ENTER` 以預設值運行；另外，假如要切換帳號，可重新輸入指定的 `Authtoken` 來達成。
 
    ![img](images/img_38.png)
 
@@ -223,11 +223,11 @@ _添加輸入 Token 的對話框_
 
    # 如果用戶提供了token，使用它來認證
    if [ ! -z "$TOKEN" ]; then
-      ./ngrok authtoken $TOKEN
+      ngrok authtoken $TOKEN
    fi
 
    # 使用指定的端口啟動ngrok
-   ./ngrok http $PORT
+   ngrok http $PORT
 
    # 保持開啟直到用戶動作
    read
