@@ -317,7 +317,7 @@ _進入樹莓派_
 
 ## 將 Ngnix 指向這個站台
 
-_以上若是覆蓋 `Apache` 文本，那 `Firebase Hosting` 可與 `Apache` 結合；以下將操作 Ngnix 與該站台的結合_
+_以上若是覆蓋 `Apache` 文本，那 `Firebase Hosting` 可與 `Apache` 結合；若有建立 `Ngnix` 站台，可繼續以下操作結合 Ngnix_
 
 <br>
 
