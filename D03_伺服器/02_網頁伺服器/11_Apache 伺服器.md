@@ -28,7 +28,7 @@ _以下將分幾個階段依序完成站台建立_
 
 ## 安裝與檢查
 
-1. 更新套件索引＆升級套件。
+1. 更新套件索引並升級套件。
 
    ```bash
    sudo apt update && sudo apt upgrade -y
@@ -36,7 +36,7 @@ _以下將分幾個階段依序完成站台建立_
 
 <br>
 
-2. 安裝 `apache2`。
+2. 安裝套件 `apache2`。
 
    ```bash
    sudo apt install apache2 -y
@@ -122,7 +122,7 @@ _若預設端口 `80` 被佔用會導致啟動失敗_
 
 <br>
 
-4. 停用佔用端口的服務如 `lighttpd`，同時啟用 `Apache`。
+4. 假設端口被服務如 `lighttpd` 佔用，可運行以下指令進行停用，同時啟用 `apache2`。
 
    ```bash
    sudo systemctl stop lighttpd
