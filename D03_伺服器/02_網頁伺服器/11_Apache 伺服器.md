@@ -46,7 +46,7 @@ _以下將分幾個階段依序完成站台建立_
 
 <br>
 
-3. 透過指令查詢 `apache2` 安裝狀態：使用 `dpkg -l` 命令列出與 `apache2` 相關的套件列表。
+3. 使用 `dpkg -l` 命令查詢是否已安裝 `apache2` 及相關套件。
 
    ```bash
    dpkg -l | grep apache2
