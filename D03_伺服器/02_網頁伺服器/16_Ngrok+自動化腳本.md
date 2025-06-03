@@ -42,9 +42,7 @@ _使用 `zenity` 來搭建_
    fi
 
    # 啟動
-   # ./ngrok http $PORT
-   NGROK_PATH=~/Documents/NgrokApp/ngrok
-   "$NGROK_PATH" http "$PORT"
+   ngrok http "$PORT"
    read -p "Ngrok 啟動完成，按 Enter 結束..."
    ```
 
