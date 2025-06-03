@@ -26,7 +26,7 @@
 3. 下載指令。
 
     ```bash
-    sudo wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-v3-stable-linux-arm64.tgz
+    sudo wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz
     ```
 
 <br>
@@ -34,7 +34,7 @@
 4. 解壓縮：若是 `.zip` 文件則將 `tar -xvzf` 改為 `unzip`。
 
     ```bash
-    sudo tar -xvzf ngrok-v3-stable-linux-arm64.tgz
+    sudo tar -xvzf ngrok-v3-stable-linux-arm.tgz
     ```
 
 <br>
@@ -44,7 +44,9 @@
     ```bash
     ./ngrok http <指定端口>
     ```
+
     如 `8080` 訪問 `Nginx`
+
     ```bash
     ./ngrok http 8080
     ```
@@ -65,15 +67,23 @@
 
 <br>
 
+3. 當版本更新時，可運行以下指令自動轉換設定檔。
+
+    ```bash
+    ./ngrok config upgrade
+    ```
+
+<br>
+
 ## 註冊
 
-1. 前往 [Ngrok 官網](https://ngrok.com/) 點擊 `Sign up for free`，已有帳戶可點擊 `Login in`。
+1. 前往 [Ngrok 官網](https://ngrok.com/) 點擊 `Sign up`，已有帳戶可點擊 `Login in`。
 
     ![](images/img_32.png)
 
 <br>
 
-2. 可使用 Google 帳號。
+2. 建議使用 Google 帳號快速註冊。
 
     ![](images/img_33.png)
 
@@ -85,21 +95,17 @@
 
 <br>
 
-4. 授權，在終端機中執行。
+4. 在終端機執行以下指令進行授權，完成時會輸出儲存路徑。
 
     ```bash
     ./ngrok authtoken <複製下來的 Authtoken>
     ```
 
-<br>
-
-5. 完成時會顯示如下訊息。
-
     ![](images/img_118.png)
 
 <br>
 
-6. 假如是依照官網指示安裝的版本，可以適用以下新版指令，在沒有其他參數時，兩者效果一致，這裡不多做說明，同學可以自己嘗試看看。
+5. 假如是依照官網指示安裝的版本，可以適用以下新版指令，在沒有其他參數時，兩者效果一致，這裡不多做說明，同學可以自己嘗試看看。
 
     ```bash
     ngrok config add-authtoken <複製下來的 Authtoken>
@@ -109,17 +115,25 @@
 
 <br>
 
-7. 完成後會顯示儲存授權以及所在路徑。
+6. 再次啟動服務；以下指令是使用端口 `8080`，若使用其他端口則自行修正參數。
+
+    ```bash
+    ./ngrok http 8080
+    ```
+
+<br>
+
+7. 假如版本過低會出現以下警告。
 
     ![](images/img_34.png)
 
 <br>
 
-8. 啟動服務。
+8. 運行指令進行更新。
 
-    ```bash
-    ./ngrok http 8080
-    ```
+```bash
+
+```
 
 <br>
 
