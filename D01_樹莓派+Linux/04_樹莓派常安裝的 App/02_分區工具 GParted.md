@@ -141,7 +141,7 @@ _Partition Table_
 
 ## 掛載並驗證
 
-1. 在終端機查詢；顯示 USB 隨身碟裝置為 `/dev/sda1` 且尚未掛載到任何位置。
+1. 查詢分區與掛載情況；顯示 USB 隨身碟裝置為 `/dev/sda1` 且尚未掛載到任何位置。
 
     ```bash
     lsblk
@@ -167,7 +167,7 @@ _Partition Table_
 
 <br>
 
-4. 驗證是否掛載成功。
+4. 驗證是否掛載成功；`df -h` 就是查詢掛載點的指令。
 
     ```bash
     df -h | grep /mnt/usb
@@ -223,7 +223,7 @@ _Partition Table_
 
 <br>
 
-## 卸載 USB 裝置
+## 卸載裝置
 
 1. 運行以下指令可卸載磁區。
 
