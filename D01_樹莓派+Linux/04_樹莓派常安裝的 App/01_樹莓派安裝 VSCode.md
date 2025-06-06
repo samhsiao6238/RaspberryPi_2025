@@ -8,7 +8,7 @@
 
 <br>
 
-2. 另外，若是使用虛擬機，那在虛擬機中的樹莓派安裝了 VSCode，才能在虛擬機中的 VSCode 使用 SSH 連線虛擬機中的樹梅派，這是因為安裝 VSCode 才有 code-server。
+2. 另外，若是使用虛擬機，那在虛擬機中的樹莓派安裝 VSCode 後，才能使用 VSCode 進行 SSH 連線到同樣為在虛擬機中的樹梅派，這是因為安裝 VSCode 之後才有 `code-server`。
 
 <br>
 
