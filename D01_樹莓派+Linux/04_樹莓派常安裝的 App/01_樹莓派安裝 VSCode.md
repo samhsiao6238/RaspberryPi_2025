@@ -14,21 +14,21 @@
 
 ## 安裝前準備
 
-1. 便於後續指令的順利運行，先切換到家目錄中檢查資料夾是否顯示為英文，假如是中文，請先手動更名。
+_檢查樹莓派顯示語系_
+
+<br>
+
+1. 便於後續指令的順利運行，先切換到家目錄檢查資料夾是否顯示為英文；假如顯示是中文名稱，請先手動更名為英文。
 
     ```bash
     cd ~ && ls
     ```
 
-<br>
-
-2. 假如還沒改過的話，這裡可以改一下。
-
     ![](images/img_25.png)
 
 <br>
 
-3. 將其中的 `下載`、`文件` 更名為 `Downloads` 及 `Documents`。
+2. 主要針對將其中兩個目錄 `下載`、`文件` 更名為 `Downloads` 及 `Documents` 即可。
 
     ```bash
     mv 下載 Downloads && mv 文件 Documents
@@ -40,11 +40,11 @@
 
 ## 開始安裝
 
-_與樹莓派實機安裝 VSCode 程序相同_
+_實機與虛擬機的安裝步驟相同_
 
 <br>
 
-1. 進入下載。
+1. 進入 `~/Downloads`。
 
     ```bash
     cd ~/Downloads
@@ -52,22 +52,21 @@ _與樹莓派實機安裝 VSCode 程序相同_
 
 <br>
 
-2. 下載。
+2. 運行指令進行下載。
 
     ```bash
     curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
     ```
 
-    _可能出現警告_
+<br>
 
-    ```bash
-    Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
-    OK
-    ```
+3. 可能出現如下警告；簡單說就是提醒 `apt-key` 已經被淘汰，系統建議改用將金鑰檔案手動存放到 `/etc/apt/trusted.gpg.d/` 目錄下的方式來管理金鑰。
+
+    ![](images/img_01.png)
 
 <br>
 
-3. 若出現警告，可以改用以下指令，原本的指令還是可以運行。
+4. 改用以下指令。
 
     ```bash
     curl -sSL https://packages.microsoft.com/keys/microsoft.asc -o microsoft.asc
@@ -75,7 +74,7 @@ _與樹莓派實機安裝 VSCode 程序相同_
 
 <br>
 
-4. 將 VScode 添加到來源列表。
+5. 將 VScode 添加到來源列表。
 
     ```bash
     echo "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
@@ -83,7 +82,7 @@ _與樹莓派實機安裝 VSCode 程序相同_
 
 <br>
 
-5. 更新＆安裝。
+6. 更新與安裝。
 
     ```bash
     sudo apt update && sudo apt install code -y
@@ -91,18 +90,14 @@ _與樹莓派實機安裝 VSCode 程序相同_
 
 <br>
 
-6. 完成安裝可看到應用 `Visual Studio Code`。
+## 進入樹莓派
+
+1. 完成安裝後，可在選單中看到 `Visual Studio Code`。
 
     ![](images/img_27.png)
 
 <br>
 
-7. 若是因為使用虛擬機操作，在 VSCode 中無法連線樹莓派而進行安裝的狀況，這時再次連線就能成功。
-
-    ![](images/img_29.png)
-
-<br>
-
 ___
 
-_END：以上說明樹莓派安裝 VSCode_
+_END_
