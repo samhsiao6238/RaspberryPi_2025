@@ -108,7 +108,7 @@ sudo usermod -aG video $USER
 ---
 
 ## 🔊 麥克風語音辨識延伸應用（可選）
-你可以使用 `speech_recognition` 搭配 `arecord` 收音並呼叫 Whisper / Google API：
+你可以使用 `speech_recognition` 搭配 `arecord` 收音並調用 Whisper / Google API：
 
 ```bash
 pip3 install SpeechRecognition
