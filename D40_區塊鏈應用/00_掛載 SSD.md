@@ -14,7 +14,15 @@
 
 <br>
 
-2. 假如已經掛載，可卸載所有分割區；因為掛載中的分割區無法格式化。
+2. 檢查當前已掛載的磁碟與其掛載點。
+
+    ```bsh
+    df -h
+    ```
+
+<br>
+
+3. 假如已經掛載，可卸載所有分割區；因為掛載中的分割區無法格式化。
 
     ```bash
     sudo umount /dev/nvme0n1p1
@@ -29,7 +37,7 @@ _另外也可使用 `fdisk`_
 
 <br>
 
-1. 使用 `gdisk` 進行刪除。
+1. 使用 `gdisk` 進行刪除分區；在 Linux 系統中，磁碟與磁區的使用路徑格式是 `/dev/<磁區名稱>`，假如要刪除指定分區，則使用 `/dev/<分區名稱>`。
 
     ```bash
     sudo gdisk /dev/nvme0n1
@@ -37,15 +45,15 @@ _另外也可使用 `fdisk`_
 
 <br>
 
-2. 進入後輸入 `3`；建立全新的空白 GPT，適合格式化整顆 SSD 的情境。
+2. 進入後輸入 `3` 選擇 `3 - Create blank GPT` 建立全新的空白 GPT，適合格式化整顆 SSD 的情境。
 
 <br>
 
-3. 接著輸入 `n` 新增分割區；全部預設即可，按 Enter 直到完成。
+3. 接著在 `Command` 提示後方輸入 `n` 新增分割區；`Partition number`、`First sector`、`Last sector`、`Hex code or GUID` 都按 Enter 使用預設值即可。
 
 <br>
 
-4. 接著輸入 `w` 寫入變更、`y` 確認。
+4. 再次出現 `Command` 提示，先輸入 `w` 寫入變更，再輸入 `y` 確認。
 
     ![](images/img_14.png)
 
