@@ -56,15 +56,13 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-3. 添加以下內容設定路徑。
+3. 添加以下內容設定路徑；添加在文件末行即可。
 
     ```ini
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     ```
-
-    ![](images/img_05.png)
 
 <br>
 
@@ -86,7 +84,11 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-## 安裝指定版本的 Python
+## 安裝 Python
+
+_使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及虛擬環境管理_
+
+<br>
 
 1. 從 [官網](https://www.python.org/downloads/) 下載頁面可查看當前建議版本為 `3.13.4`。
 
