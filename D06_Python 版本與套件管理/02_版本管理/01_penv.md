@@ -1,12 +1,12 @@
 # `pyenv`
 
-_版本管理方式很多，以下將作說明；這個章節示範其中的 _
+_版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-##  前置作業
+## 安裝
 
-1. 進行更新。
+1. 先更新樹莓派。
 
     ```bash
     sudo apt-get update && sudo apt-get upgrade -y
@@ -14,57 +14,7 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 
 <br>
 
-2. 運氣不錯，一開始就遇到問題。
-
-    ![](images/img_33.png)
-
-<br>
-
-3. 處理到麻木了，不管啥原因，直接註解更新列表，先切換到管理資料夾。
-
-    ```bash
-    cd /etc/apt/sources.list.d/ 
-    ```
-
-<br>
-
-4. 透過指令 `ls -al` 查詢，只有一個 `.list` 檔案，這好辦。
-
-    ![](images/img_02.png)
-
-<br>
-
-5. 進行編輯。
-
-    ```bash
-    sudo nano raspi.list
-    ```
-
-<br>
-
-6. 註解起來就對了。
-
-    ![](images/img_03.png)
-
-<br>
-
-7. 在更新一次，順利完成。
-
-    ![](images/img_04.png)
-
-<br>
-
-## 安裝 pyenv
-
-1. 後續會以編譯的方式安裝 Python，而 Python 的某些標準函式庫需要這些庫的支援才能正常運作，所以先安裝以下套件，以下有些已經內建在新版作業系統中，重複執行並不衝突。
-
-    ```bash
-    sudo apt install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev
-    ```
-
-<br>
-
-2. 下載與執行 `pyenv` 安裝腳本。
+3. 下載與執行 `pyenv` 安裝腳本。
 
     ```bash
     curl https://pyenv.run | bash
@@ -72,15 +22,15 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 
 <br>
 
-3. 編輯環境參數。
+4. 編輯環境參數。
 
     ```bash
-    sudo nano ~/.bashrc
+    nano ~/.bashrc
     ```
 
 <br>
 
-4. 添加以下內容。
+5. 添加以下內容。
 
     ```ini
     export PATH="$HOME/.pyenv/bin:$PATH"
@@ -92,7 +42,7 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 
 <br>
 
-4. 重新載入設定。
+6. 重新載入設定。
 
     ```bash
     source ~/.bashrc
@@ -100,7 +50,7 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 
 <br>
 
-5. 查詢 pyenv 版本。
+7. 查詢 pyenv 版本。
 
     ```bash
     pyenv --version
@@ -112,38 +62,74 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 
 ## 安裝指定版本的 Python
 
-1. 進入 [Python 官網](https://www.python.org/) 。
+1. 從 [官網](https://www.python.org/downloads/) 下載頁面可查看當前建議版本為 `3.13.4`。
 
-
-<br>
-
-
-1. 點擊 `Downloads` 進入下一個畫面。
-
-    ![](images/img_07.png)
-
+    ![](images/img_21.png)
 
 <br>
 
-3. 點擊 `All releases` 查看有哪些版本。
-
-    ![](images/img_08.png)
-
-<br>
-
-4. 這裡示範安裝 `3.10.13`，這需要相當時間。
+2. 使用指令查看 `pyenv` 支援可安裝的版本清單，其中會包含官方釋出版本、額外實作版本與開發版本。
 
     ```bash
-    pyenv install 3.10.13
+    pyenv install --list
     ```
 
-    ![](images/img_09.png)
+<br>
+
+3. 在輸出中確認官網建議版本也在其中。
+
+    ![](images/img_22.png)
+
+<br>
+
+4. 安裝指定版本 `3.13.4`。
+
+    ```bash
+    pyenv install 3.13.4
+    ```
+
+<br>
+
+5. 安裝過程可能出現模組未正確編譯的錯誤提示，原因是缺少必要的系統函式庫與開發套件，屬於常見問題，官方也提供了解法連結；依據錯誤訊安裝缺漏套件，安裝前先移除 Python 版本。
+
+    ```bash
+    pyenv uninstall 3.13.4
+    ```
+
+<br>
+
+6. 安裝遺漏套件。
+
+    ```bash
+    sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
+    libffi-dev liblzma-dev
+    ```
+
+<br>
+
+7. 重新安裝 Python。
+
+    ```bash
+    pyenv install 3.13.4
+    ```
+
+<br>
+
+8. 查看系統預設版本；關於版本切換待後續說明。
+
+    ```bash
+    pyenv versions
+    ```
+
+    ![](images/img_23.png)
 
 <br>
 
 ## 驗證安裝
 
-1. 查詢當前 Python 版本。
+1. 查詢當前 Python 版本；與前面步驟安裝的版本是不同的。
 
     ```bash
     python --version
@@ -169,30 +155,22 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
     whereis python
     ```
 
+    ![](images/img_07.png)
+
 <br>
 
-4. 結果
-    
+4. 排版查看。
+
     ```bash
     python: 
     /usr/bin/python 
-    /usr/bin/python3.9-config 
-    /usr/bin/python3.9 
-    /usr/lib/python2.7 
-    /usr/lib/python3.9 
-    /etc/python3.9 
-    /usr/local/lib/python3.9 
-    /usr/include/python3.9m 
-    /usr/include/python3.9 
-    /home/sam6238/.pyenv/shims/python3.10-config 
     /home/sam6238/.pyenv/shims/python 
-    /home/sam6238/.pyenv/shims/python3.10 
     /usr/share/man/man1/python.1.gz
     ```
 
 <br>
 
-5. 接下來就特別留意了，pyenv 看似將 Python 安裝在了 `/home/sam6238/.pyenv/shims` 資料夾內，實際進入查看可以發現，pyenv 是通過 shims 機制來管理不同版本的 Python，而非將 Python 安裝於此。
+5. 特別留意，`pyenv` 看似將 Python 安裝在 `/home/sam6238/.pyenv/shims` 資料夾內，但實際進入查看可以發現，`pyenv` 是通過 `shims` 機制來管理不同版本的 Python，而非將 Python 安裝於此。
 
     ![](images/img_12.png)
 
@@ -203,41 +181,12 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
     ```bash
     /home/sam6238/.pyenv/shims/python --version
     ```
-    結果
-    ```bash
-    Python 3.9.2
-    ```
-    
-    <br>
 
-    ```bash
-    /home/sam6238/.pyenv/shims/python3 --version
-    ```
-    結果
-    ```bash
-    Python 3.9.2
-    ```
-
-    <br>
-
-    或是
-    ```bash
-    /home/sam6238/.pyenv/shims/python3.10 --version
-    ```
-    結果
-    ```bash
-    pyenv: python3.10: command not found
-
-    The `python3.10' command exists in these Python versions:
-    3.10.13
-
-    Note: See 'pyenv help global' for tips on allowing both
-        python2 and python3 to be found.
-    ```
+    ![](images/img_08.png)
 
 <br>
 
-7. 可以查看 pyenv 當前管理的 Python 版本。
+7. 查看 `pyenv` 當前管理的 Python 版本。
 
     ```python
     pyenv versions
@@ -247,7 +196,7 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 
 ## _究竟在哪裡？_
 
-1. 實際路徑在 `/home/sam6238/.pyenv/versions/3.10.13/bin` 。
+1. 實際路徑在 `/home/sam6238/.pyenv/versions/3.13.4/bin` 。
 
     ![](images/img_13.png)
 
@@ -256,7 +205,7 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 2. 再次查詢。
 
     ```bash
-    /home/sam6238/.pyenv/versions/3.10.13/bin/python --version
+    /home/sam6238/.pyenv/versions/3.13.4/bin/python --version
     ```
 
 <br>
@@ -264,7 +213,7 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 3. 確定路徑後，回到 `~/Documents` 或其他指定資料夾建立虛擬環境。
 
     ```bash
-    /home/sam6238/.pyenv/versions/3.10.13/bin/python -m venv env3.10.13
+    /home/sam6238/.pyenv/versions/3.13.4/bin/python -m venv env3.13.4
     ```
 
 <br>
@@ -272,7 +221,7 @@ _版本管理方式很多，以下將作說明；這個章節示範其中的 _
 4. 編輯環境參數文件 `~/.bashrc` ，添加以下內容。
 
     ```txt
-    source /home/sam6238/Documents/env3.10.13/bin/activate
+    source /home/sam6238/Documents/env3.13.4/bin/activate
     ```
 
 <br>
@@ -374,24 +323,39 @@ _除了 `pyenv local` 外，還有其他指令進行設定和切換_
 <br>
 
 1. `pyenv global`：
+
    - 用於設置系統全域的 Python 版本。
+
    - 這個設置決定執行 Python 時的預設版本。
 
-2. `pyenv shell`：
+<br>
+
+1. `pyenv shell`：
+
    - 在當前終端機視窗中設置臨時的 Python 版本。
+
    - 這個設置不會影響其他終端機或目錄的設置，關閉後即失效。
 
+<br>
+
 3. `pyenv versions`：
+
    - 顯示所有已安裝的 Python 版本，並標示當前選擇的版本。
 
+<br>
+
 4. `pyenv install`：
+
    - 用於安裝新的 Python 版本。
 
+<br>
+
 5. `pyenv uninstall`：
+
    - 用於卸載已安裝的 Python 版本。
 
 <br>
 
 ___
 
-_END：多玩幾次就熟悉了_
+_END_
