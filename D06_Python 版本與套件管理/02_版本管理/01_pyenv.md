@@ -301,9 +301,13 @@ _繼續相關說明_
 
 <br>
 
-## 再裝一版
+## 再次安裝
 
-1. 安裝指定版本的 Python 如 `3.12.0`，先檢查是否存在該版本。
+_以下安裝另一個版本 `3.12.0`_
+
+<br>
+
+1. 安裝 Python `3.12.0` 版，首先檢查該版本是否存在。
 
     ```bash
     pyenv install --list | grep -w 3.12.0
@@ -313,7 +317,7 @@ _繼續相關說明_
 
 <br>
 
-2. 確定存在即可進行安裝。
+2. 確定版本號正確，使用 `pyenv` 進行安裝。
 
     ```bash
     pyenv install 3.12.0
@@ -321,7 +325,7 @@ _繼續相關說明_
 
 <br>
 
-3. 查看目前受 `pyenv` 管理的版本。
+3. 完成後，查看目前由 `pyenv` 管理的 Python 版本有哪些。
 
     ```bash
     pyenv versions
@@ -340,12 +344,24 @@ _官方指引的使用方式_
 1. 建立一個目錄；特別注意，這並非虛擬環境路徑，而是在不同的目錄中指定使用的 Python 版本。
 
     ```bash
+    cd ~/Documents
     mkdir envTest
+    cd envTest
     ```
 
 <br>
 
-2. 透過 `pyenv` 的 `local` 參數設定當前目錄要使用的版本。
+2. 先在目錄內查詢一下當前環境使用的 Python 版本號，結果是 `3.11.2`。
+
+    ```bash
+    python --version
+    ```
+
+    ![](images/img_26.png)
+
+<br>
+
+3. 使用 `pyenv` 搭配參數 `local` 設定當前目錄要使用的版本 `3.12.0`。
 
     ```bash
     pyenv local 3.12.0
@@ -353,71 +369,91 @@ _官方指引的使用方式_
 
 <br>
 
-3. 使用 `ls -al` 觀察一下，會看到目錄內添加了一個檔案 `.python-version`。
+4. 完成後可發現添加了一個檔案 `.python-version`。
+
+    ```bash
+    ls -al
+    ```
 
     ![](images/img_17.png)
 
 <br>
 
-4. 這時候無需進入任何虛擬環境透過 `python --version` 查詢當前版本。
+5. 無需啟動虛擬環境，再次查詢透過版本號，可發現已經改變為 `3.12.0`。
+
+    ```bash
+    python --version
+    ```
 
     ![](images/img_18.png)
 
 <br>
 
-5. 可手動編輯內容 `sudo nano .python-version` ，達成暴力更改當前版本的目的。
+## 更改版本號
+
+1. 編輯目錄內的 `.python-version`，直接填入其他由 `pyenv` 所管理的版本號如 `3.11.2`。
+
+    ```bash
+    nano .python-version
+    ```
 
     ![](images/img_19.png)
 
 <br>
 
-6. 在查詢一次 `python --version` ，版本確實就更改了。
+2. 在查詢一次，可發現版本號更改了。
+
+    ```bash
+    python --version
+    ````
 
     ![](images/img_20.png)
 
 <br>
 
-7. 這時，只要在這個資料夾內建立虛擬環境，就會是指定的 Python 版本，只是這個虛擬環境會在這個路徑之下，雖然版本設定的部分變得很直觀，但虛擬環境的管理卻顯得混亂，我個人是比較建議將版本安裝與虛擬環境管理分開，僅透過 `pyenv` 進行多版本的安裝，虛擬環境管理還是比照原有模式。當然，這僅是個人建議，如何最順手都依主觀執行即可。
-
-<br>
-
 ## 其他指令
 
-_除了 `pyenv local` 外，還有其他指令進行設定和切換_
+_`pyenv` 其他指令_
 
 <br>
 
-1. `pyenv global`：
+1. 設置系統全域的 Python 版本，這個設置決定執行 Python 時的預設版本。
 
-   - 用於設置系統全域的 Python 版本。
-
-   - 這個設置決定執行 Python 時的預設版本。
-
-<br>
-
-1. `pyenv shell`：
-
-   - 在當前終端機視窗中設置臨時的 Python 版本。
-
-   - 這個設置不會影響其他終端機或目錄的設置，關閉後即失效。
+    ```bash
+    pyenv global
+    ```
 
 <br>
 
-3. `pyenv versions`：
+2. 在當前終端機視窗中設置臨時的 Python 版本，這個設置不會影響其他終端機或目錄的設置，關閉後即失效。
 
-   - 顯示所有已安裝的 Python 版本，並標示當前選擇的版本。
-
-<br>
-
-4. `pyenv install`：
-
-   - 用於安裝新的 Python 版本。
+    ```bash
+    pyenv shell
+    ```
 
 <br>
 
-5. `pyenv uninstall`：
+3. 顯示所有已安裝的 Python 版本，並標示當前選擇的版本。
 
-   - 用於卸載已安裝的 Python 版本。
+    ```bash
+    pyenv versions
+    ``` 
+
+<br>
+
+4. 用於安裝新的 Python 版本。
+
+    ```bash
+    pyenv install
+    ```
+
+<br>
+
+5. 用於卸載已安裝的 Python 版本。
+
+    ```bash
+    pyenv uninstall
+    ```
 
 <br>
 
