@@ -1,19 +1,25 @@
-# 非關聯式資料庫（NoSQL Database）
+# 非關聯式資料庫
 
-_NoSQL Database_
+_NoSQL Database，Not Only SQL Database，意指不僅限於 SQL 的資料庫，強調彈性資料模型，常用於處理大規模非結構化或半結構化資料_
 
 <br>
 
-## 成員
+## 常見非關聯式資料庫
 
-MongoDB、Cassandra、Redis、Neo4j 等。
+1. MongoDB
+
+2. Cassandra
+
+3. Redis
+
+4. Neo4j
 
 <br>
 
 ## 主要特點
 
 1. 靈活的數據模型
-   
+
    - 不需要預先定義的結構，可以儲存結構化、半結構化或非結構化的數據。
 
 <br>
@@ -66,6 +72,6 @@ MongoDB、Cassandra、Redis、Neo4j 等。
 
 <br>
 
----
+___
 
 _END_
