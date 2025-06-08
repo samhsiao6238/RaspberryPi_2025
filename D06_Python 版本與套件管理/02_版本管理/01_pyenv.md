@@ -473,12 +473,65 @@ _`pyenv` 其他指令_
 
 ## 關於虛擬環境
 
+_pyenv-virtualenv_
+
+<br>
+
 1. `pyenv` 本體僅處理 `Python` 版本管理，若要管理虛擬環境，需安裝 `pyenv-virtualenv` 套件。
 
     ```bash
     pyenv virtualenv 3.13.4 myenv-3.13
     pyenv activate myenv-3.13
     ```
+
+<br>
+
+以下是以你現有筆記風格所撰寫的兩個補充段落：「`pyenv-doctor` 健檢工具」與「shim 補充說明」，保持原風格（標題 + 說明 + 指令 + 圖示區塊）並可無縫接續於你目前講義的結尾部分使用：
+
+
+## pyenv 健檢工具
+
+_`pyenv-doctor`，用於確認系統是否具備安裝 Python 所需的所有依賴套件與環境_
+
+<br>
+
+1. `pyenv` 提供 `pyenv-doctor` 檢測腳本，可用來檢查目前系統是否符合安裝條件。
+
+    ```bash
+    curl -fsSL https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-doctor | bash
+    ```
+
+<br>
+
+2. 檢查項目包括 `gcc`、`make` 編譯器、依賴函式庫（如 `zlib`、`libssl`）、是否安裝 curl、readline 等工具；檢測通過會顯示 `OK`；若有缺失則建議根據提示安裝。
+
+<br>
+
+## `shim` 補充說明
+
+_`pyenv` 的核心機制之一是 shim，作用為在執行階段動態導向指定版本的 Python_
+
+<br>
+
+1. `~/.pyenv/shims/` 目錄中並不是實際的 Python 可執行檔，而是一組 `轉向器腳本（shim）」`，其用途是在使用 `python`、`pip` 等命令時，根據當前 pyenv 的設定，轉向至正確版本的執行檔。
+
+<br>
+
+2. 以 `python3` 為例，查看 shim 檔案內容如下。
+
+    ```bash
+    cat ~/.pyenv/shims/python3
+    ```
+
+3. 可見內容實際上會呼叫。
+
+    ```bash
+    exec "/home/使用者/.pyenv/libexec/pyenv" exec "python3" "$@"
+    ```
+
+<br>
+
+4. 根據目前所在目錄的 `.python-version`、當前 shell 的 `pyenv shell` 或全域的 `pyenv global` 設定，shim 會自動選擇正確版本的 Python，讓使用者可以統一使用 `python` 命令而不需記憶版本路徑。
 
 <br>
 
