@@ -209,7 +209,7 @@ _繼續相關說明_
 
 <br>
 
-1. 查詢 Python 存放在系統中的哪些目錄中。
+1. 查系統中與關鍵字 `Python` 相關的所有檔案路徑。
 
     ```bash
     whereis python
@@ -230,27 +230,23 @@ _繼續相關說明_
 
 <br>
 
-5. 特別留意，`pyenv` 看似將 Python 安裝在 `/home/sam6238/.pyenv/shims` 資料夾內，但實際進入查看可以發現，`pyenv` 是通過 `shims` 機制來管理不同版本的 Python，而非將 Python 安裝於此。
+3. 特別留意，`pyenv` 看似將 Python 安裝在 `/home/sam6238/.pyenv/shims` 資料夾內，但實際上 `shims` 是一種 `轉向機制`，用來根據當前設定的 Python 版本自動導向對應執行檔，實際的 Python 安裝檔則位於 `~/.pyenv/versions/` 目錄下；在 `/shims` 目錄內的是 shim 轉向器腳本。
+
+    ```bash
+    cat /home/sam6238/.pyenv/shims/python3
+    ```
 
     ![](images/img_12.png)
 
 <br>
 
-6. 分別透過以下指令查詢版本並觀察結果。
+4. 可查詢版本並觀察結果。
     
     ```bash
     /home/sam6238/.pyenv/shims/python --version
     ```
 
     ![](images/img_08.png)
-
-<br>
-
-7. 查看 `pyenv` 當前管理的 Python 版本。
-
-    ```python
-    pyenv versions
-    ```
 
 <br>
 
