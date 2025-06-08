@@ -24,7 +24,7 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-3. 下載與執行 `pyenv` 安裝腳本。
+3. 下載與執行 `pyenv` 安裝腳本；這是 pyenv 官方提供的。
 
     ```bash
     curl https://pyenv.run | bash
@@ -32,7 +32,23 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-4. 編輯環境參數。
+4. 特別說明，遇到這類安裝腳本，也可先觀察腳本內容，也就是不要加上語句 `| bash`。
+
+    ```bash
+    curl https://pyenv.run
+    ```
+
+<br>
+
+## 加入路徑
+
+1. 安裝完成後，會提示尚未加入路徑。 
+
+    ![](images/img_24.png)
+
+<br>
+
+2. 編輯環境參數。
 
     ```bash
     nano ~/.bashrc
@@ -40,7 +56,7 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-5. 添加以下內容。
+3. 添加以下內容設定路徑。
 
     ```ini
     export PATH="$HOME/.pyenv/bin:$PATH"
@@ -52,7 +68,7 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-6. 重新載入設定。
+4. 儲存並退出後，重新載入、套用設定。
 
     ```bash
     source ~/.bashrc
@@ -60,7 +76,7 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-7. 查詢 pyenv 版本。
+5. 查詢 `pyenv` 版本。
 
     ```bash
     pyenv --version
