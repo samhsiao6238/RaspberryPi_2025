@@ -157,7 +157,7 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-9. 查看系統預設版本；關於版本切換待後續說明。
+9. 查看 `pyenv` 當前預設的 Python 版本，其中 `* system` 表示目前使用的是系統預設的 Python 版本，並非 `pyenv` 管理的版本；關於版本切換等操作待後續說明。
 
     ```bash
     pyenv versions
@@ -169,7 +169,7 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 ## 驗證安裝
 
-1. 查詢當前 Python 版本；與前面步驟安裝的版本是不同的。
+1. 查詢當前系統管理的 Python 版本；結果顯示與 `pyenv` 所管理的版本不同。
 
     ```bash
     python --version
@@ -179,7 +179,7 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-2. 查詢當前運行的 Python 路徑，可發現 Python 現在已經由 `.pyenv` 進行管理了。
+2. 查詢當前運行的 Python 路徑，可發現 Python 現在已經由 `.pyenv` 進行管理了，這樣的結果似乎與前面的描述有所混淆。
 
     ```bash
     which python
@@ -189,7 +189,27 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-3. 查詢 Python 存放在系統中的哪些目錄中。
+## 釐清
+
+1. 使用 `which python` 查詢所顯示的結果表示 pyenv 的 shim 機制已經啟動，但是 `python --version` 執行的仍然是系統的版本。
+
+<br>
+
+2. 根本原因是因為目前的 pyenv 使用預設的設定，所以雖然透過 pyenv 呼叫，但 pyenv 仍指向系統內建版本。
+
+    ```bash
+    pyenv global system
+    ```
+
+<br>
+
+## Python 所在路徑
+
+_繼續相關說明_
+
+<br>
+
+1. 查詢 Python 存放在系統中的哪些目錄中。
 
     ```bash
     whereis python
@@ -199,7 +219,7 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-4. 排版查看。
+2. 將以上的輸出排版查看；包含系統內建的 Python 執行檔，以及 `pyenv` 所建立的 `shim` 檔案，這是用來轉向目前指定的 Python 版本；另外 `python.1.gz` 則是 Python 指令的說明文件 `man page` 的壓縮檔。
 
     ```bash
     python: 
