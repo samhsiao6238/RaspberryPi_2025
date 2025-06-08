@@ -1,18 +1,34 @@
 # 關聯式資料庫管理系統
 
-_RDBMS，Relational Database Management System_
+_RDBMS，Relational Database Management System；是一種以表格形式儲存資料，並透過主鍵與外鍵建立資料之間關聯的資料管理系統。_
 
 <br>
 
 ## 常見的關聯資料庫
 
+_皆可透過 Python 操作_
+
+<br>
+
 1. MySQL
 
 2. PostgreSQL
 
-3. Oracle Database
+3. SQLite
 
-4. Microsoft SQL Server
+4. Oracle Database
+
+5. Microsoft SQL Server
+
+6. IBM Db2
+
+7. MariaDB
+
+8. Amazon Aurora
+
+9. SAP HANA
+
+10. Firebird
 
 <br>
 
@@ -20,13 +36,13 @@ _RDBMS，Relational Database Management System_
 
 1. 表格結構
 
-   - 資料以表格的形式儲存，每個表格稱為一個 `關聯`（relation），相當於一個二維表。
+   - 每個表格稱為一個 `關聯（relation）`，是資料與結構的集合，對應實作層為 `table`，即二維表格。
 
    - 表格由 `行（records）` 和 `欄位（columns）` 組成，每行代表一條 `記錄` ，每欄位代表一個數據類型。
 
 <br>
 
-2. 資料類型
+1. 資料類型
 
    - 每個欄位都有指定的資料類型，如整數、浮點數、字串等。
 
@@ -36,7 +52,7 @@ _RDBMS，Relational Database Management System_
 
    - 每個表格通常有一個 `主鍵 (primary key)` ，用於唯一識別表中的每條記錄。
 
-   - 表格間可以通過 `外鍵 (foreign key)` 建立關聯，外鍵是一個表中的欄位，它是另一個表的主鍵。
+   - 表格間可以通過 `外鍵 (foreign key)` 建立關聯，外鍵是某個表中的欄位，用來參照另一個表的主鍵或唯一鍵，以建立表格之間的關聯。
 
 <br>
 
@@ -50,7 +66,7 @@ _RDBMS，Relational Database Management System_
 
 5. 交易管理
 
-   - 支援 `交易（transactions）`，這是一組原子性（Atomicity）的資料庫操作序列，要麼全部執行，要麼全部不執行，以確保資料庫的一致性和完整性。
+   - 交易具有 ACID 屬性：原子性（Atomicity）、一致性（Consistency）、隔離性（Isolation）、持久性（Durability），是關聯式資料庫可靠運作的核心機制。
 
 <br>
 
@@ -66,13 +82,13 @@ _RDBMS，Relational Database Management System_
 
 <br>
 
-8. 支援標準化
+8. 遵循 ACID 標準
 
    - 符合 ACID 屬性（原子性、一致性、隔離性、持久性），確保了資料庫交易是可靠和穩定的。
 
 <br>
 
-9. 擴展性和維護性
+9. 可調整性和維護性
 
    - 設計來應對不同大小的數據集，從小型應用程序到大型企業系統。
 
@@ -80,7 +96,7 @@ _RDBMS，Relational Database Management System_
 
 <br>
 
-10. 多用戶環境
+10. 補強鎖定與同步機制的概念
 
    - 支援多用戶環境，允許多個用戶同時訪問和操作資料庫。
 

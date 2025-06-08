@@ -1,18 +1,34 @@
 # 非關聯式資料庫
 
-_NoSQL Database，Not Only SQL Database，意指不僅限於 SQL 的資料庫，強調彈性資料模型，常用於處理大規模非結構化或半結構化資料_
+_NoSQL Database，Not Only SQL Database；意指不僅限於 SQL 的資料庫，強調彈性資料模型，常用於處理大規模非結構化或半結構化資料_
 
 <br>
 
 ## 常見非關聯式資料庫
 
+_皆可透過 Python 操作_
+
+<br>
+
 1. MongoDB
 
-2. Cassandra
+2. Redis
 
-3. Redis
+3. Cassandra
 
-4. Neo4j
+4. CouchDB
+
+5. DynamoDB
+
+6. Neo4j
+
+7. HBase
+
+8. Amazon DocumentDB
+
+9. ArangoDB
+
+10. Firebase Realtime Database
 
 <br>
 
