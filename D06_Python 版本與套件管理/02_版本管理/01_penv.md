@@ -14,6 +14,14 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
+2. 查看系統預裝的 Python 版本。
+
+    ```bash
+    python --version
+    ```
+
+<br>
+
 3. 下載與執行 `pyenv` 安裝腳本。
 
     ```bash
