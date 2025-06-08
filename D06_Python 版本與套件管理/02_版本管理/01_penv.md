@@ -14,11 +14,13 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
-2. 查看系統預裝的 Python 版本。
+2. 查看系統預裝的 Python 版本；依據結果顯示 `3.11.2`。
 
     ```bash
     python --version
     ```
+
+    ![](images/img_09.png)
 
 <br>
 
