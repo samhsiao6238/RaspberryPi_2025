@@ -124,7 +124,13 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-5. 安裝過程可能出現模組未正確編譯的錯誤提示，原因是缺少必要的系統函式庫與開發套件，屬於常見問題，官方也提供了解法連結；依據錯誤訊安裝缺漏套件，安裝前先移除 Python 版本。
+5. 安裝過程可能出現模組未正確編譯的錯誤提示，原因是缺少必要的系統函式庫與開發套件，屬於常見問題，官方有提供排除方法的連結。
+
+    ![](images/img_25.png)
+
+<br>
+
+6. 依據錯誤訊安裝缺漏套件前，先運行移除安裝指令，確保 Python 清理乾淨；一般來說應該會顯示尚未安裝。
 
     ```bash
     pyenv uninstall 3.13.4
@@ -132,7 +138,7 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-6. 安裝遺漏套件。
+7. 安裝遺漏套件。
 
     ```bash
     sudo apt install -y make build-essential libssl-dev zlib1g-dev \
@@ -143,7 +149,7 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-7. 重新安裝 Python。
+8. 重新安裝 Python。
 
     ```bash
     pyenv install 3.13.4
@@ -151,7 +157,7 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-8. 查看系統預設版本；關於版本切換待後續說明。
+9. 查看系統預設版本；關於版本切換待後續說明。
 
     ```bash
     pyenv versions
