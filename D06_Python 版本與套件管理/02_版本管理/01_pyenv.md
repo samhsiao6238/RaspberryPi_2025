@@ -104,17 +104,23 @@ _使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及�
 
 <br>
 
-3. 在輸出中確認官網建議版本也在其中。
+3. 可使用 `grep` 在輸出中篩選是否包含官網建議版本；有的話會顯示結果。
+
+    ```bash
+    pyenv install --list | grep -w 3.13.4
+    ```
 
     ![](images/img_22.png)
 
 <br>
 
-4. 安裝指定版本 `3.13.4`。
+4. 安裝指定版本 `3.13.4`；這會從官網下載，需要一點時間。
 
     ```bash
     pyenv install 3.13.4
     ```
+
+    ![](images/img_05.png)
 
 <br>
 
