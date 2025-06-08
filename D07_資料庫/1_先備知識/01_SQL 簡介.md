@@ -21,6 +21,7 @@ _RDBMS，Relational Database Management System_
 1. 表格結構
 
    - 資料以表格的形式儲存，每個表格稱為一個 `關聯`（relation），相當於一個二維表。
+
    - 表格由 `行（records）` 和 `欄位（columns）` 組成，每行代表一條 `記錄` ，每欄位代表一個數據類型。
 
 <br>
@@ -34,6 +35,7 @@ _RDBMS，Relational Database Management System_
 3. 主鍵和外鍵
 
    - 每個表格通常有一個 `主鍵 (primary key)` ，用於唯一識別表中的每條記錄。
+
    - 表格間可以通過 `外鍵 (foreign key)` 建立關聯，外鍵是一個表中的欄位，它是另一個表的主鍵。
 
 <br>
@@ -41,6 +43,7 @@ _RDBMS，Relational Database Management System_
 4. 標準化查詢語言（SQL）
 
    - 使用結構化查詢語言（SQL）進行資料的查詢、更新、插入和刪除。
+
    - 支援建立視圖、儲存程序和函數等進階資料庫功能。
 
 <br>
