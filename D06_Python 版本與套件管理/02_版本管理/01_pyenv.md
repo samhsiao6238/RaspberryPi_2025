@@ -250,39 +250,40 @@ _繼續相關說明_
 
 <br>
 
-## _究竟在哪裡？_
+## 執行檔位置
 
-1. 實際路徑在 `/home/sam6238/.pyenv/versions/3.13.4/bin` 。
+1. 由以上的說明可知，Python 執行檔的實際路徑是在 `~/.pyenv/versions` 所對應的版本號目錄中，例如 `3.13.4` 即在 `3.13.4/bin` 。
 
     ![](images/img_13.png)
 
 <br>
 
-2. 再次查詢。
+2. 透過實際路徑可查詢版本及運行相關指令。
 
     ```bash
-    /home/sam6238/.pyenv/versions/3.13.4/bin/python --version
+    ~/.pyenv/versions/3.13.4/bin/python --version
     ```
 
 <br>
 
-3. 確定路徑後，回到 `~/Documents` 或其他指定資料夾建立虛擬環境。
+3. 確定路徑後，可回到指定路徑如 `~/Documents/PythonVenvs` 建立虛擬環境。
 
     ```bash
-    /home/sam6238/.pyenv/versions/3.13.4/bin/python -m venv env3.13.4
+    cd ~/Documents/PythonVenvs
+    ~/.pyenv/versions/3.13.4/bin/python -m venv env3.13.4
     ```
 
 <br>
 
-4. 編輯環境參數文件 `~/.bashrc` ，添加以下內容。
+4. 編輯環境參數文件 `~/.bashrc`，添加以下內容。
 
     ```txt
-    source /home/sam6238/Documents/env3.13.4/bin/activate
+    source ~/Documents/PythonVenvs/env3.13.4/bin/activate
     ```
 
 <br>
 
-5. 載入更新後的環境設置。
+5. 載入更新立即套用環境設置。
 
     ```bash
     source ~/.bashrc
@@ -291,6 +292,10 @@ _繼續相關說明_
 <br>
 
 6. 查詢虛擬環境的 Python 版本。
+
+    ```bash
+    python --version
+    ```
 
     ![](images/img_14.png)
 
