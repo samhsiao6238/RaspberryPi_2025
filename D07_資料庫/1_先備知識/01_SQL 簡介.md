@@ -1,12 +1,18 @@
-# 關聯式資料庫管理系統（RDBMS）
+# 關聯式資料庫管理系統
 
-_Relational Database_
+_RDBMS，Relational Database Management System_
 
 <br>
 
-## 成員
+## 常見的關聯資料庫
 
-MySQL、PostgreSQL、Oracle Database 和 Microsoft SQL Server 等。
+1. MySQL
+
+2. PostgreSQL
+
+3. Oracle Database
+
+4. Microsoft SQL Server
 
 <br>
 
