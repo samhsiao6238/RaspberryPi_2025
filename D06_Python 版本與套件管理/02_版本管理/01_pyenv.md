@@ -84,9 +84,23 @@ _版本管理方式很多，以下將示範其中的 `pyenv`_
 
 <br>
 
+## 設定文件
+
+_關於 `~/.profile`、`~/.bash_profile` 或是 `~/.bashrc`_
+
+<br>
+
+1. 前段設定值 `pyenv init --path` 寫在 `~/.bashrc` 表示在互動式 shell 時執行生效，並非 login shell。
+
+<br>
+
+2. 另外的選擇是放在 `~/.profile` 或 `~/.bash_profile` 之中，該兩個設定文件會在登入時就初始化 PATH。
+
+<br>
+
 ## 安裝 Python
 
-_使用 `pyenv` 安裝指定版本的 Python；特別注意，`pyenv` 不涉及虛擬環境管理_
+_使用 `pyenv` 安裝指定版本的 Python_
 
 <br>
 
@@ -425,7 +439,7 @@ _`pyenv` 其他指令_
 
 <br>
 
-2. 在當前終端機視窗中設置臨時的 Python 版本，這個設置不會影響其他終端機或目錄的設置，關閉後即失效。
+2. 在當前終端機視窗中設置臨時的 Python 版本，這個變數是設在 `PYENV_VERSION` 環境變數上，使用場景為在 `同一 shell 中` 臨時測試不同版本，而不寫入 `.python-version` 或改動 `全域` 設定。
 
     ```bash
     pyenv shell
@@ -453,6 +467,17 @@ _`pyenv` 其他指令_
 
     ```bash
     pyenv uninstall
+    ```
+
+<br>
+
+## 關於虛擬環境
+
+1. `pyenv` 本體僅處理 `Python` 版本管理，若要管理虛擬環境，需安裝 `pyenv-virtualenv` 套件。
+
+    ```bash
+    pyenv virtualenv 3.13.4 myenv-3.13
+    pyenv activate myenv-3.13
     ```
 
 <br>
