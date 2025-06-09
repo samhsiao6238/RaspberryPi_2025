@@ -38,6 +38,7 @@ _Retrieval-Augmented Generation，整合 PostgreSQL 向量資料庫與 LangChain
     POSTGRES_HOST=localhost
     POSTGRES_PORT=5432
     POSTGRES_DB=testdb
+    LLM_MODEL=gpt-3.5-turbo
     ```
 
 <br>
@@ -128,7 +129,7 @@ _Retrieval-Augmented Generation，整合 PostgreSQL 向量資料庫與 LangChain
         "PostgreSQL 搭配 pgvector 可以儲存並查詢 embedding 向量。",
     ]
     vectorstore.add_texts(texts)
-    print("✅ 已插入測試資料")
+    print("已插入測試資料")
     ```
 
 <br>
@@ -148,7 +149,7 @@ _Retrieval-Augmented Generation，整合 PostgreSQL 向量資料庫與 LangChain
     # 提出問題
     query = "請問什麼是向量資料庫？"
     result = qa_chain.run(query)
-    print("🤖 回答：", result)
+    print("回答：", result)
     ```
 
 <br>
@@ -212,7 +213,7 @@ _Retrieval-Augmented Generation，整合 PostgreSQL 向量資料庫與 LangChain
     ```python
     query_engine = index.as_query_engine()
     response = query_engine.query("什麼是 RAG？")
-    print("🤖 回答：", response)
+    print("回答：", response)
     ```
 
 <br>
