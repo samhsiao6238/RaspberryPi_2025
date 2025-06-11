@@ -171,6 +171,41 @@ _安裝向量庫與 embedding 模型_
 
 <br>
 
+## 關於模型選擇
+
+1. 目前專案使用的 Claude 模型是 `claude-3-sonnet-20240229`，在以下代碼處可設定。
+
+    ```python
+    data = {
+        "model": "claude-3-sonnet-20240229",
+        # ...
+    }
+    ```
+
+<br>
+
+2. `Claude 3 Sonnet` 是 `Claude 3` 系列中屬於 `中高階` 的模型，這個系列主要有三個版本 `Haiku`（最輕量、最快）、`Sonnet`（主流/性價比）、`Opus`（旗艦、最強）；其中 `Sonnet` 比 `Haiku` 強不少，同樣，`Opus` 也比 `Sonnet` 強，價格也最高。
+
+<br>
+
+3. 已官方數據來說，費用如下；`Sonnet` 費用是 `Haiku` 的 `10～12` 倍，`Opus` 又比 `Sonnet` 高 `5` 倍。
+
+    ```bash
+    * Haiku：\$0.25/百萬輸入 token，\$1.25/百萬輸出 token
+    * Sonnet：\$3/百萬輸入 token，\$15/百萬輸出 token
+    * Opus：\$15/百萬輸入 token，\$75/百萬輸出 token
+    ```
+
+<br>
+
+4. 若專案允許降級，可考慮 `claude-3-haiku-20240307`，效能對知識檢索大部分場景仍足夠，費用會低很多。
+
+    ```python
+    "model": "claude-3-haiku-20240307",
+    ```
+
+<br>
+
 ___
 
 _END_
