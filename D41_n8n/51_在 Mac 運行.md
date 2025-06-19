@@ -123,7 +123,27 @@ docker run -it --rm \
 
 _在以上任一方式前，可設定環境變數以控制資料庫、埠號、時區等_
 
-1. 用 SQLite、設定時區
+1. `n8n` 在第一次啟動時會自動在資料庫 `~/.n8n/database.sqlite` 裡建立必要的資料表，並寫入一筆預設的系統設定，之後再啟動時就會直接讀取這些資料庫裡的設定。
+
+2. 進入資料庫。
+
+```bash
+sqlite3 ~/.n8n/database.sqlite
+```
+
+3. 列出所有資料表
+
+```bash
+.tables
+```
+
+4. 查詢某表 `settings` 的前十筆資料
+
+```bash
+SELECT * FROM settings LIMIT 10;
+```
+
+5. 把設定寫到環境變數，下一次啟動 n8n 時會讀取這些變數並自動將對應的值寫入 SQLite 的資料表 `settings` 中。
 
 ```bash
 export DB_TYPE="sqlite"
@@ -132,3 +152,39 @@ export N8N_PORT=5678
 export N8N_HOST="0.0.0.0"
 ```
 
+
+## 直接寫入資料庫
+
+1. 進入 SQLite shell5
+
+```bash
+sqlite3 ~/.n8n/database.sqlite
+```
+
+2. 如果已經有對應的 key，就用 UPDATE
+
+```bash
+UPDATE settings
+SET value = '"sqlite"'
+WHERE key = 'db.type';
+
+UPDATE settings
+SET value = '"Asia/Taipei"'
+WHERE key = 'generic.timezone';
+```
+
+3. 如果是第一次寫入，則用 INSERT OR REPLACE，這樣可確保不存在時也會新增
+
+```bash
+INSERT OR REPLACE INTO settings(key, value, loadOrder)
+VALUES
+  ('db.type', '"sqlite"', 1),
+  ('generic.timezone', '"Asia/Taipei"', 1);
+```
+
+4. 確認結果
+
+```bash
+SELECT * FROM settings
+WHERE key IN ('db.type','generic.timezone');
+```
