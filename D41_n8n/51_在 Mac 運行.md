@@ -1,304 +1,134 @@
-# 建立 n8n 開發環境
+# 快速運行 n8n
 
-*在 MacOS 上*
+_在本機上操作，可使用以下三種方式中的一種_
 
-## 安裝 nvm
+## 使用 npx
 
-*`管理 Node.js`*
+_這個方式會即時從網路抓最新版本執行，不會在全域安裝任何檔案，每次關閉後都只剩下指定的資料目錄；適用於臨時試用、快速驗證_
 
-1. 進行安裝之前，先確認是否已經安裝，並檢查是否存在相關路徑。
-
-```bash
-nvm -v
-ls ~/.nvm
-```
-
-2. 在終端機中執行安裝指令；特別注意，Homebrew 本身設計為使用者層級安裝，所以相關指令皆無需 `sudo`。
+1. 直接拉最新版本並啟動
 
 ```bash
-brew install nvm
+npx n8n
 ```
 
-3. 安裝到最後會提示接下來該怎麼做，依據說明照做即可。
+2. 啟動後編輯器會跑在 [http://localhost:5678](http://localhost:5678)，資料（設定、工作流等）會儲存在 `~/.n8n`。
 
-    ![](images/img_48.png)
-
-4. 建立工作目錄；因為 `Homebrew` 預設會在升級或移除時清空 `/opt/homebrew/Cellar/nvm`，避免 `$NVM_DIR` 因此被刪除，所有已安裝的 Node.js 版本也會被刪除，所以另外建立目錄管理。
+3. 這個方式啟動服務後，預設會把 `SQLite` 資料庫、憑證等放在 `~/.n8n` 資料夾。關機或停止服務後，資料會保留在磁碟上，若要徹底清除需手動刪除資料夾 `~/.n8n`。
 
 ```bash
-mkdir ~/.nvm
+rm -rf ~/.n8n
 ```
 
-5. 編輯 shell 設定檔。
+4. 若要一次性的實例，可在啟動時指定資料目錄到暫存路徑如下；如此在系統關機後，`/tmp/n8n-data` 的內容會隨系統清理而移除。
 
 ```bash
-code ~/.zshrc
+npx n8n start --data-dir /tmp/n8n-data
 ```
 
-6. 將以下內容加入 `~/.zshrc`，此段會載入 nvm 指令並啟用補全功能，建議加在最下方即可；特別注意，若使用 bash 管理則寫入 `~/.bashrc`。
+## 全域安裝
+
+_這方式會下載完整套件在全局 `node_modules` 目錄，完成後可直接執行 n8n 指令，離線也能使用；適合長期本機使用_
+
+1. 安裝。
 
 ```bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+npm install -g n8n
 ```
 
-7. 重新載入設定。
+2. 重設檔案權限，需使用 sudo
 
 ```bash
-source ~/.zshrc
+sudo chmod 600 ~/.n8n/config
 ```
 
-8. 安裝 Node.js，建議 v20，官方目前支援最穩定版本
+3. 修正 ~/.n8n 及 ~/.cache/n8n 的擁有權與權限
 
 ```bash
-nvm install 20
-nvm use 20
-nvm alias default 20
+sudo chown -R $(id -u):$(id -g) ~/.n8n
+find ~/.n8n -type d -exec chmod 700 {} \;
+find ~/.n8n -type f -exec chmod 600 {} \;
+
+sudo chown -R $(id -u):$(id -g) ~/.cache/n8n
+find ~/.cache/n8n -type d -exec chmod 700 {} \;
+find ~/.cache/n8n -type f -exec chmod 600 {} \;
 ```
 
-9. 查詢版本。
+4. 在 ~/.zshrc 中加入以下語句，可消除不影響運作的警告。
 
 ```bash
-npm -v
-node -v
+export N8N_RUNNERS_ENABLED=true
 ```
 
-## 升級 npm
+![](images/img_49.png)
 
-*`解決 workspace 錯誤並支援 monorepo`*
-
-1. 查詢權限；目前 ~/.npm 目錄中的檔案屬於 root 擁有者，這會導致後續執行 `npm install` 或 `pnpm install` 出現權限錯誤。
+5. 啟動
 
 ```bash
-ls -l ~/.npm
+n8n
 ```
 
-2. 修正權限錯誤，如果曾用 sudo 安裝過套件
+6. 依據畫面提示進行訪問。
+
+![](images/img_50.png)
+
+
+## Docker 部署
+
+_適合伺服器、容器化環境_
+
+1. 確認本機 Docker 狀態
 
 ```bash
-sudo chown -R $(id -u):$(id -g) ~/.npm
+docker -v
 ```
 
-3. 升級至最新 npm
+2. 透過終端機啟動 Docker Desktop；參數 `--background` 會讓應用在背景運行。
 
 ```bash
-sudo npm install -g npm@latest
+open --background -a Docker
 ```
 
-## 檔案監聽數量限制
-
-1. 查看當前限制
+3. 啟動後可查看詳細資訊。
 
 ```bash
-launchctl limit maxfiles
+docker info
 ```
 
-2. 建立設定檔以提升限制
+4. 查看容器運行。
 
 ```bash
-sudo nano /Library/LaunchDaemons/limit.maxfiles.plist
+docker ps -a
 ```
 
-3. 填入以下內容，提升 macOS 可監控的檔案數量限制；設定完成必須重啟系統
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key>
-  <string>limit.maxfiles</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>launchctl</string>
-    <string>limit</string>
-    <string>maxfiles</string>
-    <string>65536</string>
-    <string>200000</string>
-  </array>
-  <key>RunAtLoad</key>
-  <true/>
-</dict>
-</plist>
-```
-
-
-## 安裝 n8n
-
-*`使用 pnpm + Corepack 環境`*
-
-1. 注意，如果曾執行過錯誤安裝，請清理舊的依賴與鎖檔
+5. 在 Docker 中建立一個儲存空間並命名 `n8n_data`，可用於永久保存 n8n 的資料。
 
 ```bash
-rm -rf node_modules
-rm -f package-lock.json yarn.lock pnpm-lock.yaml
+docker volume create n8n_data
 ```
 
-2. 正式進入安裝程序，先下載並進入 n8n 專案目錄。
+2. 以互動模式啟動容器
 
 ```bash
-cd ~/Downloads
-git clone https://github.com/n8n-io/n8n.git
-cd n8n
+docker run -it --rm \
+    --name n8n \
+    -p 5678:5678 \
+    -v n8n_data:/home/node/.n8n \
+    docker.n8n.io/n8nio/n8n
 ```
 
-3. 啟用 Corepack，管理 Yarn 與 pnpm 的工具
+3. 編輯器在 `5678` 端口運行，所有資料都存在 `n8n_data` volume 中
+
+## 設定環境變數
+
+_在以上任一方式前，可設定環境變數以控制資料庫、埠號、時區等_
+
+1. 用 SQLite、設定時區
 
 ```bash
-corepack enable
+export DB_TYPE="sqlite"
+export GENERIC_TIMEZONE="Asia/Taipei"
+export N8N_PORT=5678
+export N8N_HOST="0.0.0.0"
 ```
 
-4. 讓 Corepack 安裝正確版本的 Yarn 與 pnpm，符合專案指定
-
-```bash
-corepack prepare pnpm@10.12.1 --activate
-```
-
-5. 安裝所有套件；強制重新安裝並重建工作區連結
-
-```bash
-rm -rf node_modules
-pnpm install
-```
-
-6. 安裝 turbo 到 workspace root
-
-```bash
-pnpm add -D turbo -w
-```
-
-7. 啟動 n8n 本地端開發模式
-
-```bash
-pnpm dev
-```
-
-7. 若成功啟動會看到
-
-```bash
-• Packages in scope: ...
-• Running dev in 3 packages
-n8n ready on http://localhost:5678
-```
-
-
-
-# 第二部：開發自訂節點與測試流程
-
-*在 n8n 開發環境中撰寫與測試自訂 Node*
-
-
-
-## 目標
-
-* 建立一個自訂的節點（Node）並讓它顯示在 n8n UI 中
-* 理解節點的結構與註冊方式
-* 在本地環境中實際測試自訂節點運作
-
-
-
-## 節點放置位置
-
-n8n 採用 monorepo 架構，自訂節點應放在：
-
-```
-packages/nodes-base/nodes/<YourNodeName>
-```
-
-例如要建立一個 `HelloWorld` 節點，目錄路徑為：
-
-```
-packages/nodes-base/nodes/HelloWorld/
-```
-
-
-
-## 建立節點檔案
-
-### 1️⃣ 建立主檔案 `HelloWorld.node.ts`
-
-```ts
-import { INodeType, INodeTypeDescription, IExecuteFunctions } from 'n8n-workflow';
-
-export class HelloWorld implements INodeType {
-  description: INodeTypeDescription = {
-    displayName: 'Hello World',
-    name: 'helloWorld',
-    group: ['transform'],
-    version: 1,
-    description: 'A simple test node',
-    defaults: {
-      name: 'Hello World',
-    },
-    inputs: ['main'],
-    outputs: ['main'],
-    properties: [],
-  };
-
-  async execute(this: IExecuteFunctions) {
-    return this.prepareOutputData([{ greeting: 'Hello from your custom node!' }]);
-  }
-}
-```
-
-### 2️⃣ 註冊節點
-
-編輯：
-
-```
-packages/nodes-base/nodes/index.ts
-```
-
-加入一行匯入與註冊：
-
-```ts
-export * from './HelloWorld/HelloWorld.node';
-```
-
-
-
-## 編譯節點（可跳過，pnpm dev 會自動執行）
-
-```bash
-pnpm build
-```
-
-或使用 hot reload 開發模式：
-
-```bash
-pnpm dev
-```
-
-
-
-## 啟動 n8n 並測試節點
-
-1. 開啟瀏覽器：
-
-```
-http://localhost:5678
-```
-
-2. 在 UI 中新增節點，搜尋 `Hello World`
-
-3. 執行流程，應該會看到回傳的 JSON：
-
-```json
-{
-  "greeting": "Hello from your custom node!"
-}
-```
-
-
-
-## 補充說明
-
-* 若節點沒有顯示，請確認您已儲存檔案，並重新啟動 `pnpm dev`
-* 若 TypeScript 編譯失敗，請先確認格式與匯出方式
-* 建議每個節點一個獨立資料夾（可加入 icon、描述等）
-
-
-
-如需撰寫 API 互動、OAuth 驗證、自訂表單輸入等，請進入第三部。
