@@ -107,7 +107,7 @@ docker ps -a
 docker volume create n8n_data
 ```
 
-2. 以互動模式啟動容器
+6. 以互動模式啟動容器
 
 ```bash
 docker run -it --rm \
@@ -117,7 +117,7 @@ docker run -it --rm \
     docker.n8n.io/n8nio/n8n
 ```
 
-3. 編輯器在 `5678` 端口運行，所有資料都存在 `n8n_data` volume 中
+7. 編輯器在 `5678` 端口運行，所有資料都存在 `n8n_data` volume 中
 
 ## 設定環境變數
 
@@ -131,19 +131,37 @@ _在以上任一方式前，可設定環境變數以控制資料庫、埠號、�
 sqlite3 ~/.n8n/database.sqlite
 ```
 
-3. 列出所有資料表
+![](images/img_51.png)
+
+3. 列出所有資料表，這些都是 n8n 預設啟動時自動建立的資料表，由 Core migrations 管理。
 
 ```bash
 .tables
 ```
 
-4. 查詢某表 `settings` 的前十筆資料
+![](images/img_52.png)
+
+4. 查詢表 `settings` 的前十筆資料
 
 ```bash
 SELECT * FROM settings LIMIT 10;
 ```
 
-5. 把設定寫到環境變數，下一次啟動 n8n 時會讀取這些變數並自動將對應的值寫入 SQLite 的資料表 `settings` 中。
+5. 依欄位對齊、帶標頭地顯示；這不是全局設定，只會影響當前連線；若要每次啟動都套用，可寫入 `~/.sqliterc`。
+
+```bash
+.headers on
+.mode column
+SELECT key, value FROM settings LIMIT 10;
+```
+
+6. 將設定寫入 ~/.sqliterc；放在 `~/.sqliterc` 的設定會在每次啟動 SQLite CLI 時自動讀取，因而永久生效。
+
+```bash
+printf ".headers on\n.mode column\n" > ~/.sqliterc
+```
+
+7. 另外也可以在 `shell（bash/zsh）` 中用 `export` 語法設定 `環境變數`，接下來啟動 `n8n` 時便會讀取這些值；它不是 SQL，而是告訴作業系統接下來執行的程式都帶著這些參數；要永久生效必須寫入 `~/.zshrc` 或 `~/.bashrc`。
 
 ```bash
 export DB_TYPE="sqlite"
@@ -151,7 +169,6 @@ export GENERIC_TIMEZONE="Asia/Taipei"
 export N8N_PORT=5678
 export N8N_HOST="0.0.0.0"
 ```
-
 
 ## 直接寫入資料庫
 
@@ -184,7 +201,7 @@ VALUES
 
 4. 確認結果
 
-```bash
+```bash56
 SELECT * FROM settings
 WHERE key IN ('db.type','generic.timezone');
 ```
