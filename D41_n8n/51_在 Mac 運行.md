@@ -170,7 +170,9 @@ export N8N_PORT=5678
 export N8N_HOST="0.0.0.0"
 ```
 
-## 直接寫入資料庫
+## 寫入資料庫
+
+_直接修改 `n8n` 資料庫 `SQLite` 的 `settings` 表，這會影響 `n8n` 的運行行為；相較於 `~/.sqliterc` 是寫入 `SQLite CLI` 客戶端的啟動設定檔，只控制在終端用 sqlite3 互動時的顯示，不會改動資料庫裡的任何資料。_
 
 1. 進入 SQLite shell5
 
