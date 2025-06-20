@@ -100,7 +100,7 @@ _使用 ext4 格式_
 
 <br>
 
-3. 加入一行，依據查詢結果替換 UUID。
+3. 加入一行，依據查詢結果更改 UUID。
 
     ```bash
     UUID=<更換正確的-UUID> /mnt/ssd ext4 defaults 0 0

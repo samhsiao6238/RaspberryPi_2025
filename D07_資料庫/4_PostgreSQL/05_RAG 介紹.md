@@ -139,7 +139,7 @@ _使用 PostgreSQL 官方 PGDG 倉庫，Debian 預設套件源中沒有提供 pg
 
 <br>
 
-4. 寫入更多文字，只要呼叫一次 get_embedding() 並將結果寫入即可。
+4. 寫入更多文字，只要調用一次 get_embedding() 並將結果寫入即可。
 
     ```python
     texts = [
@@ -204,7 +204,7 @@ _使用 PostgreSQL 官方 PGDG 倉庫，Debian 預設套件源中沒有提供 pg
     context = "\n".join([row[0] for row in rows])
     prompt = f"根據以下內容回答問題：\n{context}\n\nQ: {question}"
 
-    # 使用新版 openai.Chat API 呼叫
+    # 使用新版 openai.Chat API 調用
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[

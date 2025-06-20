@@ -209,7 +209,7 @@ _使用 `pyenv` 安裝指定版本的 Python_
 
 <br>
 
-2. 根本原因是因為目前的 pyenv 使用預設的設定，所以雖然透過 pyenv 呼叫，但 pyenv 仍指向系統內建版本。
+2. 根本原因是因為目前的 pyenv 使用預設的設定，所以雖然透過 pyenv 調用，但 pyenv 仍指向系統內建版本。
 
     ```bash
     pyenv global system
@@ -523,7 +523,7 @@ _`pyenv` 的核心機制之一是 shim，作用為在執行階段動態導向指
     cat ~/.pyenv/shims/python3
     ```
 
-3. 可見內容實際上會呼叫。
+3. 可見內容實際上會調用。
 
     ```bash
     exec "/home/使用者/.pyenv/libexec/pyenv" exec "python3" "$@"

@@ -17,7 +17,7 @@ _讀取、摘要、向量化 Excel 文件並存入 PostgreSQL + `pgvector` 中�
 2. 編輯 `.env` 設定檔。
 
     ```env
-    OPENAI_API_KEY=<替換-sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx>
+    OPENAI_API_KEY=<更改-sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx>
     POSTGRES_HOST=localhost
     POSTGRES_PORT=5432
     POSTGRES_DB=testdb

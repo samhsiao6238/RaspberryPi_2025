@@ -59,7 +59,7 @@ _安裝向量庫與 embedding 模型_
 
 <br>
 
-3. 向量索引建構，將 embedding 存入本地 FAISS 索引，之後可快速查找與問題最相近的片段。
+3. 向量索引建構，將 embedding 存入本地 FAISS 索引，之後可快速搜尋與問題最相近的片段。
 
     ```python
     import faiss

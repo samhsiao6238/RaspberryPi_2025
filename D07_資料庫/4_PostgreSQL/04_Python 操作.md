@@ -39,7 +39,7 @@ _在樹莓派使用 Python 操作 PostgreSQL_
     conn = psycopg2.connect(
         dbname="postgres",
         user="postgres",
-        password="<替換為自己設定的密碼>",
+        password="<更改為自己設定的密碼>",
         host="localhost",
         port=5432
     )
