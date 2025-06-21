@@ -34,6 +34,38 @@ _將 SD 卡插入樹莓派啟動，會進入歡迎畫面_
 
 <br>
 
+## SSH
+
+_桌面版與 Server 相同_
+
+<br>
+
+1. 手動安裝 `openssh-server`。
+
+    ```bash
+    sudo apt install openssh-server -y
+    ```
+
+<br>
+
+2. 啟動開機
+
+    ```bash
+    sudo reboot now
+    ```
+
+<br>
+
+3. 查詢狀態
+
+    ```bash
+    sudo systemctl status ssh
+    ```
+
+<br>
+
+_以下尚未編排_
+
 ## 設定文件
 
 _在 SD 卡的 `system-boot` 分割區手動編輯設定檔_
@@ -45,35 +77,6 @@ _在 SD 卡的 `system-boot` 分割區手動編輯設定檔_
 ## 使用者帳密
 
 2. user-data、cloud-init，設定使用者帳號與密碼
-
-## SSH
-
-_桌面版與 Server 相同_
-
-1. 在 `system-boot` 分區下新增一個空白檔案，特別注意，這是 macOS 掛載 SD 卡時才會使用的掛載點。
-
-```bash
-touch /Volumes/system-boot/ssh
-```
-
-2. 進到樹莓派的 Ubuntu 系統中，特別注意，/boot/firmware 是對應 boot 分割區的掛載點，所以查看 ssh 文件會在。
-
-```bash
-/boot/firmware/ssh
-```
-
-3. openssh-server 預設尚未安裝，需手動進行安裝。
-
-```bash
-sudo apt install openssh-server
-```
-
-4. 啟動服務
-
-```bash
-sudo systemctl enable ssh
-sudo systemctl start ssh
-```
 
 
 ## 查看各項設定
