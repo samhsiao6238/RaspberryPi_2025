@@ -54,6 +54,36 @@ _一般來說，SD 卡會分為兩個分割區_
 
 <br>
 
+## 第一次開機
+
+_接上外接顯示器、鍵盤滑鼠，並將燒錄好的卡插入後開機_
+
+<br>
+
+1. 等待畫面出現 `Finished apt-news.service - Update APT News.`，從本機終端機運行 SSH 連接。
+
+    ```bash
+    ssh <帳號>@<IP-或主機名稱>
+    ```
+
+<br>
+
+2. 查看當前連線帳號。
+
+    ```bash
+    whoami
+    ```
+
+<br>
+
+3. 查詢當前設備分配到的 IP。
+
+    ```bash
+    hostname -I
+    ```
+
+<br>
+
 ___
 
 _END_
