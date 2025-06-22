@@ -6,13 +6,13 @@ _以下簡單介紹 Ubuntu 系統的燒錄以及使用_
 
 ## 燒錄
 
-1. 同樣使用官方工具，選擇 `Unbuntu Server`。
+1. 同樣使用官方燒錄工具 `Imager`，選擇 `Unbuntu Server`。
 
     ![](images/img_01.png)
 
 <br>
 
-2. 其餘配置與燒錄樹莓派系統時相同，不贅述。
+2. 其餘配置與燒錄樹莓派系統時相同，包含主機名稱、開啟 SSH 服務等，不贅述。
 
     ![](images/img_02.png)
 
