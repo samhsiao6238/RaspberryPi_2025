@@ -70,7 +70,11 @@ _刷新之前，先對當前 EEPROM 設置進行查詢_
 
 <br>
 
-3. 特別注意，預設會將更新文件 (`pieeprom.upd`) 複製到資料夾 `/boot/firmware` 中，並且也做了備份 `recovery.bin`，所以透過上述指令可取消此更新。
+3. 特別注意，`樹莓派五` 與先前樹莓派版本的 EEPROM 更新機制不同；新機型可以直接在線更新 EEPROM，使用 flashrom 立即寫入，不再等待重開機，完成時會直接提示 `UPDATE SUCCESSFUL`；早期機型運行 `rpi-eeprom-update` 只會準備更新檔`pieeprom.upd`，更新動作會在下次開機時由 bootloader 執行，且會顯示`Copying recovery.bin`。
+
+<br>
+
+4. 承上，在這樣的情況下，更新時會將更新文件 (`pieeprom.upd`) 複製到資料夾 `/boot/firmware` 中，並且也做了備份 `recovery.bin`，所以透過上述指令可取消此更新。
 
     ```bash
     *** PREPARING EEPROM UPDATES ***
@@ -97,7 +101,7 @@ _刷新之前，先對當前 EEPROM 設置進行查詢_
 
 <br>
 
-4. 若有更新需重啟系統。
+5. 若有提示重啟系統則運行以下指令。
 
     ```bash
     sudo reboot now
