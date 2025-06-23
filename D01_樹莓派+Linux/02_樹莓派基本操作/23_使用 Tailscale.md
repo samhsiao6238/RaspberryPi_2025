@@ -14,7 +14,7 @@ _以下說明如何使用 Tailscale 讓電腦與樹莓派建立 `虛擬私人網
 
 <br>
 
-## 建立 Tailscale 帳號
+## 建立帳號
 
 1. 前往 [tailscale 官網](https://tailscale.com)，點擊右上角 `Get started` 開始使用服務。
 
