@@ -46,9 +46,9 @@ _以下說明如何使用 Tailscale 讓電腦與樹莓派建立 `虛擬私人網
 
 <br>
 
-## 安裝在電腦
+## 安裝在 MacOS
 
-_使用終端機指令安裝；Windows 系統同樣依照官方指引進行_
+_使用終端機指令安裝；Windows 系統請跳至下一段說明_
 
 <br>
 
@@ -93,6 +93,28 @@ _使用終端機指令安裝；Windows 系統同樣依照官方指引進行_
     ```bash
     sudo tailscale down
     ```
+
+<br>
+
+## 安裝在 Windows
+
+_使用 Windows 套件管理器 `winget` 進行安裝_
+
+<br>
+
+1. 指令。
+
+    ```bash
+    winget install Tailscale.Tailscale
+    ```
+
+    ![](images/img_212.png)
+
+<br>
+
+2. 接著就會彈出視窗工具。
+
+    ![](images/img_213.png)
 
 <br>
 
