@@ -4,6 +4,16 @@ _以下說明如何使用 Tailscale 讓電腦與樹莓派建立 `虛擬私人網
 
 <br>
 
+## 簡介
+
+1. `Tailscale` 是一種基於 `WireGuard VPN` 協議的零設定私有網路工具，可讓多台裝置透過安全加密的方式在不同網路間直接互聯，形成一種虛擬內網的架構。
+
+<br>
+
+2. 不需手動開放防火牆或設定 IP、跨平台支援，適合遠端 SSH、檔案分享、自架服務連線。
+
+<br>
+
 ## 建立 Tailscale 帳號
 
 1. 前往 [tailscale 官網](https://tailscale.com)，點擊右上角 `Get started` 開始使用服務。
