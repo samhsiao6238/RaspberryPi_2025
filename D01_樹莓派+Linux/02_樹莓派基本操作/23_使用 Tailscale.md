@@ -88,14 +88,6 @@ _使用終端機指令安裝；Windows 系統請跳至下一段說明_
 
 <br>
 
-5. 斷開本設備；特別注意，這僅僅是停止連線，裝置仍會保留在後台。
-
-    ```bash
-    sudo tailscale down
-    ```
-
-<br>
-
 ## 安裝在 Windows
 
 _使用 Windows 套件管理器 `winget` 進行安裝_
@@ -142,13 +134,23 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-3. 可查看。
+3. 複製網址到瀏覽器訪問；可在任意設備的瀏覽器進行。
+
+    ![](images/img_215.png)
+
+<br>
+
+4. 可查看虛擬區網狀態。
+
+    ```bash
+    tailscale status
+    ```
 
     ![](images/img_197.png)
 
 <br>
 
-4. 取得樹莓派的 Tailscale IP。
+5. 取得樹莓派的 Tailscale IP。
 
     ```bash
     tailscale ip
@@ -158,7 +160,7 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-5. 透過 SSH 連線。
+6. 透過 SSH 連線。
 
     ![](images/img_199.png)
 
@@ -194,9 +196,17 @@ _設定 Remote-SSH_
 
 <br>
 
-## 登出
+## 斷開或登出
 
-1. 登出登入狀態；與 `down` 相同，這僅會登出，設備仍會在後台顯示。
+1. 斷開本設備；僅停止 VPN 傳輸連線，但登入狀態與授權仍保留，裝置依然顯示於控制台中。
+
+    ```bash
+    sudo tailscale down
+    ```
+
+<br>
+
+2. 登出設備；會移除本機授權與登入憑證，裝置將失去 `Tailscale` 使用權限，但在控制台仍會以 `Expired` 狀態顯示於一段時間。
 
     ```bash
     sudo tailscale logout
@@ -204,11 +214,15 @@ _設定 Remote-SSH_
 
 <br>
 
-2. 若要完全刪除，需至 [控制台](https://login.tailscale.com/admin/machines) 手動清理。
+3. 若要完全刪除，需至 [控制台](https://login.tailscale.com/admin/machines) 手動移除該設備。
 
     ![](images/img_204.png)
 
 <br>
+
+## 使用 API
+
+_使用 API 自動化移除設備_
 
 ___
 
