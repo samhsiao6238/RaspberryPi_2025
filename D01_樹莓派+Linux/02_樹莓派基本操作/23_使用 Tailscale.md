@@ -118,6 +118,12 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
+3. 完成時會顯示如下。
+
+    ![](images/img_214.png)
+
+<br>
+
 ## 在樹莓派上安裝 Tailscale
 
 1. 安裝。
