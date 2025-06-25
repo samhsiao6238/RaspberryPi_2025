@@ -3,13 +3,6 @@
         "!markdown",
         "!python"
     ],
-    // 添加字彙
-    "cSpell.words": [
-        // 可將特殊命名字串加入
-        "myfunction", "mysource", "mytarget", "dateutil",
-        "boto3", "gettz", "timestr", "zipf", "ipynb",
-        "arcname", "botocore", "voclab", "elif", "TMQTT"
-    ],
     // 設定貼上相片的預設路徑
     "pasteImage.path": "${currentFileDir}/images/",
     // 圖片前綴
