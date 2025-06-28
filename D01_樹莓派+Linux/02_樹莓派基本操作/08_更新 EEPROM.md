@@ -1,6 +1,6 @@
 # 更新 EEPROM
 
-_更新樹莓派的 `EEPROM` 韌體，屬於底層硬體開機晶片的程式碼；該代碼影響開機行為與硬體初始化，與 `rpi-update` 更新 `kernel/firmware` 的層級不同。_
+_更新樹莓派的 `EEPROM` 韌體，也就是將最新版的 bootloader 韌體寫入板載 EEPROM，屬於底層硬體開機晶片的程式碼；該代碼影響開機行為與硬體初始化，與 `rpi-update` 更新 `kernel/firmware` 的層級不同。_
 
 <br>
 
