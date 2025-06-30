@@ -188,7 +188,7 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-5. 取得樹莓派的 Tailscale IP。
+9. 取得樹莓派的 Tailscale IP。
 
     ```bash
     tailscale ip
@@ -198,7 +198,7 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-6. 透過 SSH 連線。
+10. 透過 SSH 連線。
 
     ![](images/img_199.png)
 
@@ -242,6 +242,8 @@ _設定 Remote-SSH_
     sudo tailscale down
     ```
 
+    ![](images/img_12.png)
+
 <br>
 
 2. 登出設備；會移除本機授權與登入憑證，裝置將失去 `Tailscale` 使用權限，但在控制台仍會以 `Expired` 狀態顯示於一段時間。
@@ -250,11 +252,21 @@ _設定 Remote-SSH_
     sudo tailscale logout
     ```
 
+    ![](images/img_13.png)
+
 <br>
 
 3. 若要完全刪除，需至 [控制台](https://login.tailscale.com/admin/machines) 手動移除該設備。
 
     ![](images/img_204.png)
+
+<br>
+
+4. 若要重新啟用，運行以下指令即可。
+
+    ```bash
+    sudo tailscale up
+    ```
 
 <br>
 
