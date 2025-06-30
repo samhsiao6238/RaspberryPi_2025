@@ -1,36 +1,24 @@
 # Raspberry Pi Connect 
 
-_這是官方在 2024/05/07 發佈的測試版功能，使用 `WebRTC` 技術來建立安全的點對點連接；特別注意，官方服務不支援以標準 SSH 協定連線，因此無法直接用 `VSCode Remote - SSH` 連線_
+<br>
 
-![](images/img_147.png)
+## 介紹
+
+1. 這是官方在 2024/05/07 發佈的功能，使用 `WebRTC` 技術來建立安全的點對點連接；特別注意，官方服務不支援以標準 SSH 協定連線，因此無法直接用 `VSCode Remote - SSH` 連線。
+
+    ![](images/img_147.png)
 
 <br>
 
-## 硬體需求
-
-_其他版本硬體進行安裝不會報錯，只是重啟後並不會看到服務啟動_
+2. 硬體需求樹莓派 4、5 或 400；其他版本硬體進行安裝不會報錯，只是重啟後並不會看到服務啟動。
 
 <br>
 
-1. Raspberry Pi 5。
+3. 系統至少需安裝 `Bookworm 64 位元` 以上版本。
 
 <br>
 
-2. Raspberry Pi 4。
-
-<br>
-
-3. Raspberry Pi 400。
-
-<br>
-
-## 軟體需求
-
-1. 至少需安裝 `64 位元 Raspberry Pi OS Bookworm` 以上版本。
-
-<br>
-
-2. 使用 Wayland 窗口服務器。
+4. 使用 Wayland 窗口服務器，在 Linux 中用以替代傳統的 X Window System（X11），負責管理應用程式視窗的顯示和輸入事件，設計更簡潔且效能更佳，提供更流暢的圖形輸出和更安全的顯示環境。
 
 <br>
 
