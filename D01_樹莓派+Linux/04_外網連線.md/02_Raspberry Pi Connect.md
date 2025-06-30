@@ -54,31 +54,69 @@ _新版系統已預設安裝好，可直接跳到第 `4` 步_
 
 <br>
 
-4. 重啟後透過 VNC 連線桌面，會在右上角看到一個新的圖標，點擊此圖標並選擇 [Sign in](https://connect.raspberrypi.com/sign-in)，建議在電腦上開啟。
+4. 重啟後透過 VNC 連線桌面，會在右上角看到功能的圖標，預設是反白的。
+
+    ![](images/img_01.png)
+
+<br>
+
+5. 點擊此圖標開啟功能。
+
+    ![](images/img_02.png)
+
+<br>
+
+6. 會自動開啟瀏覽器進入 [Sign in](https://connect.raspberrypi.com/sign-in) 頁面。
 
     ![](images/img_141.png)
 
 <br>
 
-5. 初次使用先建立帳號。
+7. 有帳號的話可點擊登入。
+
+    ![](images/img_03.png)
+
+<br>
+
+## 註冊帳號
+
+_初次使用先建立帳號_
+
+<br>
+
+1. 點擊 [create one for free](https://id.raspberrypi.com/sign-up) 註冊新帳號。
 
     ![](images/img_142.png)
 
 <br>
 
-6. 需要驗證郵件。
+2. 填入相關資訊，需要驗證郵件。
+
+    ![](images/img_04.png)
+
+<br>
+
+## 登入
+
+1. 輸入帳號密碼。
 
     ![](images/img_143.png)
 
 <br>
 
-7. 完成後重新登入，並對設備命名。
+2. 可設置雙重驗證。
+
+    ![](images/img_05.png)
+
+<br>
+
+3. 對設備任意命名，然後點擊 `Create device and sign in`。
 
     ![](images/img_144.png)
 
 <br>
 
-8. 登入完成會亮起顏色；特別注意，必須先在樹莓派完成登入，才能到其他設備上進行遠端連線。
+4. 登入完成會亮起顏色；特別注意，必須先在樹莓派完成登入，才能到其他設備上進行遠端連線。
 
     ![](images/img_150.png)
 
