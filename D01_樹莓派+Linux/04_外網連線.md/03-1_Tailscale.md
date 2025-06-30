@@ -270,6 +270,22 @@ _設定 Remote-SSH_
 
 <br>
 
+## 重啟設備
+
+_每次重啟設備會自動啟用服務_
+
+<br>
+
+1. 查詢 IP；`tailscale0` 就是 Tailscale 虛擬網路介面，表示已啟用並有對應虛擬 IP。
+
+    ```bash
+    ipconfig
+    ```
+
+    ![](images/img_14.png)
+
+<br>
+
 ## 使用 API
 
 _使用 API 自動化移除設備_
