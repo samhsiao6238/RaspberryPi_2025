@@ -172,7 +172,13 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-7. 可查看虛擬區網狀態。
+7. 終端機則顯示 `Success`。
+
+    ![](images/img_11.png)
+
+<br>
+
+8. 可查看虛擬區網狀態。
 
     ```bash
     tailscale status
