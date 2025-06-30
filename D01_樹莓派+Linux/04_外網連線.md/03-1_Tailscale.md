@@ -62,7 +62,15 @@ _使用終端機指令安裝；Windows 系統請跳至下一段說明_
 
 <br>
 
-2. 開啟 Tailscale 圖形介面完成登入，登入後會在背景運行。
+2. 透過查詢版本確認安裝成功。
+
+    ```bash
+    tailscale version
+    ```
+
+<br>
+
+3. 開啟 Tailscale 圖形介面完成登入，登入後會在背景運行。
 
     ```bash
     open -a Tailscale
@@ -70,7 +78,7 @@ _使用終端機指令安裝；Windows 系統請跳至下一段說明_
 
 <br>
 
-3. 啟動虛擬網路並加入 Tailscale 網路，如此設備便可被其他裝置存取；只要登入相同帳號的設備都將加入同一個 Tailscale 網路。
+4. 啟動虛擬網路並加入 Tailscale 網路，如此設備便可被其他裝置存取；只要登入相同帳號的設備都將加入同一個 Tailscale 網路。
 
     ```bash
     tailscale up
@@ -78,13 +86,19 @@ _使用終端機指令安裝；Windows 系統請跳至下一段說明_
 
 <br>
 
-4. 查看狀態。
+5. 查看狀態。
 
     ```bash
     tailscale status
     ```
 
     ![](images/img_196.png)
+
+<br>
+
+6. 在主控台中也可以看到設備狀態。
+
+    ![](images/img_07.png)
 
 <br>
 
@@ -118,7 +132,7 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 ## 安裝在樹莓派
 
-1. 安裝。
+1. 運行以下安裝指令。
 
     ```bash
     curl -fsSL https://tailscale.com/install.sh | sh
@@ -140,7 +154,25 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-4. 可查看虛擬區網狀態。
+4. 點擊 `Connect`。
+
+    ![](images/img_08.png)
+
+<br>
+
+5. 網頁顯示成功。
+
+    ![](images/img_09.png)
+
+<br>
+
+6. 接著會自動轉到主控台。
+
+    ![](images/img_10.png)
+
+<br>
+
+7. 可查看虛擬區網狀態。
 
     ```bash
     tailscale status
