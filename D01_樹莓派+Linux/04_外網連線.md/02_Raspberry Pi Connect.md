@@ -168,6 +168,12 @@ _可在任意設備中的瀏覽器進行兩種連線方式訪問樹莓派_
 
 <br>
 
+3. 查詢只會看到內網 IP，因為這個服務並不會直接分配外網 IP 給設備，而是透過雲端代理服務，建立一條中繼通道，讓使用者可從外網透過中繼代理服務連接到樹莓派。
+
+    ![](images/img_06.png)
+
+<br>
+
 ## 透過終端機建立設備
 
 _不進入樹莓派桌面_
@@ -225,6 +231,10 @@ _不能直接將 Raspberry Pi Connect 的 SSH 連線整合到 VSCode Remote-SSH 
 <br>
 
 1. Raspberry Pi Connect 的 Remote Shell 是瀏覽器內嵌的 `WebShell`，是基於 WebRTC / Relay 的抽象連線，它並不開放真正的 SSH port（22），也不提供 SSH Host/IP 給 VSCode 使用。
+
+<br>
+
+2. 服務預設開機啟動，所以重啟之後依舊可以連線。
 
 <br>
 
