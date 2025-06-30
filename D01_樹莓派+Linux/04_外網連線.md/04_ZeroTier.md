@@ -30,6 +30,8 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 
 <br>
 
+5. 
+
 ## 在樹莓派上安裝
 
 1. 依據官網指示，執行以下安裝腳本，此腳本會自動加入 ZeroTier 軟體倉庫並安裝相依套件。
@@ -48,6 +50,8 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
     sudo zerotier-cli join <貼上-NetworkID>
     ```
 
+    ![](images/img_15.png)
+
 <br>
 
 3. 此時使用指令確認狀態，會得到 `ACCESS_DENIED` 的回應，這是因為所建立的是 PRIVATE 網路，必須在控制台中手動授權該節點，否則不會拿到 IP 也無法通訊。
@@ -55,6 +59,8 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
     ```bash
     sudo zerotier-cli listnetworks
     ```
+
+    ![](images/img_16.png)
 
 <br>
 
@@ -72,23 +78,29 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 
 ## 檢查虛擬網路介面
 
-1. 授權完成後，在樹莓派上查看虛擬網路介面。
+1. 授權完成後，在樹莓派上查看虛擬網路介面，通常名稱是 `zt<短ID>`。
 
     ```bash
     ip addr show | grep zt
     ```
 
+    ![](images/img_243.png)
+
 <br>
 
-2. 通常名稱是 `zt<短ID>`，`inet` 即是此節點在 ZeroTier 網路中的 IP。
+2. `inet` 即是此節點在 ZeroTier 網路中的 IP。
 
-    ![](images/img_243.png)
+    ![](images/img_17.png)
 
 <br>
 
 ## 點對點連線測試
 
 1. 使用另一台設備加入同一 Network 並進行授權。
+
+    ```bash
+    sudo zerotier-cli join <ID>
+    ```
 
 <br>
 
@@ -97,6 +109,8 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
     ```bash
     ping <樹莓派-IP>
     ``` 
+
+    ![](images/img_18.png)
 
 <br>
 

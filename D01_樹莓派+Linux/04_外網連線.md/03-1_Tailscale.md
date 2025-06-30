@@ -277,7 +277,7 @@ _預設每次重啟樹莓派都會自動啟用服務_
 5. 查詢 IP；`tailscale0` 就是 Tailscale 虛擬網路介面，表示已啟用並有對應虛擬 IP。
 
     ```bash
-    ipconfig
+    ifconfig
     ```
 
     ![](images/img_14.png)
