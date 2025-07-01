@@ -115,7 +115,7 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 1. 使用另一台設備加入同一 Network 並進行授權。
 
     ```bash
-    sudo zerotier-cli join <ID>
+    sudo zerotier-cli join <Network ID>
     ```
 
 <br>
@@ -130,13 +130,25 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 
 <br>
 
-3. 安裝桌面應用後，也可直接運行終端機指令，最後顯示的就是本機取得的 IP。
+3. 安裝桌面應用後，也可直接運行指令查詢網路狀態。
 
     ```bash
     sudo zerotier-cli listnetworks
     ```
 
     ![](images/img_244.png)
+
+<br>
+
+## SSH
+
+_連線方式相同，不贅述_
+
+<br>
+
+## VNC
+
+_連線方式相同，不贅述_
 
 <br>
 
