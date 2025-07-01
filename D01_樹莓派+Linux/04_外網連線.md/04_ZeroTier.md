@@ -94,7 +94,7 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 
 ## 檢查虛擬網路介面
 
-1. 授權完成後，在樹莓派上查看虛擬網路介面，通常名稱是 `zt<短ID>`。
+1. 授權完成後，在樹莓派上查看虛擬網路介面，通常名稱是 `zt` 再接上 `<短-ID>`。
 
     ```bash
     ip addr show | grep zt
@@ -104,7 +104,7 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 
 <br>
 
-2. `inet` 即是此節點在 ZeroTier 網路中的 IP。
+2. 查詢 ip 會顯示以這組名稱顯示的網路連線資訊，其中包含該設備在 `ZeroTier 網路` 中的 IP。
 
     ![](images/img_17.png)
 
