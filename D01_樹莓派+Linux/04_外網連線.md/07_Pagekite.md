@@ -34,7 +34,7 @@ _連線樹莓派實作_
 2. 第一次執行 `QuickStart` 要先註冊服務；替換以下命令中的 `<公網網址>`，然後在提示中輸入 `y`。
 
     ```bash
-    sudo pagekite.py --signup <填入自己的-Pagekites-公網網址>
+    sudo pagekite.py --signup <填入自定義的-Pagekites-公網網址>
     ```
 
     ![](images/img_24.png)
@@ -43,17 +43,35 @@ _連線樹莓派實作_
 
 3. 按提示輸入 Email。
 
-![](images/img_25.png)
+    ![](images/img_25.png)
 
-4. 輸入一個名稱。
+<br>
 
-![](images/img_26.png)
+4. 因為註冊過，所以提示輸入密碼 `log on`。
 
-5. 輸入密碼。
+    ![](images/img_26.png)
 
-![](images/img_27.png)
+<br>
 
-6.  Secret，並選擇儲存配置至 `/root/.pagekite.rc`；完成後可進行查看。
+5. 成功後提示儲存配置到指定路徑 `/root/.pagekite.rc`，輸入 `y` 即可。
+
+    ![](images/img_27.png)
+
+<br>
+
+6. 完成後如下訊息。
+
+    ![](images/img_28.png)
+
+<br>
+
+## 實測
+
+_需另外開啟一個終端機連線樹莓派_
+
+<br>
+
+1. 先查看設定。
 
     ```bash
     sudo cat /root/.pagekite.rc
@@ -61,27 +79,91 @@ _連線樹莓派實作_
 
 <br>
 
-4. 若斷線，可運行以下指令重新啟動臨時隧道，並映射至本機 80 埠。
+2. 啟動 `HTTP Server` 提供內容。
+
+    ```bash
+    sudo python -m http.server 80
+    ```
+
+    ![](images/img_29.png)
+
+<br>
+
+3. 因為已有 `.pagekite.rc` 設定檔，使用以下指令重啟隧道，並映射至本機 80 埠。
 
     ```bash
     sudo pagekite.py 80 sam6238.pagekite.me
     ```
 
-<br>
-
-5. 在背景啟動服務。
-
-    ```bash
-    sudo python -m http.server 80 &
-    ```
+    ![](images/img_30.png)
 
 <br>
 
-6. 在外部網路打開網址，即可看到本機服務。
+4. 在外部網路打開網址，即可看到本機服務；因為當前伺服器中沒有 `index.html` 等預設首頁檔案，所以瀏覽器會直接顯示該目錄下的檔案清單。
 
     ```bash
     http://sam6238.pagekite.me
     ```
+
+    ![](images/img_31.png)
+
+<br>
+
+## 製作首頁
+
+1. 關閉 `HTTP Server`。
+
+    ![](images/img_32.png)
+
+<br>
+
+2. 編輯首頁。
+
+    ```bash
+    nano index.html
+    ```
+
+<br>
+
+3. 貼上後儲存退出。 
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh-Hant">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raspberry Pi 公開頁面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-light">
+
+    <div class="container py-5">
+        <div class="text-center">
+        <h1 class="display-5 fw-bold">你好！這是 Raspberry Pi 公開頁面</h1>
+        <p class="lead mt-3">透過 PageKite 將本機 HTTP 服務公開至網際網路。</p>
+        <hr class="my-4">
+        <p>你現在看到的是由 <code>python -m http.server 80</code> 所提供的內容。</p>
+        </div>
+    </div>
+
+    </body>
+    </html>
+    ```
+
+<br>
+
+4. 再次啟動服務。
+
+    ```bash
+    sudo python -m http.server 80
+    ```
+
+<br>
+
+5. 刷新網頁。
+
+    ![](images/img_33.png)
 
 <br>
 
