@@ -1,3 +1,7 @@
+_不太穩定，課程中不要實作_
+
+<br>
+
 # LocalTunnel
 
 _LocalTunnel 是一個免費且簡單易用的反向代理服務，可在樹莓派上將 HTTP 服務暴露到公網_
@@ -18,8 +22,9 @@ _LocalTunnel 是一個免費且簡單易用的反向代理服務，可在樹莓�
 2. 安裝 Node.js。
 
     ```bash
-    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-    sudo apt install -y nodejs
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    . "$HOME/.nvm/nvm.sh"
+    nvm install 22
     ```
 
 <br>
@@ -33,37 +38,21 @@ _LocalTunnel 是一個免費且簡單易用的反向代理服務，可在樹莓�
 
 <br>
 
-## 安裝套件
-
-1. 安裝 n。
-
-    ```bash
-    sudo npm install -g n
-    ```
-
-<br>
-
-2. 安裝符合版本。
-
-    ```bash
-    sudo n stable
-    ```
-
-<br>
-
-3. 或可以指定版本。
-
-    ```bash
-    sudo n 22.10.0
-    ```
-
-<br>
-
 4. 安裝 LocalTunnel CLI。
 
     ```bash
-    sudo npm install -g localtunnel
+    npm install -g localtunnel
     ```
+
+<br>
+
+5. 若出現更新提示，複製照做即可。
+
+    ```bash
+    npm install -g npm@11.4.2
+    ```
+
+    ![](images/img_36.png)
 
 <br>
 
@@ -77,11 +66,13 @@ _LocalTunnel 是一個免費且簡單易用的反向代理服務，可在樹莓�
 
 <br>
 
-2. 查詢密碼。
+2. 另外開啟一個終端機，運行以下指令查詢密碼，也就是查詢外網 IP。
 
     ```bash
     curl https://loca.lt/mytunnelpassword
     ```
+
+    ![](images/img_37.png)
 
 <br>
 
