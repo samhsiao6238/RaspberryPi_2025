@@ -58,7 +58,7 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 
 <br>
 
-3. 此時使用指令確認狀態，會得到 `ACCESS_DENIED` 的回應，這是因為所建立的是 PRIVATE 網路，必須在控制台中手動授權該節點，否則不會拿到 IP 也無法通訊。
+3. 此時使用指令確認狀態，會得到 `ACCESS_DENIED` 的回應 _是正常的_，這是因為所建立的是 `PRIVATE` 網路，必須在控制台中手動授權該節點，否則不會拿到 IP 也無法通訊。
 
     ```bash
     sudo zerotier-cli listnetworks
@@ -68,13 +68,25 @@ _在樹莓派上安裝並設定 ZeroTier，這是一個基於 WireGuard 核心�
 
 <br>
 
-4. 在控制台進行授權。
+## 授權設備
+
+1. 進入主控台，點擊連線進入。
+
+    ![](images/img_23.png)
+
+<br>
+
+2. 勾選要授權的設備，然後點擊 `Authorize` 進行授權。
 
     ![](images/img_241.png)
 
 <br>
 
-5. 再次查看就會顯示 `OK`。
+3. 返回樹莓派終端機中，再次執行指令查看，結果會顯示 `OK`。
+
+    ```bash
+    sudo zerotier-cli listnetworks
+    ```
 
     ![](images/img_242.png)
 
