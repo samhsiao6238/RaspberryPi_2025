@@ -184,15 +184,7 @@ _特別注意，透過官方的安裝腳本只把 `pagekite.py` 拷貝到 `/usr/
 
 <br>
 
-2. 若兩者同時存在，要繼續使用腳本啟動，必須指定在哪裡讀取設定。
-
-    ```bash
-    sudo pagekite.py --clean --optdir=/etc/pagekite.d
-    ```
-
-<br>
-
-3. 複製設定文件到預設路徑；`10_account.rc` 用以儲存 Pagekite 帳號憑證。
+2. 複製設定文件到預設路徑；`10_account.rc` 用以儲存 Pagekite 帳號憑證。
 
     ```bash
     sudo mkdir -p /etc/pagekite.d
@@ -202,7 +194,7 @@ _特別注意，透過官方的安裝腳本只把 `pagekite.py` 拷貝到 `/usr/
 
 <br>
 
-4. 編輯 `20_frontends.rc`，定義要用哪些 front-end relay、要把哪些本地埠映射到哪個 Kite 子域；特別注意，`Pagekite` 會依檔案名稱的字典序 `10_ → 20_ → 90_ ...` 逐一載入，這樣就能把 `帳號` 和 `服務映射` 拆成兩階段、分開維護。
+3. 編輯 `20_frontends.rc`，定義要用哪些 front-end relay、要把哪些本地埠映射到哪個 Kite 子域；特別注意，`Pagekite` 會依檔案名稱的字典序 `10_ → 20_ → 90_ ...` 逐一載入，這樣就能把 `帳號` 和 `服務映射` 拆成兩階段、分開維護。
 
     ```bash
     sudo nano /etc/pagekite.d/20_account.rc
@@ -210,7 +202,7 @@ _特別注意，透過官方的安裝腳本只把 `pagekite.py` 拷貝到 `/usr/
 
 <br>
 
-5. 填入以下內容。
+4. 填入以下內容。
 
     ```bash
     # 使用官方預設 relay
@@ -221,6 +213,14 @@ _特別注意，透過官方的安裝腳本只把 `pagekite.py` 拷貝到 `/usr/
 
     # 同時映射 SSH(22)
     service_on = 22 ssh.sam6238.pagekite.me
+    ```
+
+<br>
+
+5. 重新啟動服務，並指定讀取設定的路徑。
+
+    ```bash
+    sudo pagekite.py --clean --optdir=/etc/pagekite.d
     ```
 
 <br>
