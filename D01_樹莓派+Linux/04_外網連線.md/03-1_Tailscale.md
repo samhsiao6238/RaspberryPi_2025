@@ -34,13 +34,13 @@ _以下說明如何使用 Tailscale 讓電腦與樹莓派建立 `虛擬私人網
 
 <br>
 
-4. 在接下來的步驟中，樹莓派將依據 `Linux` 選項的指令進行安裝。
+4. 在接下來的步驟中，樹莓派將依據 `Linux` 選項的指令進行安裝；這裡先介紹、不用實作。
 
     ![](images/img_193.png)
 
 <br>
 
-5. 本機則依據作業系統，下載對應的桌面應用，或使用終端機指令進行安裝，這在後續步驟中說明。
+5. 本機則依據作業系統，下載對應的桌面應用，或使用終端機指令進行安裝；同樣地，這在後續步驟中實作。
 
     ![](images/img_194.png)
 
@@ -132,11 +132,17 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 ## 安裝在樹莓派
 
-1. 運行以下安裝指令。
+_實作_
+
+<br>
+
+1. 運行以下安裝指令；完成時會提示下一步指令。
 
     ```bash
     curl -fsSL https://tailscale.com/install.sh | sh
     ```
+
+    ![](images/img_20.png)
 
 <br>
 
@@ -148,37 +154,43 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-3. 複製網址到瀏覽器訪問；可在任意設備的瀏覽器進行。
+3. 複製網址到任意設備的瀏覽器訪問；不限制一定要在樹莓派中開啟。
 
     ![](images/img_215.png)
 
 <br>
 
-4. 點擊 `Connect`。
+4. 選取登入方式。
+
+    ![](images/img_21.png)
+
+<br>
+
+5. 點擊 `Connect`。
 
     ![](images/img_08.png)
 
 <br>
 
-5. 網頁顯示成功。
+6. 網頁顯示成功。
 
     ![](images/img_09.png)
 
 <br>
 
-6. 接著會自動轉到主控台。
+7. 接著會自動轉到主控台。
 
     ![](images/img_10.png)
 
 <br>
 
-7. 終端機則顯示 `Success`。
+8. 終端機則顯示 `Success`。
 
     ![](images/img_11.png)
 
 <br>
 
-8. 可查看虛擬區網狀態。
+9. 可查看虛擬區網狀態。
 
     ```bash
     tailscale status
@@ -188,7 +200,7 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-9. 取得樹莓派的 Tailscale IP。
+10. 取得樹莓派的 Tailscale IP。
 
     ```bash
     tailscale ip
@@ -198,7 +210,7 @@ _使用 Windows 套件管理器 `winget` 進行安裝_
 
 <br>
 
-10. 透過 SSH 連線。
+11. 透過 SSH 連線。
 
     ![](images/img_199.png)
 
