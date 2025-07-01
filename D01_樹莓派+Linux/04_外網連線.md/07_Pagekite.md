@@ -16,9 +16,13 @@ _在樹莓派上使用 Pagekite 建立安全反向隧道，將本機服務公開
 
 <br>
 
-## 在樹莓派上安裝 Pagekite
+## 在樹莓派安裝
 
-1. 使用官方安裝腳本，取得最新版 `pagekite.py`；這會把最新版的 pagekite.py 安裝到了 `/usr/local/bin`。
+_連線樹莓派實作_
+
+<br>
+
+1. 使用官方安裝腳本，取得最新版 `pagekite.py`，執行後會安裝到本機路徑 `/usr/local/bin` 中。
 
     ```bash
     cd ~/Downloads
@@ -27,15 +31,29 @@ _在樹莓派上使用 Pagekite 建立安全反向隧道，將本機服務公開
 
 <br>
 
-2. 第一次執行 QuickStart，註冊服務。
+2. 第一次執行 `QuickStart` 要先註冊服務；替換以下命令中的 `<公網網址>`，然後在提示中輸入 `y`。
 
     ```bash
-    sudo pagekite.py --signup sam6238.pagekite.me
+    sudo pagekite.py --signup <填入自己的-Pagekites-公網網址>
     ```
+
+    ![](images/img_24.png)
 
 <br>
 
-3. 按提示輸入 Email 及 Secret，並選擇儲存配置至 `/root/.pagekite.rc`；完成後可進行查看。
+3. 按提示輸入 Email。
+
+![](images/img_25.png)
+
+4. 輸入一個名稱。
+
+![](images/img_26.png)
+
+5. 輸入密碼。
+
+![](images/img_27.png)
+
+6.  Secret，並選擇儲存配置至 `/root/.pagekite.rc`；完成後可進行查看。
 
     ```bash
     sudo cat /root/.pagekite.rc
