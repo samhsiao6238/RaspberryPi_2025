@@ -81,15 +81,27 @@ _將使用 brew 安裝 Ngrok_
 
 ## 設定權杖
 
-1. 運行指令將權杖加到本地。
+_假如當前設備還沒寫入權杖，需先完成該步驟_
+
+<br>
+
+1. 複製權杖存入變數 `YOUR_AUTHTOKEN`。
 
     ```bash
-    ngrok config add-authtoken <輸入個人-TOKEN>
+    YOUR_AUTHTOKEN=<複製下來的-Authtoken>
     ```
 
 <br>
 
-2. 完成時會提示儲存位置。
+2. 運行指令將權杖加到本地。
+
+    ```bash
+    ngrok config add-authtoken $YOUR_AUTHTOKEN
+    ```
+
+<br>
+
+3. 完成時會提示儲存位置。
 
     ```bash
     ~/.config/ngrok/ngrok.yml
