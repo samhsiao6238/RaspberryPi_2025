@@ -72,7 +72,11 @@ _進入樹莓派運行_
 
 ## 添加權限
 
-1. 將當前用戶加入 Docker 群組，如此可擁有群組權限；若未加入，每次使用 Docker 指令都需要使用 `sudo`。
+_若未加入不影響使用，只是使用 `Docker` 指令時需添加 `sudo`_
+
+<br>
+
+1. 將當前用戶 `$USER` 加入 `Docker` 群組；如此可擁有群組權限。
 
    ```bash
    sudo usermod -aG docker $USER
