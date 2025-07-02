@@ -26,13 +26,15 @@
 
 2. 開啟終端機，將 `Authtoken` 存入變數。
 
-```bash
-YOUR_AUTHTOKEN=<複製下來的-Authtoken>
-```
+    ```bash
+    YOUR_AUTHTOKEN=<複製下來的-Authtoken>
+    ```
 
-![](images/img_167.png)
+    ![](images/img_167.png)
 
-4. 在終端機執行以下指令進行授權，完成時會輸出儲存路徑。
+<br>
+
+3. 在終端機執行以下指令進行授權，完成時會輸出儲存路徑。
 
     ```bash
     ngrok config add-authtoken $YOUR_AUTHTOKEN
@@ -42,7 +44,7 @@ YOUR_AUTHTOKEN=<複製下來的-Authtoken>
 
 <br>
 
-5. 啟動服務並指定使用端口 `80`。
+4. 啟動服務並指定使用端口 `80`。
 
     ```bash
     ngrok http 80
@@ -50,19 +52,19 @@ YOUR_AUTHTOKEN=<複製下來的-Authtoken>
 
 <br>
 
-6. 複製公網網址可進行訪問服務器。
+5. 複製公網網址可進行訪問服務器。
 
     ![](images/img_140.png)
 
 <br>
 
-7. 若正常運行會顯示如下，點擊 `Visit Site` 。
+6. 若正常運行會顯示如下，點擊 `Visit Site` 。
 
     ![](images/img_96.png)
 
 <br>
 
-8. 就會看到目前正在端口上運行的服務器；同時終端機會顯示 `200 OK`。
+7. 就會看到目前正在端口上運行的服務器；同時終端機會顯示 `200 OK`。
 
     ![](images/img_97.png)
 
