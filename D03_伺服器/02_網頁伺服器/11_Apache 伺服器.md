@@ -397,7 +397,7 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
    _如_
 
    ```bash
-   sudo chmod -R 755 /home/sam6238/Documents/my_web
+   sudo chmod -R 755 ~/Documents/my_web
    ```
 
 <br>
@@ -411,7 +411,7 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
    _如_
 
    ```bash
-   sudo chown -R www-data:www-data  /home/sam6238/Documents/my_web
+   sudo chown -R www-data:www-data  ~/Documents/my_web
    ```
 
 <br>
@@ -441,7 +441,7 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
    _如_
 
    ```bash
-   sudo chown -R sam6238:sam6238 /home/sam6238/Documents/my_web
+   sudo chown -R sam6238:sam6238 ~/Documents/my_web
    ```
 
 <br>
@@ -449,7 +449,7 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 5. 以上指令可進一步使用 `$USER` 來表達當前使用者 `sam6238`；在編程時，無論腳本或指令都應儘量避免硬編碼。
 
    ```bash
-   sudo chown -R $USER:$USER /home/sam6238/Documents/my_web
+   sudo chown -R $USER:$USER ~/Documents/my_web
    ```
 
 <br>
@@ -459,8 +459,8 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 1. 進入指定的文本目錄 `/home/sam6238/Documents/my_web`，接著新增 `index.html` 檔案。
 
    ```bash
-   cd /home/sam6238/Documents/my_web
-   sudo touch index.html
+   cd ~/Documents/my_web
+   touch index.html
    ```
 
    ![](images/img_07.png)
@@ -490,6 +490,51 @@ _網頁要能夠正確顯示，必須訪問者有權限讀取相關目錄_
 5. 在樹莓派上瀏覽 `http://localhost` 或在區網內訪問樹莓派網址 `http://<樹莓派-IP>`。
 
    ![](images/img_11.png)
+
+<br>
+
+6. 可稍做優化。
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="zh-Hant">
+   <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <title>Welcome to Raspberry Pi Web</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+   <style>
+      body {
+         background: linear-gradient(to right, #74ebd5, #ACB6E5);
+         min-height: 100vh;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: #333;
+      }
+      .card {
+         border-radius: 1rem;
+         box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      }
+      .btn-primary {
+         background-color: #4a90e2;
+         border-color: #4a90e2;
+      }
+   </style>
+   </head>
+   <body>
+   <div class="container text-center">
+      <div class="card p-5">
+         <h1 class="mb-3">🌐 歡迎使用 Raspberry Pi 網頁伺服器</h1>
+         <p class="lead">已成功啟動 Apache2！這是一個使用 Bootstrap 打造的簡潔頁面。</p>
+         <hr />
+         <p>若看到這個畫面，代表 Apache 正常運作。</p>
+         <a href="https://www.raspberrypi.com" target="_blank" class="btn btn-primary mt-3">前往 Raspberry Pi 官網</a>
+      </div>
+   </div>
+   </body>
+   </html>
+   ```
 
 <br>
 
