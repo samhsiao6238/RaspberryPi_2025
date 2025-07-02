@@ -21,6 +21,7 @@ _使用 `zenity` 來搭建_
 2. 在 `~/Documents/NgrokApp` 資料夾內建立腳本。
 
    ```bash
+   mkdir -p ~/Documents/NgrokApp
    cd ~/Documents/NgrokApp
    nano start_ngrok.sh
    ```
