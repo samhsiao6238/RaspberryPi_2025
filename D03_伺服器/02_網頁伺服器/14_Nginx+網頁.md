@@ -80,21 +80,9 @@ _以下分別使用 `netstat`、`ss`、`lsof` 檢查預設的 `80` 與 `443` 端
 
 <br>
 
-## 編輯 Ngnix 設定文件
+## Ngnix 設定文件
 
-1. 設定文件所在路徑。
-
-    ```bash
-    /etc/nginx/sites-available/default
-    ```
-    _可切換至資料夾並開啟 code，不過這個檔案比較簡單，建議使用 `nano`_
-    ```bash
-    cd /etc/nginx/sites-available/ && code .
-    ```
-
-<br>
-
-2. 編輯設定文件。
+1. 編輯設定文件。
 
     ```bash
     sudo nano /etc/nginx/sites-available/default
@@ -102,7 +90,7 @@ _以下分別使用 `netstat`、`ss`、`lsof` 檢查預設的 `80` 與 `443` 端
 
 <br>
 
-3. 若要使用 VSCode 編輯設定檔案要先授權，但這裡很容易修改，建議透過 `nano` 即可。
+2. 再次提醒，若要使用 `VSCode` 編輯設定檔，必須先授權。
 
     ```bash
     sudo chown $USER /etc/nginx/sites-available/default
@@ -110,13 +98,14 @@ _以下分別使用 `netstat`、`ss`、`lsof` 檢查預設的 `80` 與 `443` 端
 
 <br>
 
-4. 因為 `80` 已經佔用，將端口改為 `8080`。
+3. 預設服務端口為 `80`。
 
-    _預設為 `80`_
 
     ![](images/img_111.png)
 
-    _修改為_
+<br>
+
+4. 但 `80` 可能以已經被 `Apache` 佔用，所以將端口改為 `8080`。
 
     ```bash
     listen 8080 default_server;
@@ -127,7 +116,7 @@ _以下分別使用 `netstat`、`ss`、`lsof` 檢查預設的 `80` 與 `443` 端
 
 <br>
 
-5. 設定完成，啟動服務。
+5. 設定完成、啟動服務。
 
     ```bash
     sudo systemctl start nginx
@@ -145,19 +134,23 @@ _以下分別使用 `netstat`、`ss`、`lsof` 檢查預設的 `80` 與 `443` 端
 
 <br>
 
-7. 查看服務狀態。
+7. 查看服務狀態；正常啟動會顯示為 `active (running)`。
 
     ```bash
     sudo systemctl status nginx
     ```
 
-    _正常啟動會顯示為 `active (running)`_
-
     ![](images/img_112.png)
 
 <br>
 
-8. 再度開啟設定檔案，進一步設定網頁所在位置案。
+## 建立站台
+
+_再次開啟前段所操作的設定檔案_
+
+<br>
+
+1. 設定網頁所在位置案。
 
     ```bash
     sudo nano /etc/nginx/sites-available/default
@@ -165,51 +158,63 @@ _以下分別使用 `netstat`、`ss`、`lsof` 檢查預設的 `80` 與 `443` 端
 
 <br>
 
-9. 找到 `root /var/www/html;` 開頭的區塊，預設的內容如下。
+2. 找到 `root /var/www/html;` 開頭的區塊，預設的內容如下。
 
     ![](images/img_22.png)
 
 <br>
 
-10. 針對 `路徑` 與 `索引` 規則修訂。
+3. 針對 `路徑` 與 `索引` 規則修訂。
 
     ![](images/img_23.png)
 
 <br>
 
-11. 這裡先修改 `路徑`，但特別注意，這個資料夾尚未建立，修改完成後進行建立，並將站台文件置放在這個資料夾中；除此，其餘部分暫且不修改。
+4. 先修改 `路徑` 如下；特別注意，這個資料夾尚未建立，在後續的步驟中會進行新增，並將站台文件置放在這個資料夾中；其餘部分暫不修改。
+
+    ```bash
+    root /home/sam6238/Documents/my_nginx;
+    ```
 
     ![](images/img_113.png)
 
 <br>
 
-12. 基於前一個步驟自訂的路徑 `建立資料夾`。
+5. 延續前一個步驟，在自訂的路徑中 `建立資料夾`。
 
     ```bash
-    sudo mkdir /home/sam6238/Documents/my_nginx
+    mkdir ~/Documents/my_nginx
     ```
 
 <br>
 
-13. 授權。
+6. 授權。
 
     ```bash
-    sudo chown -R sam6238:sam6238 /home/sam6238/Documents/my_nginx
+    sudo chown -R $USER:$USER ~/Documents/my_nginx
     ```
 
 <br>
 
-14. 連線樹莓派後開啟終端機來進入站台資料夾，並使用 VSCode 開啟工作空間。
+## 編輯站台文本
+
+1. 連線樹莓派並進入以下路徑。
 
     ```bash
-    cd ~/Documents/my_nginx && code .
+    ~/Documents/my_nginx
     ```
+
+    ![](images/img_156.png)
 
 <br>
 
-15. 建立超文本文件 `index.html` 並編輯內容，透過快速鍵 `!` 建立並簡單修改即可。
+2. 新增文本文件 `index.html`。
 
-    ![](images/img_24.png)
+    ![](images/img_157.png)
+
+<br>
+
+3. 在 VSCode 中可使用快速鍵 `!` 建立基本內容並簡單修改。
 
     ```html
     <!DOCTYPE html>
@@ -225,9 +230,11 @@ _以下分別使用 `netstat`、`ss`、`lsof` 檢查預設的 `80` 與 `443` 端
     </html>
     ```
 
+    ![](images/img_24.png)
+
 <br>
 
-16. 重新啟動。
+4. 重新啟動。
 
     ```bash
     sudo systemctl reload nginx
@@ -269,13 +276,21 @@ _若發生錯時_
 
 ## 連線測試
 
-1. 使用 `ifconfig` 指令查詢樹莓派 IP。
+1. 查詢樹莓派 IP。
+
+    ```bash
+    ifconfig
+    ```
 
     ![](images/img_25.png)
 
 <br>
 
-2. 透過 `樹莓派網址:8080` 在指定端口上訪問網站。
+2. 在指定端口上訪問樹莓派的網站。
+
+    ```bash
+    <樹莓派網址>:8080
+    ```
 
     ![](images/img_26.png)
 
