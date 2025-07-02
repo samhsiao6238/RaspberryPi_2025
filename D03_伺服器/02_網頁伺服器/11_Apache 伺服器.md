@@ -262,24 +262,15 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 <br>
 
-3. 滑動到程式碼中以下區塊進行添加內容 `# 添加這個`，其餘部分可以不用變動。
+3. 滑動以下區塊，將框選的部分取消註解。
+
+   ![](images/img_152.png)
+
+<br>
+
+4. 將其中的 `/srv/` 替換為自己的 `<超文本所在目錄>`。
 
    ```html
-   <Directory />
-      Options FollowSymLinks
-      AllowOverride None
-      Require all granted
-   </Directory>
-   <Directory /usr/share>
-      AllowOverride None
-      Require all granted
-   </Directory>
-   <Directory /var/www/>
-      Options Indexes FollowSymLinks
-      AllowOverride None
-      Require all granted
-   </Directory>
-   # 添加這個
    <Directory <超文本所在目錄>>
       Options Indexes FollowSymLinks
       AllowOverride None
@@ -289,13 +280,13 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 <br>
 
-4. 超文本所在目錄就是前面自己建立的目錄，比如說 `/home/sam6238/Documents/my_web`；特別注意箭頭括號的格式。
+5. 超文本所在目錄就是前面建立的資料夾路徑，格式如下 `/home/sam6238/Documents/my_web`；務必將路徑展開，不要使用 `~` 符號。
 
    ![](images/img_06.png)
 
 <br>
 
-5. 修改 `個別` 網站配置。
+6. 修改 `個別` 網站配置。
 
    ```bash
    sudo nano /etc/apache2/sites-available/000-default.conf
@@ -303,7 +294,7 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 <br>
 
-6. 添加內容 `# 添加這個`，並且些修改 `超文本所在目錄`，其餘部分不用變動；可把預設註解的內容都刪除，這樣會看得比較清楚。
+7. 添加內容 `# 添加這個`，並且些修改 `超文本所在目錄`，其餘部分不用變動；可把預設註解的內容都刪除，這樣會看得比較清楚。
 
    ```html
    <VirtualHost *:80>
@@ -324,7 +315,7 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 <br>
 
-7. 修改如下。
+8. 修改如下。
 
    ![](images/img_139.png)
 
