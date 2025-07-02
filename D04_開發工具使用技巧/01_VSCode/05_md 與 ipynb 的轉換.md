@@ -1,6 +1,6 @@
 # Markdown 與 Jupyter 的轉換
 
-_以下分別說明 Markdown 與 Jupyter Notebook 文件的雙向轉換_
+_以下分別說明 `Markdown` 與 `Jupyter Notebook` 文件的 `雙向轉換`_
 
 <br>
 
@@ -61,7 +61,7 @@ _在 VSCode 中建立任務，並設定快捷鍵來執行這個任務_
 
 <br>
 
-3. 假如沒有的話，選擇 `Open User Tasks` ，並任選其中一個就會開啟 `tasks.json` 檔案。
+3. 假如沒有的話，選擇 `Open User Tasks`，並任選其中一個就會開啟 `tasks.json` 檔案。
 
     ![](images/img_13.png)
 
