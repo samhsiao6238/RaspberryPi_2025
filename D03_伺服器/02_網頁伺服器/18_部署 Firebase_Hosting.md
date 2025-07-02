@@ -33,20 +33,57 @@ _須先安裝相關套件_
 
 <br>
 
-3. 若有提示更新，複製指令並以 `sudo` 權限進行即可。
+## 版本相容
+
+_若有提示更新，可改用 nvm 進行管理_
+
+<br>
+
+1. 遇到版本相容問題。
+
+   ![](images/img_142.png)
+
+<br>
+
+2. 先安裝 nvm；指令及當前版本可在 [官網](https://github.com/nvm-sh/nvm) 中進行查詢。
 
    ```bash
-   sudo npm install -g npm@<指定版本>
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+   source ~/.bashrc
    ```
 
 <br>
 
-4. 可查看安裝版本。
+3. 安裝指定版本。
 
+   ```bash
+   nvm install 20
+   nvm use 20
+   nvm alias default 20
+   ```
+
+<br>
+
+4. 查看版本。
 
    ```bash
    node -v
    npm -v
+   ```
+
+<br>
+
+5. 重新安裝 Firebase CLI。
+
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+<br>
+
+6. 查看安裝版本。
+
+   ```bash
    firebase --version
    ```
 
@@ -54,7 +91,7 @@ _須先安裝相關套件_
 
 ## 登入帳號
 
-_繼續在樹莓派終端機中運行_
+_必須進入樹莓派桌面並啟動終端機運行_
 
 <br>
 
