@@ -6,6 +6,10 @@ _[Ngrok 官網](https://ngrok.com/)；Ngrok 本身並不是一種 `伺服器服�
 
 ## 安裝 Homebrew
 
+_將使用 brew 安裝 Ngrok_
+
+<br>
+
 1. 前往 [官網](https://brew.sh/) 複製安裝指令。
 
     ![](images/img_158.png)
