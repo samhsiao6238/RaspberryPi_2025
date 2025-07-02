@@ -22,9 +22,11 @@ _Images_
     docker images
     ```
 
+    ![](images/img_19.png)
+
 <br>
 
-3. 刪除本地鏡像。
+3. 刪除本地鏡像；特別注意，若要移除映像檔，必須先刪除依賴於鏡像的容器。
 
     ```bash
     docker rmi <image-id 或 image-name>
