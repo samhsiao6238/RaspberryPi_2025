@@ -56,42 +56,6 @@ _特別注意，雖然設置可以持久有效，但基於安全性仍議作為�
 
 <br>
 
-## 通知軟體庫更新
-
-1. 顯示訊息如下時，無需特別進行處理。
-
-   ![](images/img_06.png)
-
-<br>
-
-## 安全通告 
-
-1. 顯示狀況。
-
-   ![](images/img_07.png)
-
-<br>
-
-_說明與排除_
-
-<br>
-
-1. 這是一個關於 `Common UNIX Printing System（CUPS）` 的 `安全通告`，具體訊息內容說明省略。
-
-<br>
-
-2. 根據建議進行檢查 `/etc/cups/cupsd.conf`，並對 `CUPS-Get-Document` 的訪問添加限制如下。
-
-   ```ini
-   <Limit CUPS-Get-Document>
-   AuthType Default
-   Require user @OWNER @SYSTEM
-   Order deny,allow
-   </Limit>
-   ```
-
-<br>
-
 ___
 
 _END_
