@@ -1,6 +1,6 @@
 # Firebase Hosting
 
-_Google Cloud 的服務_
+_Google Cloud 的服務：更新【2025/07/02】_
 
 <br>
 
@@ -16,29 +16,16 @@ _須先安裝相關套件_
 
 <br>
 
-1. 將 `Node.js` 加入系統的來源清單，可先參考 [官方](https://nodejs.org/zh-tw/about/previous-releases) 的版本說明，這裡將嘗試安裝當前最新版本；這會從 `NodeSource` 下載對應版本的套件庫設定腳本，參數 `-E` 會保留當前使用者的環境變數。
+1. 安裝 `Node.js`。
 
    ```bash
-   curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+   sudo apt update
+   sudo apt install nodejs npm -y
    ```
 
 <br>
 
-2. 在輸出中提示了接下來的指令，其中也提示可改用 `N|Solid` 這個商業版 `Node.js` 版本，這是由 `NodeSource` 所維護的，但一般的開發者可以忽略。
-
-   ![](images/img_142.png)
-
-<br>
-
-3. 安裝 `Node.js`，包括 `node` 和 `npm`。
-
-   ```bash
-   sudo apt install -y nodejs -y
-   ```
-
-<br>
-
-4. 安裝 `firebase-tools`。
+2. 安裝 `firebase-tools`。
 
    ```bash
    sudo npm install -g firebase-tools
@@ -46,15 +33,15 @@ _須先安裝相關套件_
 
 <br>
 
-5. 若有提示更新如 `npm@11.4.1`，可使用 `sudo` 權限進行。
+3. 若有提示更新，複製指令並以 `sudo` 權限進行即可。
 
    ```bash
-   sudo npm install -g npm@11.4.1
+   sudo npm install -g npm@<指定版本>
    ```
 
 <br>
 
-6. 可查看安裝版本。
+4. 可查看安裝版本。
 
 
    ```bash
