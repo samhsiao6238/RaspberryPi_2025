@@ -296,28 +296,23 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 <br>
 
-2. 添加內容 `# 添加這個`，並且些修改 `超文本所在目錄`，其餘部分不用變動；可把預設註解的內容都刪除，這樣會看得比較清楚。
+2. 先修改以下代碼，將 `/var/www/html` 替換為 `<超文本所在目錄>`。
+
+   ![](images/img_153.png)
+
+3. 添加以下內容，並替換 `<超文本所在目錄>`。
 
    ```html
-   <VirtualHost *:80>
-      ServerAdmin webmaster@localhost
-      DocumentRoot <超文本所在目錄>
-
-      # 添加這段
-      <Directory <超文本所在目錄>>
-         Options Indexes FollowSymLinks
-         AllowOverride All
-         Require all granted
-      </Directory>
-
-      ErrorLog ${APACHE_LOG_DIR}/error.log
-      CustomLog ${APACHE_LOG_DIR}/access.log combined
-   </VirtualHost>
+   <Directory <超文本所在目錄>>
+      Options Indexes FollowSymLinks
+      AllowOverride All
+      Require all granted
+   </Directory>
    ```
 
 <br>
 
-8. 修改如下。
+4. 完整的修改如下。
 
    ![](images/img_139.png)
 
