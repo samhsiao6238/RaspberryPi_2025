@@ -318,6 +318,28 @@ _這裡僅是 `共用設備` 而不是指 `共同開發` 的情境；`多人共�
 
 <br>
 
+5. 可複製以下文本進行修改。
+
+   ```html
+   <VirtualHost *:80>
+
+      ServerAdmin webmaster@localhost
+      DocumentRoot <超文本所在目錄>
+
+      <Directory <超文本所在目錄>>
+         Options Indexes FollowSymLinks
+         AllowOverride All
+         Require all granted
+      </Directory>
+
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+   </VirtualHost>
+   ```
+
+<br>
+
 ## 指定所要使用的設定文件
 
 _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定文件，這也代表系統中可以存在一個以上的設定文件作為選擇與切換對象；由於在這示範使用預設值，所以僅作說明無需實作_
@@ -347,6 +369,16 @@ _前一個步驟是編輯設定文件，接著可指定要使用哪一個設定�
    ```bash
    sudo a2ensite 000-default.conf
    ```
+
+<br>
+
+4. 完成後依指示重啟服務。
+
+   ```bash
+   systemctl reload apache2
+   ```
+
+   ![](images/img_154.png)
 
 <br>
 
