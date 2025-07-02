@@ -18,6 +18,10 @@
 
 ## 寫入權杖
 
+_若尚未安裝，可先查看下一章節 `安裝使用`_
+
+<br>
+
 1. 切換到 `Your Authtoken` 頁籤，點擊 `Copy` 複製 `Authtoken`。
 
     ![](images/img_31.png)
