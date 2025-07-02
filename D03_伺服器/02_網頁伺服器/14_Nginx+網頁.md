@@ -12,6 +12,8 @@ _Nginx 就是 `Engine X` 的變形拼法，所以讀音可直接讀作 `Engine X
     nginx -v
     ```
 
+<br>
+
 2. 尚未安裝會顯示如下。
 
     ![](images/img_109.png)
