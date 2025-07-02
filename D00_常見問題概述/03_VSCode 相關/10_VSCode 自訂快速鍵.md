@@ -12,26 +12,26 @@ _VSCode 預設的快速鍵是不可更改的，但可以替既有或新的功能
 
 <br>
 
-1. 輸入 `Open Keyboard Shortcuts` 可自訂快速鍵。
+2. 輸入 `Open Keyboard Shortcuts` 可自訂快速鍵。
 
     ![](images/img_02.png)
 
 <br>
 
-1. 若要查看預設快速鍵，可選擇 `Open Default Keyboard Shortcuts` ，這部分是不允許更改的。
+3. 若要查看預設快速鍵，可選擇 `Open Default Keyboard Shortcuts` ，這部分是不允許更改的。
 
     ![](images/img_03.png)
 
 
 <br>
 
-1. 在預設快速鍵清單中，透過搜尋可以看到 `Paste Image` 這個插件的快速鍵也寫在預設值內，設定為 `alt+cmd+v`；再次說明，Mac 系統的 `option` 與 `cmd` 對應 Windows 鍵盤分別為 `alt` 與 `Windwos`，物理鍵盤的位置是相同的。
+4. 在預設快速鍵清單中，透過搜尋可以看到 `Paste Image` 這個插件的快速鍵也寫在預設值內，設定為 `alt+cmd+v`；再次說明，Mac 系統的 `option` 與 `cmd` 對應 Windows 鍵盤分別為 `alt` 與 `Windwos`，物理鍵盤的位置是相同的。
 
     ![](images/img_04.png)
 
 <br>
 
-1. 假如想更新為 `alt+cmd+/`，先查詢確認這個新的目標設定值與其他預設值都沒有衝突，或是已被定義，但條件 `when` 不衝突；特別說明，這個衝突來自於後來推出的 `AI Copilot` 功能使用了這個快速鍵，但我未使用，所以不受影響。
+5. 假如想更新為 `alt+cmd+/`，先查詢確認這個新的目標設定值與其他預設值都沒有衝突，或是已被定義，但條件 `when` 不衝突；特別說明，這個衝突來自於後來推出的 `AI Copilot` 功能使用了這個快速鍵，但我未使用，所以不受影響。
 
     ![](images/img_06.png)
 
@@ -42,6 +42,8 @@ _VSCode 預設的快速鍵是不可更改的，但可以替既有或新的功能
 1. 開啟設定文件。
 
     ![](images/img_05.png)
+
+<br>
 
 2. 設定值如下，快速鍵可自行修改。
 
@@ -57,6 +59,29 @@ _VSCode 預設的快速鍵是不可更改的，但可以替既有或新的功能
 <br>
 
 3. 設定完成後，當編輯過程中進行畫面截圖，按下快速鍵便可啟動 `Paste Image` 插件。
+
+    ![](images/img_07.png)
+
+<br>
+
+4. 特別補充，針對本範例使用的插件 `Paste Image`，除了設定快捷鍵外，還必須在 `settings.json` 中進行其他設定如下，在此不做贅述。
+
+    ```json
+    {
+        // 設定貼上相片的預設路徑
+        "pasteImage.path": "${currentFileDir}/images/",
+        // 圖片前綴
+        "pasteImage.namePrefix": "img_",
+        // 預設名稱
+        "pasteImage.defaultName": "0",
+        // 已經存在就彈出視窗自訂名稱
+        "pasteImage.showFilePathConfirmInputBox": true,
+        
+        // 其餘省略...
+    }
+    ```
+
+<br>
 
 ___
 
