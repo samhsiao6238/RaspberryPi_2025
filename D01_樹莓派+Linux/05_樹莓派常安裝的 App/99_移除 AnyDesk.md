@@ -1,4 +1,4 @@
-# AnyDesk
+# 移除 AnyDesk
 
 _依據 [官方說明](https://support.anydesk.com/zh-tw/knowledge/anydesk-for-linux-raspberry-pi-freebsd)，截至今日（2024/07/10） 可支援版本如下，但這已不在推薦使用的系統清單中，所以不再贅述安裝步驟，僅對於已經安裝卻無法運行的狀況提供移除安裝說明。_
 
