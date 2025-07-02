@@ -4,43 +4,39 @@ _Nginx 就是 `Engine X` 的變形拼法，所以讀音可直接讀作 `Engine X
 
 <br>
 
-## 檢查與更新
+## 安裝套件
 
-1. 透過查詢版本確認是否安裝 `nginx`。
+1. 查詢版本確認是否安裝 `nginx`。
 
     ```bash
     nginx -v
     ```
 
-    _假如尚未安裝_
+2. 尚未安裝會顯示如下。
 
     ![](images/img_109.png)
 
 <br>
 
-2. 也可以透過 `which` 指令查詢是否有安裝 `nginx`。
+3. 也可透過 `which` 指令查詢是否有安裝 `nginx`。
 
     ```bash
     which nginx
     ```
 
-    _若沒有安裝將不會顯示任何訊息_
+<br>
+
+4. 若沒有安裝將不會顯示任何訊息。
 
     ![](images/img_110.png)
 
 <br>
 
-3. 先進行 `更新＆升級`：確保系統的軟體包管理器和安裝的軟體包處於最新狀態。
+5. 更新、升級系統軟體包並安裝 `nginx`。
 
     ```bash
-    sudo apt update && sudo apt upgrade -y
-    ```
-
-<br>
-
-4. 安裝 nginx。
-
-    ```bash
+    sudo apt update
+    sudo apt upgrade -y
     sudo apt install nginx -y
     ```
 
