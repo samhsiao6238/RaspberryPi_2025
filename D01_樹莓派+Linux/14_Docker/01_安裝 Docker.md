@@ -174,40 +174,6 @@ _用於從網路取得或發送數據的終端機指令，補充說明相關參�
 
 <br>
 
-## Docker 基本指令
-
-1. `docker pull`：下載 Docker 鏡像，從Docker Hub或其他Docker registry下載指定的鏡像。
-
-<br>
-
-2. `docker run`：運行 Docker 容器，根據指定的鏡像啟動一個新的容器實例。
-
-<br>
-
-3. `docker ps`：列出運行中的容器，顯示運行中的所有Docker容器的列表。
-
-<br>
-
-4. `docker stop`：停止運行的容器，使用容器ID或名稱來停止容器。
-
-<br>
-
-5. `docker start`：啟動已停止的容器，使用容器ID或名稱來啟動停止的容器。
-
-<br>
-
-6. `docker rm`：刪除一個容器，使用容器ID或名稱來刪除一個停止的容器。
-
-<br>
-
-7. `docker images`：列出本地的 Docker 鏡像，顯示在本地機器上儲存的所有Docker鏡像的列表。
-
-<br>
-
-8. `docker rmi`：刪除 Docker 鏡像，使用鏡像ID或名稱來刪除指定的Docker鏡像。
-
-<br>
-
 ## 卸載 Docker Engine
 
 _若要更新 Docker Engine 也是運行這個卸載程序後重新安裝_
