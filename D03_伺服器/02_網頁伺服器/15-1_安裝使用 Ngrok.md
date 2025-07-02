@@ -48,13 +48,25 @@ _將使用 brew 安裝 Ngrok_
 
 ## 安裝 Ngrok
 
-1. 前往 [官網](https://dashboard.ngrok.com/get-started/setup/raspberrypi) 下載頁面，切換到樹莓派的 `Homebrew` 選項中。
+1. 前往 [官網](https://dashboard.ngrok.com/get-started/setup/raspberrypi) 並切換到下載頁面。
+
+    ![](images/img_168.png)
+
+<br>
+
+2. 選擇樹莓派系統。
+
+    ![](images/img_169.png)
+
+<br>
+
+3. 切換到 `Homebrew` 選項。
 
     ![](images/img_161.png)
 
 <br>
 
-2. 複製指令運行。
+4. 複製指令運行。
 
     ```bash
     curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
@@ -67,7 +79,9 @@ _將使用 brew 安裝 Ngrok_
 
 <br>
 
-3. 接著運行以下指令。
+## 設定權杖
+
+1. 運行指令將權杖加到本地。
 
     ```bash
     ngrok config add-authtoken <輸入個人-TOKEN>
@@ -75,7 +89,7 @@ _將使用 brew 安裝 Ngrok_
 
 <br>
 
-4. 完成時會提示儲存位置。
+2. 完成時會提示儲存位置。
 
     ```bash
     ~/.config/ngrok/ngrok.yml
@@ -85,7 +99,9 @@ _將使用 brew 安裝 Ngrok_
 
 <br>
 
-5. 啟動 Ngrok 並指定端口為 8080。
+## 啟動服務
+
+1. 啟動 Ngrok 並指定端口為 8080。
 
     ```bash
     ngrok http 8080
@@ -95,19 +111,19 @@ _將使用 brew 安裝 Ngrok_
 
 <br>
 
-6. 複製 `Forwarding` 網址並開啟瀏覽器訪問。
+2. 複製 `Forwarding` 網址並開啟瀏覽器訪問。
 
     ![](images/img_164.png)
 
 <br>
 
-7. 點擊 `Visit Site`。
+3. 點擊 `Visit Site`。
 
     ![](images/img_165.png)
 
 <br>
 
-8. 就會看到當前在 `8080` 端口運行的伺服器，目前是 `Ngnix` 伺服器。
+4. 就會看到當前在 `8080` 端口運行的伺服器，目前是 `Ngnix` 伺服器。
 
     ![](images/img_166.png)
 
