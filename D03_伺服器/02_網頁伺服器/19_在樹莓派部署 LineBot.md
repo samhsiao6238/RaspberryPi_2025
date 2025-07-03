@@ -4,24 +4,37 @@ _部署聊天機器人的所有方式中最簡單的一種，沒有之一_
 
 <br>
 
-## 安裝
+## 建立虛擬環境
 
-_請先啟動虛擬環境 `envLinebot`_
-
-<br>
-
-1. 可參考官方 [API SDKs](https://developers.line.biz/en/docs/messaging-api/line-bot-sdk/)，或直接參考官網 [Python](https://github.com/line/line-bot-sdk-python) 文件。
-
-<br>
-
-2. 在樹莓派上安裝 SDK 及必要套件。
+1. 一鍵建立虛擬環境，命名為 `envLineBot`。
 
     ```bash
-    pip install line-bot-sdk flask
+    mkdir -p ~/Documents/PythonVenvs
+    cd ~/Documents/PythonVenvs
+    python -m venv envLineBot
+    echo 'source ~/Documents/PythonVenvs/envLineBot/bin/activate' >> ~/.zshrc
+    source ~/.zshrc
     ```
 
+    ![](images/img_177.png)
 
-3. 更新版本。
+<br>
+
+## 安裝套件
+
+_可參考官方 [API SDKs](https://developers.line.biz/en/docs/messaging-api/line-bot-sdk/)，或直接參考官網 [Python](https://github.com/line/line-bot-sdk-python) 文件。_
+
+<br>
+
+1. 確認啟動虛擬環境後，安裝 SDK 及必要套件。
+
+    ```bash
+    pip install line-bot-sdk flask python-dotenv
+    ```
+
+<br>
+
+2. 若已安裝過，可進行版本更新。
 
     ```bash
     pip install --upgrade line-bot-sdk
@@ -43,34 +56,111 @@ _這裡不重複步驟指引，僅說明 Webhook 設置，其他請參考前週�
 
 <br>
 
-3. 使用 [官網腳本](https://github.com/line/line-bot-sdk-python#synopsis)
+3. 使用 [官網腳本](https://github.com/line/line-bot-sdk-python#synopsis)；在後續步驟中貼在主腳本 `app.py` 中。
+
+    ```python
+    from flask import Flask, request, abort
+
+    from linebot.v3 import (
+        WebhookHandler
+    )
+    from linebot.v3.exceptions import (
+        InvalidSignatureError
+    )
+    from linebot.v3.messaging import (
+        Configuration,
+        ApiClient,
+        MessagingApi,
+        ReplyMessageRequest,
+        TextMessage
+    )
+    from linebot.v3.webhooks import (
+        MessageEvent,
+        TextMessageContent
+    )
+
+    app = Flask(__name__)
+
+    configuration = Configuration(access_token='YOUR_CHANNEL_ACCESS_TOKEN')
+    handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+
+
+    @app.route("/callback", methods=['POST'])
+    def callback():
+        # get X-Line-Signature header value
+        signature = request.headers['X-Line-Signature']
+
+        # get request body as text
+        body = request.get_data(as_text=True)
+        app.logger.info("Request body: " + body)
+
+        # handle webhook body
+        try:
+            handler.handle(body, signature)
+        except InvalidSignatureError:
+            app.logger.info("Invalid signature. Please check your channel access token/channel secret.")
+            abort(400)
+
+        return 'OK'
+
+
+    @handler.add(MessageEvent, message=TextMessageContent)
+    def handle_message(event):
+        with ApiClient(configuration) as api_client:
+            line_bot_api = MessagingApi(api_client)
+            line_bot_api.reply_message_with_http_info(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[TextMessage(text=event.message.text)]
+                )
+            )
+
+    if __name__ == "__main__":
+        app.run()
+    ```
 
 <br>
 
-4. 用自己的 `Token`、 `Secret` 更改範例中的。
+## 建立專案
 
-    ![](images/img_75.png)
+1. 建立專案資料夾。
+
+    ```bash
+    mkdir -p ~/Documents/exLineBot
+    cd ~/Documents/exLineBot
+    touch .env .gitignore app.py
+    ```
 
 <br>
 
-## 使用 `dotenv` 隔離敏感檔案
+2. 使用 VSCode 開啟專案。
+
+    ![](images/img_178.png)
+
+<br>
+
+## 隔離敏感檔案
 
 _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。_
 
 <br>
 
-1. 在樹莓派安裝套件。
+1. 編輯 `.gitignore` 文件。
 
     ```bash
-    pip install python-dotenv
+    .env
     ```
 
-2. 在專案內根目錄自建立一格隱藏檔案 `.env` 並編輯內容。
+<br>
+
+2. 編輯 `.env`。
 
     ```bash
     _CHANNEL_ACCESS_TOKEN_=<貼上 TKOKEN>
     _CHANNEL_SECRET_=<貼上 SECRET>
     ```
+
+<br>
 
 3. 在主腳本 `app.py` 導入 `dotenv`。
 

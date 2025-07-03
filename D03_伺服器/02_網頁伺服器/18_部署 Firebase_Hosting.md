@@ -295,13 +295,27 @@ _示範新建站台_
 
 <br>
 
-3. 同樣使用 VSCode 開啟 Firebase Hosting 專案後，將壓縮後的內容拖曳到專案資料夾內的 `public` 資料夾內。
+## 編輯專案
+
+1. 使用 VSCode 連線樹莓派，並在 Firebase Hosting 專案資料夾中開啟工作區。
+
+   ![](images/img_174.png)
+
+<br>
+
+2. 完成連線後會看如下畫面。
+
+   ![](images/img_175.png)
+
+<br>
+
+3. 將壓縮後的內容拖曳到專案資料夾內的 `public` 資料夾內；會詢問是否覆蓋，點擊確認完整覆蓋原本的文件。
 
    ![](images/img_65.png)
 
 <br>
 
-4. 再次強調，下載的模板要放在 `public` 資料夾之下；完成後如下。
+4. 再次強調，下載的模板要放在 `public` 資料夾之下；完成後的 `public` 資料夾如下。
 
    ![](images/img_66.png)
 
@@ -327,27 +341,29 @@ _示範新建站台_
 
 ## 網站部署
 
-_進入樹莓派_
+_可直接在 VSCode 中開啟終端機_
 
 <br>
 
-1. 在專案的根目錄 `/my_hosting` 運行部署指令。
+1. 可修改 `index.html` 文本中的 `Alex Smith` 為自己的名字進行觀察。
+
+   ![](images/img_144.png)
+
+<br>
+
+2. 在專案的根目錄 `/my_hosting` 運行部署指令。
 
    ```bash
    firebase deploy
    ```
 
+   ![](images/img_176.png)
+
 <br>
 
-2. 完成時會顯示一個網站的超連結；複製進行訪問。
+2. 完成時會顯示一個公網連結；複製進行訪問。
 
    ![](images/img_70.png)
-
-<br>
-
-3. 可修改文本中的 `Alex Smith` 為自己的名字進行觀察。
-
-   ![](images/img_144.png)
 
 <br>
 
