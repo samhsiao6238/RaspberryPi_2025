@@ -12,33 +12,39 @@ _這是在 Firebase 主控台建立的 Google Cloud 專案，可在 [GC](https:/
 
 ## 步驟
 
-1. 訪問 [Firebase](https://console.firebase.google.com/u/0/)。
+1. 訪問 [Firebase 主控台](https://console.firebase.google.com/)。
 
     ![](images/img_37.png)
 
 <br>
 
-2. 建立專案。
+2. 點擊 `開始使用 Firebase 專案`。
 
     ![](images/img_01.png)
 
 <br>
 
-3. 自訂專案名稱、然後點擊 `繼續`。
+3. 自訂專案名稱如 `MyFirstWeb`，勾選 `我接受`、然後點擊 `繼續`。
 
     ![](images/img_02.png)
 
 <br>
 
-4. 暫時先關閉分析功能，這樣可減少所需的額外設定，然後 `建立專案`。
+4. 其他使用預設值即可。
 
     ![](images/img_03.png)
 
 <br>
 
-5. 完成後，點擊 `繼續`。
+5. 預設啟用 `Gemini`，點擊 `繼續`。
 
     ![](images/img_04.png)
+
+<br>
+
+6. 可關閉 `Analytics` 減少過程中的干擾，然後點擊 `建立專案`。
+
+    ![](images/img_70.png)
 
 <br>
 
