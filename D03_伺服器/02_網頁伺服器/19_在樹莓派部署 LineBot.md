@@ -196,11 +196,13 @@ _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。
 
 1. 先在 `5000` 端口啟動 Ngrok，這是 Flask 預設的端口。
 
-    ![](images/img_76.png)
+    ```bash
+    ngrok http 5000
+    ```
 
 <br>
 
-2. 將 `https` 的 URL 貼到 LineBot 的 Webhook 中。
+2. 複製 `https` 的 URL，這是要貼到 LineBot 的 Webhook 中的網址。
 
     ![](images/img_77.png)
 
@@ -230,22 +232,27 @@ _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。
 
 <br>
 
-2. 在 Line Developers 主控台中點擊 `Verify` 確認 `Webhook` 正確運行。
+2. 在 Line Developers 主控台中點擊 `Verify`，顯示 `OK` 確認 `Webhook` 正確運行。
 
     ![](images/img_147.png)
 
 <br>
 
-3. 接下來就可以開啟機器人對話。
+3. 掃描 QRcode 添加好友，接著嘗試與機器人對話。
 
     ![](images/img_148.png)
 
 <br>
 
-4. 可簡易編輯腳本確認互動；切記修改腳本後必須重新運行。
+## 優化腳本
+
+_可簡易編輯腳本確認互動；切記修改腳本後必須重新運行_
+
+<br>
+
+1. 修改 `handle_message` 函式。
 
     ```python
-    # 修改後的 handle_message 函式
     @handler.add(MessageEvent, message=TextMessageContent)
     def handle_message(event):
         user_msg = event.message.text.strip()
