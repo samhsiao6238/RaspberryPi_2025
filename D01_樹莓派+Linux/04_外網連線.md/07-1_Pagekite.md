@@ -65,19 +65,69 @@ _連線樹莓派實作_
 
 <br>
 
-## 實測
+## 查看設定
 
 _需另外開啟一個終端機連線樹莓派進行後續步驟_
 
 <br>
 
-1. 先查看設定。
+1. 先查看設定；這是 `pagekite` 用來穿透 `防火牆` 將樹莓派上的服務器公開到網際網路上的設定檔。
 
     ```bash
     sudo cat /root/.pagekite.rc
     ```
 
 <br>
+
+2. 這是在 `PageKite` 註冊的 `子網域名稱`，當外網訪問 `http://<自訂名稱>.pagekite.me` 時，就會連到樹莓派服務器上。
+
+    ```bash
+    kitename   = <自訂的名稱>.pagekite.me
+    ```
+
+<br>
+
+3. 這是 `PageKite` 提供的密鑰，用來驗證樹莓派主機對應 `kitename` 的身分。
+
+    ```bash
+    kitesecret = 33xxxxxxxxxxxxxxxxa2
+    ```
+
+<br>
+
+4. 表示接下來的設定會以這一段為預設規則，適用於多個服務。
+
+    ```bash
+    defaults
+    ```
+
+<br>
+
+5. 這是最重要的一行設置，第一組值表示將自訂的網域流量導向到樹莓派，第二個值是指定端口為 `80`，第三個值就是呼叫前面定義的密鑰進行驗證。
+
+    ```bash
+    service_on  = http:@kitename : localhost:80 : @kitesecret
+    ```
+
+<br>
+
+6. 預設儲存位置。
+
+    ```bash
+    savefile = /root/.pagekite.rc
+    ```
+
+<br>
+
+7. 此為內部網路傳輸的最大讀取大小參數，代表 PageKite 每次最多從連線中讀取的位元組數；數值表示某種自訂比例調整，實際用途偏底層性能調整、無需變更。
+
+    ```bash
+    max_read_bytes = 16256x3.100
+    ```
+
+<br>
+
+## 開始實作
 
 2. 啟動 `HTTP Server` 提供內容。
 
