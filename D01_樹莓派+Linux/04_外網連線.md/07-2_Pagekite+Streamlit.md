@@ -187,20 +187,22 @@ _說明如何快速套用官網範例_
 
 <br>
 
-5. 可修改座標以台北為中心；經緯度約為 `lat：25.0330`、`lon：121.5654`。
+5. 可修改座標以 `台北` 為中心；經緯度約為 `lat：25.0330`、`lon：121.5654`，`[50, 50]` 控制擴散範圍，越大越集中。
 
-```python
-import streamlit as st
-import pandas as pd
-import numpy as np
+    ```python
+    import streamlit as st
+    import pandas as pd
+    import numpy as np
 
-# 台北市中心附近隨機生成 100 筆座標
-df = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [25.0330, 121.5654],
-    columns=["lat", "lon"],
-)
-st.map(df)
-```
+    # 台北市中心附近隨機生成 100 筆座標
+    df = pd.DataFrame(
+        np.random.randn(1000, 2) / [50, 50] + [25.0330, 121.5654],
+        columns=["lat", "lon"],
+    )
+    st.map(df)
+    ```
+
+<br>
 
 6. 再次運行。
 
