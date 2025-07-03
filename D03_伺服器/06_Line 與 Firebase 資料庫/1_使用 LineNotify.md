@@ -1,3 +1,7 @@
+_該服務已經停用，不用參考_
+
+<br>
+
 # 建立 LineNotify
 
 _樹莓派啟動時發送 LineNotify 通知_
