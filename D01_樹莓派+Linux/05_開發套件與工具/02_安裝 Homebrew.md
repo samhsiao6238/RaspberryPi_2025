@@ -49,3 +49,15 @@ _將使用 brew 安裝 Ngrok_
     ![](images/img_170.png)
 
 <br>
+
+6. 查詢安裝版本。
+
+    ```bash
+    brew -v
+    ```
+
+<br>
+
+___
+
+_END_
