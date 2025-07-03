@@ -48,6 +48,12 @@ _這是在 Firebase 主控台建立的 Google Cloud 專案，可在 [GC](https:/
 
 <br>
 
+7. 完成時點擊 `繼續`。
+
+    ![](images/img_71.png)
+
+<br>
+
 ## 專案主控台
 
 _此時會自動進入專案主控台_
