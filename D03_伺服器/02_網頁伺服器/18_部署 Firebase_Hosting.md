@@ -160,6 +160,8 @@ _這裡切記要選對資料夾_
    firebase init
    ```
 
+   ![](images/img_171.png)
+
 <br>
 
 3. 使用 `方向鍵` 移動，然後用 `空白鍵` 選擇 `Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys` ，確認好按下 `ENTER` 。
