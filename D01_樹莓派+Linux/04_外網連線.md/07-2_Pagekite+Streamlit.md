@@ -125,9 +125,19 @@ _同樣需要兩個終端機_
     streamlit run app.py
     ```
 
+    ![](images/img_42.png)
+
 <br>
 
-2. 啟動反向代理；參數 `--clean` 會清除 `--optdir` 目錄中之前自動建立的暫存檔。
+2. 啟動反向代理。
+
+    ```bash
+    sudo pagekite.py 8501 sam6238.pagekite.me
+    ```
+
+<br>
+
+3. 若有變更設定，可加入參數 `--clean` 清除 `--optdir` 指定目錄中的暫存檔，重新註冊並啟用對應的 Kite。
 
     ```bash
     sudo pagekite.py --clean --optdir=/etc/pagekite.d 8501 sam6238.pagekite.me
@@ -135,7 +145,7 @@ _同樣需要兩個終端機_
 
 <br>
 
-3. 開啟瀏覽器進行訪問。
+4. 開啟瀏覽器進行訪問。
 
     ```bash
     https://sam6238.pagekite.me
