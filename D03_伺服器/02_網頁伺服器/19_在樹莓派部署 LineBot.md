@@ -162,21 +162,23 @@ _加強安全性，這個範例將安裝 `dotenv` 套件來隔離私密資訊。
 
 <br>
 
-3. 在主腳本 `app.py` 導入 `dotenv`。
+3. 在主腳本 `app.py` 導入 `dotenv` 並讀取數據。
 
     ```python
     import os
     from dotenv import load_dotenv
     load_dotenv()
-    ```
 
-4. 使用 `os` 來取得 `Token` 及 `Secret`；特別注意，分開寫是希望讓程式碼易讀性提高。
-
-    ```python
     # 讀取
     CHANNEL_ACCESS_TOKEN = os.getenv("_CHANNEL_ACCESS_TOKEN_")
     CHANNEL_SECRET = os.getenv("_CHANNEL_SECRET_")
+    ```
 
+<br>
+
+4. 修改範例腳本中的導入方式。
+
+    ```python
     # 其他代碼，略...
 
     # 使用

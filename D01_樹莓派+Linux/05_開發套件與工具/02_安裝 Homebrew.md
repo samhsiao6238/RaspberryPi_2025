@@ -1,6 +1,6 @@
-## 安裝 Homebrew
+## 安裝 `Homebrew`
 
-_將使用 brew 安裝 Ngrok_
+_將使用 `brew` 安裝 `Ngrok`_
 
 <br>
 
@@ -10,7 +10,7 @@ _將使用 brew 安裝 Ngrok_
 
 <br>
 
-2. 在樹莓派執行。
+2. 在樹莓派執行；需要輸入密碼，然後確認安裝即可。
 
     ```bash
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -18,10 +18,10 @@ _將使用 brew 安裝 Ngrok_
 
 <br>
 
-3. 依據提示把 Homebrew 加入環境變數。
+3. 依據提示把 `Homebrew` 加入環境變數。
 
     ```bash
-    echo >> /home/sam6238/.bashrc
+    echo >> ~/.bashrc
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     ```
@@ -33,14 +33,14 @@ _將使用 brew 安裝 Ngrok_
 4. 依據建議安裝基本依賴套件。
 
     ```bash
-    sudo apt-get install build-essential
+    sudo apt install build-essential
     ```
 
     ![](images/img_160.png)
 
 <br>
 
-5. 依據建立安裝工具。
+5. 依據建立安裝工具；需要一點時間完成，在教室實作可略過該步驟。
 
     ```bash
     brew install gcc
