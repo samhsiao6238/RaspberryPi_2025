@@ -155,6 +155,56 @@ _同樣需要兩個終端機_
 
 <br>
 
+## 使用官方範例
+
+_說明如何快速套用官網範例_
+
+<br>
+
+1. 前往 [官網 API Reference](https://docs.streamlit.io/develop/api-reference)。
+
+    ![](images/img_43.png)
+
+<br>
+
+2. 任意選擇一個範例如 [st.map](https://docs.streamlit.io/develop/api-reference/charts/)。
+
+    ![](images/img_44.png)
+
+<br>
+
+3. 複製範例代碼。
+
+    ![](images/img_45.png)
+
+<br>
+
+4. 關閉運行中的腳本，重新編輯。
+
+    ```bash
+    nano app.py
+    ```
+
+<br>
+
+5. 再次運行。
+
+    ```bash
+    streamlit run app.py
+    ```
+
+<br>
+
+6. 刷新頁面。
+
+    ```bash
+    https://sam6238.pagekite.me
+    ```
+
+    ![](images/img_46.png)
+
+<br>
+
 ___
 
 _END_
