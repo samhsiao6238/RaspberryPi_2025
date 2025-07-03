@@ -283,7 +283,7 @@ _示範新建站台_
 
 <br>
 
-1. [下載](https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/download/) 免費模板，這次換一個模板試試。
+1. [下載](https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/download/) 免費模板，點擊 `Free Download` 下載到本地電腦中；特別注意，使用電腦開發，所以是下載到電腦中。
 
    ![](images/img_63.png)
 
