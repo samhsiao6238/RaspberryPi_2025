@@ -6,7 +6,7 @@ _[Ngrok 官網](https://ngrok.com/)；Ngrok 本身並不是一種 `伺服器服�
 
 ## 安裝 Homebrew
 
-_參考 `D01-05_開發套件與工具-02_安裝 Ｈㄊㄩㄟ`將使用 brew 安裝 Ngrok_
+_參考 `D01-05_開發套件與工具-02_安裝 Homebrew`；因為後續的腳本需要使用到 `brew` 工具_
 
 <br>
 
