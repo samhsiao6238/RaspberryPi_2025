@@ -16,7 +16,7 @@ _須先安裝相關套件_
 
 <br>
 
-1. 安裝 `Node.js`。
+1. 安裝 `Node.js`，若使用 NVM 可參考 `D01-05` 章節的說明。
 
    ```bash
    sudo apt update
