@@ -167,15 +167,16 @@ _需另外開啟一個終端機連線樹莓派進行後續步驟_
 
 <br>
 
-2. 編輯首頁。
+2. 進入 `~/Documents` 編輯首頁文本 `index.html`。
 
     ```bash
+    cd ~/Documents
     nano index.html
     ```
 
 <br>
 
-3. 貼上後儲存退出。 
+3. 貼上後 `儲存（control+O）`、`退出（control+X）`。 
 
     ```html
     <!DOCTYPE html>
