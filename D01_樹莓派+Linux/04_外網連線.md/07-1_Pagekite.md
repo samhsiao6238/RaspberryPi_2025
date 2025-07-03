@@ -129,7 +129,7 @@ _需另外開啟一個終端機連線樹莓派進行後續步驟_
 
 ## 開始實作
 
-1. 啟動 `HTTP Server` 提供內容。
+1. 啟動 `HTTP Server` 提供內容；假如在 `80` 端口並無啟動伺服器服務，可運行以下指令使用 Python 內建的 HTTP 模組，啟動一個簡易的 Web 伺服器，讓使用者可以透過瀏覽器訪問目前目錄中的檔案。
 
     ```bash
     sudo python -m http.server 80
@@ -161,7 +161,7 @@ _需另外開啟一個終端機連線樹莓派進行後續步驟_
 
 ## 製作首頁
 
-1. 關閉 `HTTP Server`。
+1. 使用組合鍵 `control+C` 關閉 `HTTP Server`。
 
     ![](images/img_32.png)
 
