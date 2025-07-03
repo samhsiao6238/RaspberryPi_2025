@@ -12,9 +12,9 @@ _這是在 Firebase 主控台建立的 Google Cloud 專案，可在 [GC](https:/
 
 ## 步驟
 
-1. 登入 Firebase，點擊進入 [主控台 Console](https://console.firebase.google.com/) 。
+1. 訪問 [Firebase](https://console.firebase.google.com/u/0/)。
 
-    ![](images/img_37.png)   
+    ![](images/img_37.png)
 
 <br>
 
