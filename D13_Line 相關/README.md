@@ -1,36 +1,30 @@
 # 開機通知
 
-_將 LINE Notify 遷移至 Messaging API，並以樹莓派開機通知為例_
+_使用 `Line Messaging API` 在樹莓派開機時發送通知_
 
 <br>
 
 ## 建立 LINE 官方帳號
 
+_不細說步驟_
+
+<br>
+
 1. 前往 [LINE Developers Console](https://developers.line.biz/zh-hant/) 註冊或登入；使用 Line 帳號即可登入。
 
 <br>
 
-2. 建立 新的 LINE 官方帳號，該帳號將用於發送開機通知訊息。
-
-<br>
-
-## 取得 Channel Access Token
-
-_相關細節先省略_
-
-<br>
-
-1. 在 `Messaging API` 中取得 `Channel Secret` 和 `Access Token`。
+2. 建立新的 LINE 官方帳號用於發送開機通知訊息。
 
 <br>
 
 ## 準備工作
 
-_以下 Python 腳本會在樹莓派開機時，自動發送通知給 LINE 官方帳號的好友。_
+1. 在 `Messaging API` 中取得 `Access Token`；這個專案無需 `Channel Secret`。
 
 <br>
 
-1. 一鍵建立虛擬環境；命名為 `envLineBot`。
+2. 一鍵建立虛擬環境；命名為 `envLineBot`。
 
     ```bash
     mkdir -p ~/Documents/PythonVenvs
@@ -42,7 +36,7 @@ _以下 Python 腳本會在樹莓派開機時，自動發送通知給 LINE 官�
 
 <br>
 
-2. 安裝必要的 Python 套件。
+3. 安裝必要的 Python 套件。
 
     ```bash
     pip install line-bot-sdk flask requests python-dotenv
@@ -52,7 +46,7 @@ _以下 Python 腳本會在樹莓派開機時，自動發送通知給 LINE 官�
 
 ## 建立專案
 
-1. 在 `~/Document` 中建立腳本。
+1. 在指定路徑中建立腳本 `line_message.py`，這裡會建立在 `~/Document/exLineMessage` 。
 
     ```bash
     mkdir -p ~/Documents/exLineMessage
@@ -62,21 +56,27 @@ _以下 Python 腳本會在樹莓派開機時，自動發送通知給 LINE 官�
 
 <br>
 
-2. 使用 VSCode 連線。
+2. 使用 VSCode 連線樹莓派。
 
-3. 編輯 .gitignore。
+<br>
 
-```bash
-.env
-```
+3. 編輯 `.gitignore`。
 
-4. 編輯 `.env`。
+    ```bash
+    .env
+    ```
 
-```bash
-_CHANNEL_ACCESS_TOKEN_=<貼上-TKOKEN>
-_CHANNEL_SECRET_=<貼上-SECRET>
-_USER_ID=<貼上-Your-user-ID>
-```
+<br>
+
+4. 編輯 `.env`；雖然不會用到 `_CHANNEL_SECRET_`，但還是先存入備用。
+
+    ```bash
+    _CHANNEL_ACCESS_TOKEN_=<貼上-TKOKEN>
+    _CHANNEL_SECRET_=<貼上-SECRET>
+    _USER_ID=<貼上-Your-user-ID>
+    ```
+
+<br>
 
 5. 編輯 `line_message.py`。
 
@@ -119,18 +119,11 @@ _USER_ID=<貼上-Your-user-ID>
 
 <br>
 
-## 取得 User ID
-
-1. 使用 `get_profile` API 取得的 `userId`
+6. 運行測試。
 
     ```bash
-    curl -X GET "https://api.line.me/v2/bot/profile/{user_id}" \
-            -H "Authorization: Bearer 你的 Channel Access Token"
+    python line_message.py
     ```
-
-<br>
-
-2. 也可以讓 BOT 發送 `replyToken` 訊息，並查看 webhook 收到的 userId。
 
 <br>
 
@@ -144,10 +137,21 @@ _USER_ID=<貼上-Your-user-ID>
 
 <br>
 
-2. 在 `exit 0` 之前加上
+2. 貼上以下內容；只在開機時執行一次，並將腳本放到背景執行，然後結束 `rc.local`。
 
     ```bash
-    python /home/<使用者帳號>/line_message.py &
+    #!/bin/bash
+
+    # 建議加一點延遲，確保網路與系統資源準備好
+    sleep 5
+
+    # 切換工作目錄（重要，避免程式依賴相對路徑錯誤）
+    cd /home/sam6238/Documents/exLineMessage
+
+    # 執行 Python 虛擬環境內的腳本
+    nohup /home/sam6238/Documents/PythonVenvs/envLineBot/bin/python line_message.py > /home/sam6238/Documents/exLineMessage/log.txt 2>&1 &
+
+    exit 0
     ```
 
 <br>
@@ -156,7 +160,19 @@ _USER_ID=<貼上-Your-user-ID>
 
 <br>
 
-4. 重新啟動樹莓派測試。
+4. 讓檔案可執行
+
+```bash
+sudo chmod +x /etc/rc.local
+```
+
+5. 立即測試，會等待五秒鐘後運行。
+
+```bash
+sudo /etc/rc.local
+```
+
+6. 重新啟動樹莓派測試。
 
     ```bash
     sudo reboot
@@ -164,6 +180,20 @@ _USER_ID=<貼上-Your-user-ID>
 
 <br>
 
+## 檢查：
+
+1. 確認程式是否在執行。
+
+```bash
+ps aux | grep line_message.py
+```
+
+2. 查看程式的 log 輸出
+
+```bash
+tail -f /home/sam6238/Documents/exLineMessage/log.txt
+```
+
 ___
 
-_待補全_
+_END_
