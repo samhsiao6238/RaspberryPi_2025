@@ -54,27 +54,27 @@ _新版系統已預設安裝好，可直接跳過 `安裝步驟`_
 
 <br>
 
-## 連線
+## 初次連線
 
-4. 重啟後透過 VNC 連線桌面，會在右上角看到功能的圖標，預設是反白的。
+1. 透過 VNC 連線桌面，會在右上角看到功能的圖標，預設是反白的。
 
     ![](images/img_01.png)
 
 <br>
 
-5. 點擊此圖標開啟功能。
+2. 點擊此圖標開啟功能。
 
     ![](images/img_02.png)
 
 <br>
 
-6. 會自動開啟瀏覽器進入 [Sign in](https://connect.raspberrypi.com/sign-in) 頁面。
+3. 會自動開啟瀏覽器進入 [Sign in](https://connect.raspberrypi.com/sign-in) 頁面。
 
     ![](images/img_141.png)
 
 <br>
 
-7. 有帳號的話可點擊登入。
+4. 有帳號的話可點擊登入。
 
     ![](images/img_03.png)
 
