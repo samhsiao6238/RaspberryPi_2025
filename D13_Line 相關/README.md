@@ -24,72 +24,77 @@ _相關細節先省略_
 
 <br>
 
-## 在樹莓派設定 Python 腳本
+## 準備工作
 
 _以下 Python 腳本會在樹莓派開機時，自動發送通知給 LINE 官方帳號的好友。_
 
 <br>
 
-1. 建立虛擬環境。
+1. 一鍵建立虛擬環境；命名為 `envLineBot`。
 
     ```bash
-    mkdir -p ~/Desktop/PythonVenv && cd ~/Desktop/PythonVenv
-    python -m venv envBot
+    mkdir -p ~/Documents/PythonVenvs
+    cd ~/Documents/PythonVenvs
+    python -m venv envLineBot
+    echo 'source ~/Documents/PythonVenvs/envLineBot/bin/activate' >> ~/.bashrc
+    source ~/.bashrc
     ```
 
 <br>
 
-2. 編輯。
+2. 安裝必要的 Python 套件。
 
     ```bash
-    sudo nano ~/.bashrc
+    pip install line-bot-sdk flask requests python-dotenv
     ```
 
 <br>
 
-3. 加入。
+## 建立專案
+
+1. 在 `~/Document` 中建立腳本。
 
     ```bash
-    source /home/sam6238/Documents/PythonVenv/envBot/bin/activate
+    mkdir -p ~/Documents/exLineMessage
+    cd ~/Documents/exLineMessage
+    touch line_message.py .env .gitignore
     ```
 
 <br>
 
-4. 安裝必要的 Python 套件
+2. 使用 VSCode 連線。
 
-    ```bash
-    pip install flask requests
-    ```
+3. 編輯 .gitignore。
 
-<br>
+```bash
+.env
+```
 
-## 建立腳本
+4. 編輯 `.env`。
 
-1. 取得 User ID。
+```bash
+_CHANNEL_ACCESS_TOKEN_=<貼上-TKOKEN>
+_CHANNEL_SECRET_=<貼上-SECRET>
+_USER_ID=<貼上-Your-user-ID>
+```
 
-    ```bash
-    # 
-    ```
-
-<br>
-
-2. 在文件中建立腳本。
-
-    ```bash
-    cd ~/Documents && touch line_notify.py
-    ```
-
-<br>
-
-3. 建立 `line_notify.py` 腳本
+5. 編輯 `line_message.py`。
 
     ```python
     import requests
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    # 讀取
+    _CHANNEL_ACCESS_TOKEN = os.getenv("_CHANNEL_ACCESS_TOKEN_")
+    _CHANNEL_SECRET = os.getenv("_CHANNEL_SECRET_")
+    _USER_ID = os.getenv("_USER_ID")
 
     # 設定 LINE Messaging API Channel Access Token
-    LINE_ACCESS_TOKEN = "<輸入-Channel-Access-Token>"
+    LINE_ACCESS_TOKEN = _CHANNEL_ACCESS_TOKEN
     # 可在 LINE Bot加為好友後取得
-    USER_ID = "<輸入-User-ID>"
+    USER_ID = _USER_ID
 
     def send_line_message(message):
         url = "https://api.line.me/v2/bot/message/push"
@@ -142,7 +147,7 @@ _以下 Python 腳本會在樹莓派開機時，自動發送通知給 LINE 官�
 2. 在 `exit 0` 之前加上
 
     ```bash
-    python /home/<使用者帳號>/line_notify.py &
+    python /home/<使用者帳號>/line_message.py &
     ```
 
 <br>

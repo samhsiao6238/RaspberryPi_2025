@@ -12,8 +12,8 @@ _部署聊天機器人的所有方式中最簡單的一種_
     mkdir -p ~/Documents/PythonVenvs
     cd ~/Documents/PythonVenvs
     python -m venv envLineBot
-    echo 'source ~/Documents/PythonVenvs/envLineBot/bin/activate' >> ~/.zshrc
-    source ~/.zshrc
+    echo 'source ~/Documents/PythonVenvs/envLineBot/bin/activate' >> ~/.bashrc
+    source ~/.bashrc
     ```
 
     ![](images/img_177.png)
