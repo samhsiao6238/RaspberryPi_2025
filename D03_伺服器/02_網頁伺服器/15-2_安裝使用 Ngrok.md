@@ -46,6 +46,16 @@ _將使用 brew 安裝 Ngrok_
 
 <br>
 
+5. 依據建立安裝工具。
+
+    ```bash
+    brew install gcc
+    ```
+
+    ![](images/img_170.png)
+
+<br>
+
 ## 安裝 Ngrok
 
 1. 前往 [官網](https://dashboard.ngrok.com/get-started/setup/raspberrypi) 並切換到下載頁面。
