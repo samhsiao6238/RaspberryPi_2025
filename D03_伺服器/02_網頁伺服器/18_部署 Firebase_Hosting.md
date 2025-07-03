@@ -226,7 +226,7 @@ _完成部署後，先觀察專案資料夾內添加了哪些文件_
 
 <br>
 
-1. 會添加 `.gitignore`，假如要進行原始檔控制，可加入排除項目。
+1. 列出所有文件；`firebase.json` 是 `Firebase` 專案的主要設定檔，`.firebaserc` 讓 CLI 知道如何部署專案，`.gitignore` 是 `Git` 的忽略清單；`public` 資料夾是預設的部署目錄，放置 `HTML`、`CSS`、`JS` 等前端資源。
 
    ```bash
    ls -al
