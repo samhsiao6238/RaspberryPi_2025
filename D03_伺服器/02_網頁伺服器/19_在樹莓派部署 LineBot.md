@@ -277,6 +277,32 @@ _可簡易編輯腳本確認互動；切記修改腳本後必須重新運行_
 
 <br>
 
+## 使用 Pagekite
+
+_若已經建立 Pagekite 開發環境_
+
+<br>
+
+1. 在指定端口 `5000` 啟動服務。
+
+    ```bash
+    sudo pagekite.py 5000 sam6238.pagekite.me
+    ```
+
+<br>
+
+2. 將 pagekite 網域寫入 LineBot 主控台中的 `Webhook URL`；切勿忘記尾綴路由一定要寫上 `/callback`。
+
+    ![](images/img_179.png)
+
+<br>
+
+3. 驗證無誤後，機器人便可正常運作。
+
+    ![](images/img_180.png)
+
+<br>
+
 ___
 
 _END_
