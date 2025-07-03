@@ -10,7 +10,7 @@ _基於 `PEP 668`，所以要使用虛擬環境_
 
 <br>
 
-1. 一鍵完成虛擬環境建立。
+1. 一鍵完成虛擬環境建立與啟動，這裡預設的名稱是 `envStreamlit`；確認終端機命令行前綴變更為 `envStreamlit` 即表示成功。
 
     ```bash
     mkdir -p ~/Documents/PythonVenvs
