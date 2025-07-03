@@ -288,12 +288,12 @@ _除了 `Ngrok`，若已經建立 `Pagekite` 開發環境，可嘗試使用該�
 1. 在指定端口 `5000` 啟動服務。
 
     ```bash
-    sudo pagekite.py 5000 sam6238.pagekite.me
+    sudo pagekite.py 5000 <自己的-pagekite-網域名稱>.pagekite.me
     ```
 
 <br>
 
-2. 將 pagekite 網域寫入 LineBot 主控台中的 `Webhook URL`；切勿忘記尾綴路由一定要寫上 `/callback`。
+2. 將 `pagekite` 完整網域寫入 `LineBot` 主控台中的 `Webhook URL`；切勿忘記尾綴路由一定要寫上 `/callback`。
 
     ![](images/img_179.png)
 
