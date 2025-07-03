@@ -198,7 +198,7 @@ _若尚未安裝 Ngrok，可參考 `D01-04-06-2`_
 
 <br>
 
-1. 先在 `5000` 端口啟動 Ngrok，這是 Flask 預設的端口。
+1. 先在 `Flask` 預設端口 `5000` 啟動 `Ngrok`。
 
     ```bash
     ngrok http 5000
@@ -206,27 +206,25 @@ _若尚未安裝 Ngrok，可參考 `D01-04-06-2`_
 
 <br>
 
-2. 複製 `https` 的 URL，這是要貼到 LineBot 的 Webhook 中的網址。
+2. 複製 `https` 的 URL。
 
     ![](images/img_77.png)
 
 <br>
 
-3. 使用 `https` 並加上 `/callback`；特別注意所使用的路由名稱是否正確，有些腳本會使用 `webhook` 。
+3. 貼上網址，並且記得尾綴要加上路由 `/callback`；特別注意路由名稱是否正確，有些腳本會使用 `webhook`。
 
     ![](images/img_78.png)
 
 <br>
 
-4. 以上機器人便部署完成。
+## 啟動服務
 
-    ![](images/img_79.png)
+_進入專案根目錄_
 
 <br>
 
-## 運行
-
-1. 在專案跟目錄中運行腳本。
+1. 運行腳本。
 
     ```bash
     python app.py
@@ -236,7 +234,7 @@ _若尚未安裝 Ngrok，可參考 `D01-04-06-2`_
 
 <br>
 
-2. 在 Line Developers 主控台中點擊 `Verify`，顯示 `OK` 確認 `Webhook` 正確運行。
+2. 在 `Line Developers` 主控台中點擊 `Verify`，顯示 `OK` 確認 `Webhook` 正確運行。
 
     ![](images/img_147.png)
 
@@ -250,7 +248,7 @@ _若尚未安裝 Ngrok，可參考 `D01-04-06-2`_
 
 ## 優化腳本
 
-_可簡易編輯腳本確認互動；切記修改腳本後必須重新運行_
+_可簡易編輯腳本；切記修改腳本後必須重新運行_
 
 <br>
 
@@ -283,7 +281,7 @@ _可簡易編輯腳本確認互動；切記修改腳本後必須重新運行_
 
 ## 使用 Pagekite
 
-_若已經建立 Pagekite 開發環境_
+_除了 `Ngrok`，若已經建立 `Pagekite` 開發環境，可嘗試使用該服務運行機器人_
 
 <br>
 
