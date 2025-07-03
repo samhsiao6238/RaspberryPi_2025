@@ -220,7 +220,7 @@ _需另外開啟一個終端機連線樹莓派進行後續步驟_
 
 ## 以套件方式安装
 
-_特別注意，透過官方的安裝腳本只把 `pagekite.py` 拷貝到 `/usr/local/bin`，並沒有安裝 Debian 套件版，所以不會在 `/etc/pagekite.d/` 底下放任何範本或設定檔案_
+_【可跳過】特別注意，透過官方的安裝腳本只把 `pagekite.py` 拷貝到 `/usr/local/bin`，並沒有安裝 Debian 套件版，所以不會在 `/etc/pagekite.d/` 底下放任何範本或設定檔案_
 
 <br>
 
