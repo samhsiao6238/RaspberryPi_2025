@@ -57,9 +57,9 @@ _若有提示更新，可改用 nvm 進行管理；以下僅指引操作，詳�
 3. 安裝指定版本。
 
    ```bash
-   nvm install 20
-   nvm use 20
-   nvm alias default 20
+   nvm install 22
+   nvm use 22
+   nvm alias default 22
    ```
 
 <br>
