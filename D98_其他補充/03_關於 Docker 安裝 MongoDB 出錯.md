@@ -1,7 +1,5 @@
 # Docker 安裝 MongoDB
 
-_Tim Huang 提供_
-
 <br>
 
 1. 錯誤訊息
