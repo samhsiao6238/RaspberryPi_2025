@@ -87,7 +87,7 @@ _以下將分幾個階段依序完成站台建立_
 7. 查看是否為開機自動啟動。
 
    ```bash
-   sudo systemctl enable apache2
+   sudo systemctl is-enabled apache2
    ```
 
 <br>
