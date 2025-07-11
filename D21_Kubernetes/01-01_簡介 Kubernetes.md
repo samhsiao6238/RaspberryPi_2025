@@ -1,6 +1,6 @@
 # 快速導覽
 
-_參考 [網路文章](https://everythingdevops.dev/step-by-step-guide-creating-a-kubernetes-cluster-on-raspberry-pi-5-with-k3s/)，在 `樹莓派 5` 使用 `K3s` 建立 `Kubernetes 叢集`_
+_在 `樹莓派 5` 使用 `K3s` 建立 `Kubernetes 叢集`；可參考 [網路文章](https://everythingdevops.dev/step-by-step-guide-creating-a-kubernetes-cluster-on-raspberry-pi-5-with-k3s/)_
 
 <br>
 
