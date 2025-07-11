@@ -58,7 +58,7 @@ _需取得憑證_
 
     ```bash
     ACCOUNT=samhsiao6238
-    TOKEN=
+    TOKEN=<貼上-Token>
     ```
 
 <br>
