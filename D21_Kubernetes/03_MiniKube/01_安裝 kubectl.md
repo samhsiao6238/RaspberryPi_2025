@@ -106,7 +106,7 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 ## 樹莓派安裝 kubectl
 
-_若樹莓派僅作客戶端來管理外部 Kubernetes 叢集，可在樹莓派也安裝 kubectl_
+_若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `kubectl`；若僅以 `agent` 身份加入叢集負責跑 `Pod` 則不需安裝；安裝後可直接執行 `kubectl` 命令_
 
 <br>
 
