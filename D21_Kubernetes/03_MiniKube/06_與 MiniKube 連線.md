@@ -240,6 +240,16 @@ _在 `本機` 開啟新的終端機_
 
 <br>
 
+4. 加入參數 `-o wide` 可在預設欄位之外，顯示更多欄位資訊。
+
+    ```bash
+    kubectl get nodes -o wide
+    ```
+
+    ![](images/img_71.png)
+
+<br>
+
 ___
 
 _END_
