@@ -47,26 +47,32 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 ## 設定權限
 
-1. 檢查當前用戶群組；使用 `"$USER"` 或 `"$(whoami)"` 可指定當前用戶。
+1. 安裝 `Docker` 之後，並不會自動將假 `當前用戶` 加入群組 `docker` 內，所以用戶並不具備權限，運行指令將其加入。
+
+    ```bash
+    sudo usermod -aG docker $USER
+    ```
+
+<br>
+
+2. 檢查指定使用者所屬的群組；使用 `"$USER"` 或 `"$(whoami)"` 就是指定當前用戶。
 
     ```bash
     groups "$USER"
     ```
 
-<br>
-
-2. 若不帶任何參數，`groups` 查詢結果也是當前使用者所屬群組。
+    _或是_
 
     ```bash
-    groups
+    groups "$(whoami)"
     ```
 
 <br>
 
-3. 假如 `當前用戶` 不在群組 `docker` 內，則將其加入。
+3. 若不帶任何參數，`groups` 傳回的是當前用戶在目前 `shell` 的 `有效群組`，也就是登入時被授予的群組；這些是在登入時就決定的，而 `usermod -aG` 修改的是設定文件 `/etc/group`，這並不會自動套用到現有的 `shell`；反之，`groups $USER 或 groups "$(whoami)"` 查的是系統帳號資料庫 `/etc/group` 裡該使用者被列在哪些群組，所以會立刻看到 `docker`。
 
     ```bash
-    sudo usermod -aG docker $USER
+    groups
     ```
 
 <br>
