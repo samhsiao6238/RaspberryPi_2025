@@ -121,7 +121,9 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 `Dock
 
 <br>
 
-4. 使用 `Docker` 作為驅動器啟動 `MiniKube`；無參數時效果與參數 `--driver=docker` 相同，都會在容器中啟動；初次啟動或遇到版本變動時需要一點時間下載鏡像。
+## 啟動 `MiniKube`
+
+1. 使用 `Docker` 作為驅動器啟動 `MiniKube`；無參數時效果與參數 `--driver=docker` 相同，都會在容器中啟動；初次啟動或遇到版本變動時需要一點時間下載鏡像。
 
     ```bash
     minikube start
@@ -131,7 +133,7 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 `Dock
 
 <br>
 
-5. 檢查狀態、確認 `MiniKube` 已經成功運行。
+2. 檢查狀態、確認 `MiniKube` 已經成功運行。
 
     ```bash
     minikube status
@@ -141,7 +143,7 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 `Dock
 
 <br>
 
-6. 檢查容器 `IP`；這是固定的，任何一台設備運行後都會得到相同的 `192.168.49.2`。
+3. 檢查容器 `IP`；這是固定的，任何一台設備運行後都會得到相同的 `192.168.49.2`。
 
     ```bash
     minikube ip
