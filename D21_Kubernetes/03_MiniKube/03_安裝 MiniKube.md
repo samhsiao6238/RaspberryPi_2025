@@ -38,10 +38,12 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 4. 補充說明，若要先下載、再執行並保留安裝腳本，則運行以下指令；參數 `-o` 會把下載內容寫到檔案，不會輸出到標準輸出。
 
-```bash
-curl -fsSL https://get.docker.com -o get-docker.sh \
-    && sudo sh get-docker.sh
-```
+    ```bash
+    curl -fsSL https://get.docker.com -o get-docker.sh \
+        && sudo sh get-docker.sh
+    ```
+
+<br>
 
 ## 設定權限
 
