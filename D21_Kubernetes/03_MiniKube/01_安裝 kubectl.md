@@ -36,7 +36,7 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 <br>
 
-1. 先切換到下載路徑中。
+1. 先切換到下載路徑中；這僅是避免文件分散。
 
     ```bash
     cd ~/Downloads
@@ -44,7 +44,7 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 <br>
 
-2. 下載最新版本。
+2. 下載最新版本 [kubctl on MacOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)。
 
     ```bash
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
@@ -110,7 +110,7 @@ _若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `
 
 <br>
 
-1. 先切換到下載路徑中。
+1. 先切換到下載路徑中；這僅是避免文件分散。
 
     ```bash
     cd ~/Downloads
@@ -118,7 +118,7 @@ _若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `
 
 <br>
 
-2. 下載最新版本；與 MacOS 下載的不同，這裡下載的是 Linux 系統使用的版本。
+2. 依據官方指引下載最新版本 [kubctl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)。
 
     ```bash
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
@@ -126,7 +126,7 @@ _若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `
 
 <br>
 
-3. 下載驗證文件。
+3. 【Optional】下載對應版本的 `SHA-256` 校驗檔，用於驗證前面步驟下載的 `kubectl` 二進制文件是否為官方釋出未經篡改的。
 
     ```bash
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
@@ -134,19 +134,17 @@ _若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `
 
 <br>
 
-4. 根據校驗和檔案驗證 kubectl 二進位檔案。
+4. 根據校驗和檔案驗證 kubectl 二進位檔案；輸出 `OK` 代表正確。
 
     ```bash
     echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
     ```
 
-    _通過驗證一樣會顯示 OK_
-
     ![](images/img_24.png)
 
 <br>
 
-5. 安裝 kubectl。
+5. 安裝 `kubectl`。
 
     ```bash
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
@@ -168,12 +166,7 @@ _若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `
     kubectl version --client
     ```
 
-    _輸出_
-
-    ```bash
-    Client Version: v1.30.3
-    Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
-    ```
+    ![](images/img_26.png)
 
 <br>
 
