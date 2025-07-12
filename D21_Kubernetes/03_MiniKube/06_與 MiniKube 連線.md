@@ -20,7 +20,7 @@ _運行 Minikube_
 
 <br>
 
-2. 確認 Minikube 狀態。
+2. 確認 `Minikube` 狀態。
 
     ```bash
     minikube status
@@ -30,21 +30,23 @@ _運行 Minikube_
 
 <br>
 
-3. 確認 IP。
+3. 確認 IP；所有設備會得到相同 IP `192.168.49.2`。
 
     ```bash
     minikube ip
     ```
 
+    ![](images/img_68.png)
+
 <br>
 
 ## 證書文件
 
-_樹莓派 A 上的證書文件_
+_`樹莓派 A` 上的證書文件_
 
 <br>
 
-1. 檢查並確認證書文件是否存在於樹莓派 A，以下指令分開兩次執行，用以明確觀察證書所在路徑。
+1. 檢查並確認證書文件是否存在於 `樹莓派 A`；以下指令分開兩次執行，用以明確觀察證書所在路徑。
 
     ```bash
     ls ~/.minikube/profiles/minikube/
@@ -57,29 +59,36 @@ _樹莓派 A 上的證書文件_
 
 <br>
 
-2. 確認文件存在後準備進行複製，先在 MacOS 上建立目標目錄；建立之前可先檢查 `~/.minikube/profiles/minikube` 文件是否存在，若有殘餘資料可先將其刪除。
+2. 確認文件存在後準備進行複製，先在 `本機` 上建立目標目錄；建立之前先刪除可能存在的殘餘資料。
 
     ```bash
+    rm -rf ~/.minikube/profiles/minikube
     mkdir -p ~/.minikube/profiles/minikube
     ```
 
 <br>
 
-3. 使用 scp 將三個證書文件從樹莓派 A 複製到 MacOS。
+3. 先將 `樹莓派 A` 的 `HOST` 存入變數。
 
     ```bash
-    scp ssd:~/.minikube/profiles/minikube/client.crt ~/.minikube/profiles/minikube/client.crt
-    scp ssd:~/.minikube/profiles/minikube/client.key ~/.minikube/profiles/minikube/client.key
-    scp ssd:~/.minikube/ca.crt ~/.minikube/ca.crt
+    HOST_RASPI=<手動輸入樹莓派-HOST>
     ```
 
-    _務必確保文件正常複製_
+<br>
+
+4. 使用 `scp` 將三個證書文件從 `樹莓派 A` 複製到 `本機`。
+
+    ```bash
+    scp $HOST_RASPI:~/.minikube/profiles/minikube/client.crt ~/.minikube/profiles/minikube/client.crt
+    scp $HOST_RASPI:~/.minikube/profiles/minikube/client.key ~/.minikube/profiles/minikube/client.key
+    scp $HOST_RASPI:~/.minikube/ca.crt ~/.minikube/ca.crt
+    ```
 
     ![](images/img_22.png)
 
 <br>
 
-4. 使用以下指令確定複製完成。
+5. 再次確認複製工作正確完成。
 
     ```bash
     ls ~/.minikube/profiles/minikube/client.crt
@@ -89,45 +98,24 @@ _樹莓派 A 上的證書文件_
 
 <br>
 
-## 查看 Minikube 狀態與 IP
+## 查看 `Minikube` 狀態與 `IP`
 
-1. 確認在樹莓派 A 上已經啟動並運行了 Minikube。
+_進入 `樹莓派 A`_
+
+<br>
+
+1. 確認在 `樹莓派 A` 上已經啟動並運行了 `Minikube`。
 
     ```bash
     minikube status
     ```
 
-    _輸出_
-
-    ```bash
-    minikube
-    type: Control Plane
-    host: Running
-    kubelet: Running
-    apiserver: Running
-    kubeconfig: Configured
-    ```
-
 <br>
 
-2. 在樹莓派 A 上確認 Minikube 的 IP 地址。
+2. 在 `樹莓派 A` 上確認 `Minikube` 的 `IP` 地址；預期的輸出為 `192.168.49.2`；這是 `K8s` 集群內的 `Pod` 和服務之間通信的網段，若試圖從本機 `ping` 這個 `IP` 地址是無法連線的。
 
     ```bash
     minikube ip
-    ```
-
-    _輸出_
-
-    ```bash
-    192.168.49.2
-    ```
-
-<br>
-
-3. 這是 Kubernetes 集群內的 Pod 和服務之間通信的網段，若試圖從 MacOS 連線這個 IP 地址是無法連線的。
-
-    ```bash
-    ping 192.168.49.2
     ```
 
 <br>
