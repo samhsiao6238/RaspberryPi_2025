@@ -4,9 +4,9 @@ _`MiniKube` 是一個用於本地 `Kubernetes` 集群的工具，它適合在開
 
 <br>
 
-## 更新並安裝 Docker
+## 安裝 Docker
 
-_因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docker。_
+_因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 `Docker`_
 
 <br>
 
@@ -87,9 +87,17 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 <br>
 
+5. 延續上一點，或是運行以下指令立即套用變更、不需登出。
+
+    ```bash
+    newgrp docker
+    ```
+
+<br>
+
 ## 安裝 MiniKube
 
-1. 安裝 MiniKube：下載並安裝 MiniKube 的二進制文件。
+1. 下載並安裝 `MiniKube` 的二進制文件。
 
     ```bash
     curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64
@@ -105,7 +113,7 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 <br>
 
-3. 將執行文件搬移到系統路徑 `/usr/local/bin/` 中。
+3. 將執行文件搬移到系統路徑 `/usr/local/bin/` 中，之後便可在任何目錄直接運行指令。
 
     ```bash
     sudo mv minikube /usr/local/bin/
@@ -113,7 +121,7 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 <br>
 
-4. 使用 Docker 作為驅動器啟動 MiniKube；無參數時效果與參數 `--driver=docker` 相同，都會在容器中啟動。
+4. 使用 `Docker` 作為驅動器啟動 `MiniKube`；無參數時效果與參數 `--driver=docker` 相同，都會在容器中啟動；初次啟動或遇到版本變動時需要一點時間下載鏡像。
 
     ```bash
     minikube start
@@ -123,7 +131,7 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 <br>
 
-5. 檢查 MiniKube 狀態，確認 MiniKube 已經成功啟動並運行。
+5. 檢查狀態、確認 `MiniKube` 已經成功運行。
 
     ```bash
     minikube status
@@ -133,27 +141,41 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 <br>
 
-6. 檢查容器 IP；這是固定的。
+6. 檢查容器 `IP`；這是固定的，任何一台設備運行後都會得到相同的 `192.168.49.2`。
 
     ```bash
     minikube ip
     ```
 
-    _輸出_
+    ![](images/img_27.png)
+
+<br>
+
+## 關於 `橋接 IP`
+
+1. 安裝了 `Minikube` 之後會添加一個橋接 IP `192.168.49.1/24`，這是 `Minikube` 建立的虛擬網路，用於管理 `Kubernetes` 集群內的 `Pod` 和服務之間的通信；`Minikube` 使用這個網路來分配 `K8s` 集群內部的 `IP` 地址，確保內部通信不受外部網路影響；使用 `kubectl` 指令時，`Kubeconfig` 文件中的 `server` 會指向這個網路的 IP 地址，就是前面步驟所查詢到的 `Minikube` 容器的 IP `192.168.49.2`。
+
+<br>
+
+2. 查看 `docker0` 介面；安裝了 `Docker` 之後，會在宿主機上自動建立一個名為 `docker0` 的橋接網路介面，預設的子網是 `172.17.0.0/16`，而橋接介面的 IP 就是該子網的第一個地址 `172.17.0.1`，用來讓所有容器透過這條虛擬橋接網路互相溝通。
 
     ```bash
-    192.168.49.2
+    ip -4 addr show docker0
+    ```
+
+    _或使用_
+
+    ```bash
+    ifconfig docker0
     ```
 
 <br>
 
-## 新增橋接 IP
+3. 延續上一點，也可用 `Docker CLI` 直接顯示預設橋接網路的閘道 `Gateway`，也就是 `172.17.0.1`。
 
-1. 安裝了 Minikube 之後會添加一個橋接 IP `192.168.49.1/24`，這是 Minikube 建立的虛擬網路，用於管理 Kubernetes 集群內的 Pod 和服務之間的通信；Minikube 使用這個網路來分配 Kubernetes 集群內部的 IP 地址，確保 Pod 和服務之間的通信不受外部網路影響；使用 `kubectl` 指令時，Kubeconfig 文件中的 server 會指向這個網路的 IP 地址，通常是 Minikube 容器的 IP，例如 `192.168.49.2`。
-
-<br>
-
-2. 安裝了 Docker 之後會添加一個橋接 IP `172.17.0.1/16`，這是 Docker 預設建立的橋接網路，用於管理 Docker 容器之間的通信。
+    ```bash
+    docker network inspect bridge --format '{{(index .IPAM.Config 0).Gateway}}'
+    ```
 
 <br>
 
