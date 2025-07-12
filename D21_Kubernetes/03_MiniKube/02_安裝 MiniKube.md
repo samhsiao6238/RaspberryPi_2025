@@ -155,6 +155,10 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 `Dock
 
 ## 關於 `橋接 IP`
 
+_說明_
+
+<br>
+
 1. 安裝了 `Minikube` 之後會添加一個橋接 IP `192.168.49.1/24`，這是 `Minikube` 建立的虛擬網路，用於管理 `Kubernetes` 集群內的 `Pod` 和服務之間的通信；`Minikube` 使用這個網路來分配 `K8s` 集群內部的 `IP` 地址，確保內部通信不受外部網路影響；使用 `kubectl` 指令時，`Kubeconfig` 文件中的 `server` 會指向這個網路的 IP 地址，就是前面步驟所查詢到的 `Minikube` 容器的 IP `192.168.49.2`。
 
 <br>
