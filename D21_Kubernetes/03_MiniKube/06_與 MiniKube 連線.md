@@ -1,6 +1,6 @@
 # 與 Minikube 連線
 
-_以下是本機嘗試連線樹莓派 A_
+_以下從本機連線樹莓派 A_
 
 <br>
 
@@ -10,7 +10,7 @@ _運行 Minikube_
 
 <br>
 
-1. 樹莓派 A 啟動 Minikube；使用參數 `--driver=none` 會直接在本地機器樹莓派 A 上運行，而不使用虛擬機；若要使用虛擬網卡可用參數 `--driver=docker`，預設也會在容器中啟動。
+1. `樹莓派 A` 啟動 `Minikube`；使用參數 `--driver=none` 會直接在本地機器樹莓派 A 上運行，而不使用虛擬機；若要使用虛擬網卡可用參數 `--driver=docker`，預設也會在容器中啟動。
 
     ```bash
     minikube start
