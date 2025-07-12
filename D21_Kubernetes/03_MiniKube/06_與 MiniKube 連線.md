@@ -230,7 +230,7 @@ _在 `本機` 開啟新的終端機_
 
 <br>
 
-3. 連線測試；確認連接是否成功，以下訊息表示 `Minikube` 集群已經成功運行，節點 `minikube` 處於 `Ready` 狀態；其他的訊息是連線的累計時間 `AGE` 以及 `Kubernetes` 的 `VERSION`；至此確認 `Minikube` 安裝和配置是正確的，並且節點已經準備好接收和運行工作負載。
+3. 連線測試；確認連接是否成功，以下訊息表示 `Minikube` 集群已經成功運行，節點 `minikube` 處於 `Ready` 狀態；其他的訊息是連線的累計時間 `AGE` 以及 `Kubernetes` 的 `VERSION`；至此確認 `Minikube` 安裝和配置是正確的，當前僅有一個節點，且已準備好接收和運行工作負載。
 
     ```bash
     kubectl get nodes
