@@ -1,6 +1,6 @@
 # 安裝 MiniKube
 
-_MiniKube 是一個用於本地 Kubernetes 集群的工具，它適合在開發環境中使用，以下在樹莓派 A 進行安裝_
+_`MiniKube` 是一個用於本地 `Kubernetes` 集群的工具，它適合在開發環境中使用，以下在 `樹莓派 A` 進行安裝_
 
 <br>
 
@@ -13,12 +13,14 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 1. 更新樹莓派系統。
 
     ```bash
-    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt autoremove -y
     ```
 
 <br>
 
-2. 確認是否安裝了 Docker。
+2. 透過查詢版本確認 `Docker` 是否已經安裝。
 
     ```bash
     docker -v
@@ -26,23 +28,40 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 <br>
 
-3. 假如還沒安裝 Docker，運行以下指令進行安裝。
+3. 若無版本號表示尚未安裝 `Docker`，運行以下安裝指令；以下指令搭配管道 `|` 直接執行，不留下腳本檔。
 
     ```bash
-    curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+    curl -fsSL https://get.docker.com | sudo sh
     ```
 
 <br>
 
-4. 檢查當前用戶群組。
+4. 補充說明，若要先下載、再執行並保留安裝腳本，則運行以下指令；參數 `-o` 會把下載內容寫到檔案，不會輸出到標準輸出。
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh \
+    && sudo sh get-docker.sh
+```
+
+## 設定權限
+
+1. 檢查當前用戶群組；使用 `"$USER"` 或 `"$(whoami)"` 可指定當前用戶。
 
     ```bash
-    groups sam6238
+    groups "$USER"
     ```
 
 <br>
 
-5. 假如 `當前用戶` 不在群組 Group 內，則將其加入。
+2. 若不帶任何參數，`groups` 查詢結果也是當前使用者所屬群組。
+
+    ```bash
+    groups
+    ```
+
+<br>
+
+3. 假如 `當前用戶` 不在群組 `docker` 內，則將其加入。
 
     ```bash
     sudo usermod -aG docker $USER
@@ -50,7 +69,11 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 Docke
 
 <br>
 
-6. 特別注意，完成安裝 Docker 後，要退出終端機或重啟對話重新登入讓群組授權生效，否則在後續的步驟會出現錯誤。
+4. 特別注意，完成安裝 `Docker` 後，必須重啟系統或重啟終端套用變更，否則會出現錯誤。
+
+    ```bash
+    sudo reboot
+    ```
 
     ![](images/img_45.png)
 
