@@ -1,6 +1,6 @@
 # 與 Minikube 連線
 
-_以下從本機連線樹莓派 A_
+_以下從 `本機` 連線 `樹莓派 A`_
 
 <br>
 
@@ -10,7 +10,7 @@ _運行 Minikube_
 
 <br>
 
-1. `樹莓派 A` 啟動 `Minikube`；使用參數 `--driver=none` 會直接在本地機器樹莓派 A 上運行，而不使用虛擬機；若要使用虛擬網卡可用參數 `--driver=docker`，預設也會在容器中啟動。
+1. 在 `樹莓派 A` 啟動 `Minikube`；使用參數 `--driver=none` 會直接在 `樹莓派 A` 上運行，而不使用虛擬機；若要使用虛擬網卡可用參數 `--driver=docker`，預設也會在容器中啟動。
 
     ```bash
     minikube start
@@ -98,35 +98,13 @@ _`樹莓派 A` 上的證書文件_
 
 <br>
 
-## 查看 `Minikube` 狀態與 `IP`
+## 複製 Minikube 配置文件到本機
 
-_進入 `樹莓派 A`_
-
-<br>
-
-1. 確認在 `樹莓派 A` 上已經啟動並運行了 `Minikube`。
-
-    ```bash
-    minikube status
-    ```
+_從 `樹莓派 A` 將配置文件複製到 `本機` 上_
 
 <br>
 
-2. 在 `樹莓派 A` 上確認 `Minikube` 的 `IP` 地址；預期的輸出為 `192.168.49.2`；這是 `K8s` 集群內的 `Pod` 和服務之間通信的網段，若試圖從本機 `ping` 這個 `IP` 地址是無法連線的。
-
-    ```bash
-    minikube ip
-    ```
-
-<br>
-
-## 複製 Minikube 配置文件到 MacOS
-
-_從樹莓派將配置文件複製到本機電腦上_
-
-<br>
-
-1. 在樹莓派 A 檢查所需的設定文件已經存在。
+1. 在 `樹莓派 A` 檢查所需的設定文件已經存在。
 
     ```bash
     ls ~/.kube/config
@@ -134,25 +112,26 @@ _從樹莓派將配置文件複製到本機電腦上_
 
 <br>
 
-2. 在本地電腦 MacOS 上建立目標目錄。
+2. 在 `本機` 上建立目標目錄；避免殘留文件，先進行刪除。
 
     ```bash
+    rm -rf ~/.kube
     mkdir -p ~/.kube
     ```
 
 <br>
 
-3. 在 MacOS 上運行以下指令從樹莓派 A 複製 Minikube 的 kubeconfig 文件到 MacOS。
+3. 在 `本機` 運行以下指令從 `樹莓派 A` 複製 `Minikube` 的 `kubeconfig` 文件到 `本機`；其中 `HOST_RASPI` 在前面步驟已經存入當前終端視窗，若有重啟，則需重新建立，不再贅述。
 
     ```bash
-    scp ssd:~/.kube/config ~/.kube/config
+    scp $HOST_RASPI:~/.kube/config ~/.kube/config
     ```
 
     ![](images/img_12.png)
 
 <br>
 
-4. 在本機電腦確認複製確實完成。
+4. 在 `本機` 確認複製確實完成。
 
     ```bash
     ls ~/.kube/config
@@ -160,23 +139,30 @@ _從樹莓派將配置文件複製到本機電腦上_
 
 <br>
 
-5. 在 MacOS 設置 Minikube 環境變數；這是暫時性的，系統重啟便會失效，若要持久生效則需寫入環境變數文件中如 `~/.zshrc`。
+5. 在 `本機` 設置 `Minikube` 環境變數；這是暫時性的，系統重啟便會失效，若要持久生效則需寫入環境變數文件中如 `~/.zshrc`。
 
     ```bash
-    export KUBECONFIG=~/.kube/config
+    echo "" >> ~/.zshrc
+    echo "# MiniKube 練習用" >> ~/.zshrc
+    echo "export KUBECONFIG=~/.kube/config" >> ~/.zshrc
+    source ~/.zshrc
     ```
 
 <br>
 
 ## 編輯設定文件
 
-1. 查看本機使用者的家目錄絕對路徑 `/Users/samhsiao`；可在任何路徑中透過 `pwd` 查看路徑前綴即可。
+1. 查看當前使用者在本機的 `家目錄絕對路徑`；在任意路徑查詢即可，前綴就是該路徑。
+
+    ```bash
+    pwd
+    ```
 
     ![](images/img_14.png)
 
 <br>
 
-2. 編輯 Kubeconfig 文件 `~/.kube/config`， 將其中的路徑指向 MacOS 上的正確位置，原本是樹莓派上的文件路徑，要將其改為本機電腦上的路徑；可先確認資料 `~/.kube/config` 存在。
+2. 編輯 `Kubeconfig` 文件 `~/.kube/config`，將其中的路徑指向本機的正確位置；這個文件是由樹莓派複製到本機的，所以當前設定值是在 `樹莓派` 的文件路徑。
 
     ```bash
     code ~/.kube/config
@@ -184,13 +170,13 @@ _從樹莓派將配置文件複製到本機電腦上_
 
 <br>
 
-3. 將其中的使用者家目錄從樹莓派的 `/home/sam6238` 改為本機用戶的家目錄 `/Users/samhsiao`；再次強調，務必詳細檢查。
+3. 修正其中 `使用者家目錄`，從樹莓派的 `/home/<樹莓派使用者帳號>` 改為本機用戶的家目錄 `/Users/<本機用戶名稱>`；若使用 `VSCode`，使用替換鍵轉換即可；共計 `3` 處。
 
     ![](images/img_13.png)
 
 <br>
 
-4. 將其中的 `server` 改為 `localhost:8443`，這將用在後續 `端口轉發` 時的本地端口。
+4. 接著，將其中的 `server` 改為 `localhost:8443`，這將用在後續 `端口轉發` 時的本地端口。
 
     ```bash
     server: https://localhost:8443
@@ -200,10 +186,10 @@ _從樹莓派將配置文件複製到本機電腦上_
 
 <br>
 
-5. 開啟通道，這個通道不可關閉；設定後可通過 SSH 通道訪問遠程服務，而不需要直接暴露遠程服務的端口。
+5. 在終端機運行以下指令開啟通道；特別注意，測試期間不要關閉這個終端視窗；後續會詳細說明。
 
     ```bash
-    ssh -L 8443:192.168.49.2:8443 ssd
+    ssh -L 8443:192.168.49.2:8443 $HOST_RASPI
     ```
 
 <br>
@@ -214,45 +200,33 @@ _開啟通道也稱為 `SSH 端口轉發`，其工作原理是通過 `SSH 通道
 
 <br>
 
-1. `ssh`：啟動 SSH 客戶端。
+1. `-L` 設置本地端口轉發的參數，後面接著轉發的設定值，依序是 `本地端口 : 遠程位置及端口`。
 
 <br>
 
-2. `-L`：設置本地端口轉發的參數，後面接著轉發的設定值，依序是 `本地端口 : 遠程位置及端口`。
-
-<br>
-
-3. `8443`：第一個值是本地端口。
-
-<br>
-
-4. `192.168.49.2:8443`：第二個值是遠程樹莓派主機的目標 IP 和端口。
-
-<br>
-
-5. `ssd`：一般 SSH 連線時使用的樹莓派 SSH 別名或地址。
+2. `8443`：第一個值是本地端口，第二個值是遠程樹莓派主機的目標 IP 和端口。
 
 <br>
 
 ## 繼續連線
 
-1. 在 MacOS 運行指定連線文件的指令 `kubectl config`，並透過參數 `use-context` 指定使用的連線名稱為 `minikube`。
+_在 `本機` 開啟新的終端機_
+
+<br>
+
+1. 延續之前的操作，確認定義在設定文件 `~/.kube/config` 中的連線名稱是 `minikube`。
+
+    ![](images/img_25.png)
+
+<br>
+
+2. 在 `本機` 運行指定連線文件的指令 `kubectl config`，並透過參數 `use-context` 指定使用的連線名稱為 `minikube`。
 
     ```bash
     kubectl config use-context minikube
     ```
 
-    _輸出_
-
-    ```bash
-    Switched to context "minikube".
-    ```
-
-<br>
-
-2. 延續上一點，這個連線名稱是定義在設定文件 `~/.kube/config` 中的。
-
-    ![](images/img_25.png)
+    ![](images/img_69.png)
 
 <br>
 
@@ -262,12 +236,7 @@ _開啟通道也稱為 `SSH 端口轉發`，其工作原理是通過 `SSH 通道
     kubectl get nodes
     ```
 
-    _輸出_
-
-    ```bash
-    NAME       STATUS   ROLES           AGE     VERSION
-    minikube   Ready    control-plane   3h45m   v1.30.0
-    ```
+    ![](images/img_70.png)
 
 <br>
 
