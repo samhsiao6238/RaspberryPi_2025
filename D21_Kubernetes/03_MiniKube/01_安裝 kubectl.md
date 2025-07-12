@@ -1,6 +1,14 @@
 #  安裝 kubectl
 
-_必須在要部署的設備上安裝 [kubctl on MacOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)，而樹莓派也可以安裝指定版本 [kubctl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)_
+<br>
+
+## 姿妘
+
+1. 在本機安裝 [kubctl on MacOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)。
+
+<br>
+
+2. 在樹莓派安裝 [kubctl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)。
 
 <br>
 
