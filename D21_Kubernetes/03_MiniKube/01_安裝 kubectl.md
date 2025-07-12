@@ -1,6 +1,6 @@
 #  安裝 kubectl
 
-_在本機及樹莓派設備上皆可安裝_
+_在 `本機` 及 `樹莓派` 上皆進行安裝_
 
 <br>
 
@@ -136,7 +136,7 @@ _若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `
 
 <br>
 
-4. 根據校驗和檔案驗證 kubectl 二進位檔案；輸出 `OK` 代表正確。
+4. 【Optional】若有下載驗證文件，可驗證 `kubectl` 二進位檔案；輸出 `OK` 代表正確。
 
     ```bash
     echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
@@ -154,7 +154,7 @@ _若將樹莓派作為客戶端管理外部 `Kubernetes` 叢集，也可安裝 `
 
 <br>
 
-6. 刪除臨時文件。
+6. 【Optional】若有下載驗證文件，可進行刪除。
 
     ```bash
     rm kubectl.sha256 kubectl

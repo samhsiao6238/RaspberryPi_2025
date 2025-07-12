@@ -20,7 +20,7 @@ _因為 `MiniKube` 依賴於 `Docker` 作為容器運行，所以先安裝 `Dock
 
 <br>
 
-2. 透過查詢版本確認 `Docker` 是否已經安裝。
+2. 透過查詢版本確認 `Docker` 是否已經安裝；樹莓派系統預設並無安裝。
 
     ```bash
     docker -v
