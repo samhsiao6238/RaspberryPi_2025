@@ -2,23 +2,31 @@
 
 <br>
 
-## 姿妘
+## 資源
+
+_這裡先做說明，可在後續步驟中在實作_
+
+<br>
 
 1. 在本機安裝 [kubctl on MacOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)。
+
+    ```bash
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
+    ```
+
+    ![](images/img_04.png)
 
 <br>
 
 2. 在樹莓派安裝 [kubctl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)。
 
+    ```bash
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+    ```
+
+    ![](images/img_16.png)
+
 <br>
-
-## 說明
-
-1. K3s 自帶 kubectl，更適合在 Raspberry Pi 這類資源有限的設備上使用，無需手動安裝，獨立安裝 kubectl，適合用在開發環境或遠程管理其他叢集。
-
-<br>
-
-2. 不同場景選擇不同安裝方式，在樹莓派上安裝 K3s 這種場景，手動安裝 kubectl 並無必要；而本地開發環境如 Mac 需要連接遠程 Kubernetes 叢集時，只需要一個 kubectl 客戶端來管理外部 Kubernetes 叢集，這種手動安裝是必要的。
 
 <br>
 
@@ -44,7 +52,7 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 <br>
 
-3. 下載的是 kubectl 的 SHA-256 校驗和文件，用於驗證 kubectl 二進制文件的完整性。
+3. 【Optional】下載對應版本的 `SHA-256` 校驗檔，用於驗證前面步驟下載的 `kubectl` 二進制文件是否為官方釋出未經篡改的。
 
     ```bash
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl.sha256"
@@ -52,21 +60,17 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 <br>
 
-4. 根據校驗和檔案驗證 kubectl 二進位檔案。
+4. 根據校驗和檔案驗證 kubectl 二進位檔案；輸出 `OK` 代表正確。
 
     ```bash
     echo "$(cat kubectl.sha256)  kubectl" | shasum -a 256 --check
     ```
 
-    _輸出 OK 代表正確_
-
-    ```bash
-    kubectl: OK
-    ```
+    ![](images/img_20.png)
 
 <br>
 
-5. 使 kubectl 二進位檔案可執行。
+5. 使 `kubectl` 二進位檔案可執行。
 
     ```bash
     chmod +x ./kubectl
@@ -74,7 +78,7 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 <br>
 
-6. 將 kubectl 二進位檔案移到系統上的檔案位置 `/usr/local/bin/kubectl`。
+6. 將 `kubectl` 二進位檔案移到系統上的檔案位置 `/usr/local/bin/kubectl`。
 
     ```bash
     sudo mv ./kubectl /usr/local/bin/kubectl && sudo chown root: /usr/local/bin/kubectl
@@ -82,19 +86,17 @@ _兩種安裝方式，這是第一種，簡單一點可以使用 Homebrew_
 
 <br>
 
-7. 測試以確保安裝的版本是最新的。
+7. 確認本機安裝的 `kubectl` 客戶端版本。
 
     ```bash
     kubectl version --client
     ```
 
-    _輸出顯示當前版本_
-
     ![](images/img_23.png)
 
 <br>
 
-8. 安裝並驗證 kubectl 後，刪除校驗和檔案。
+8. 安裝並驗證 `kubectl` 後，刪除校驗和檔案。
 
     ```bash
     rm kubectl.sha256
